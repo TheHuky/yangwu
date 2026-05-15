@@ -2,7 +2,7 @@ const fs = require('fs');
 
 const TOKEN = process.env.DISCORD_TOKEN;
 // WAŻNE: Tutaj wklej ID kanału #ogłoszenia
-const CHANNEL_ID = 'TUTAJ_WPISZ_ID_KANALU'; 
+const CHANNEL_ID = '1503491827884625990'; 
 
 async function fetchMessages() {
   // Pobieramy 5 ostatnich wiadomości z kanału
