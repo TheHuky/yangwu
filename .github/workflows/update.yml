@@ -2,7 +2,7 @@ name: Aktualizuj Ogłoszenia
 
 on:
   schedule:
-    - cron: '0 * * * *' # Odpala się w każdej pełnej godzinie (np. 12:00, 13:00)
+    - cron: '*/5 * * * *' # Odpala się w każdej pełnej godzinie (np. 12:00, 13:00)
   workflow_dispatch: # Dodaje przycisk, żeby móc odpalić to ręcznie z panelu GitHuba
 
 jobs:
