@@ -1,0 +1,33 @@
+name: Aktualizuj Ogłoszenia
+
+on:
+  schedule:
+    - cron: '0 * * * *' # Odpala się w każdej pełnej godzinie (np. 12:00, 13:00)
+  workflow_dispatch: # Dodaje przycisk, żeby móc odpalić to ręcznie z panelu GitHuba
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Pobranie kodu (Checkout)
+        uses: actions/checkout@v3
+
+      - name: Instalacja środowiska (Node.js)
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Uruchomienie skryptu i pobranie z Discorda
+        env:
+          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+        run: node fetch_discord.js
+
+      - name: Zapisz nowy plik JSON w repozytorium
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add announcements.json
+          # Wykonaj commit i push tylko, jeśli plik uległ zmianie (ktoś napisał coś nowego)
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Autoupdate: Nowe ogłoszenia z Discorda" && git push)
