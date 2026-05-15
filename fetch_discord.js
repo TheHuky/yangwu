@@ -1,7 +1,7 @@
 import fs from 'fs';
 
 const TOKEN = process.env.DISCORD_TOKEN;
-const CHANNEL_ID = 'TUTAJ_TWÓJ_IDENTYFIKATOR_KANAŁU'; // Podmień na swój ID kanału
+const CHANNEL_ID = '1503491827884625990'; // Podmień na swój ID kanału
 
 async function fetchMessages() {
   try {
