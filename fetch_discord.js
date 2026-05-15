@@ -5,8 +5,7 @@ const TOKEN = process.env.DISCORD_TOKEN;
 const CHANNEL_ID = '1503491827884625990'; 
 
 async function fetchMessages() {
-  // Pobieramy 5 ostatnich wiadomości z kanału
-  const response = await fetch(`https://discord.com/api/v10/channels/${CHANNEL_ID}/messages?limit=5`, {
+  const response = await fetch(`https://discord.com/api/v10/channels/${CHANNEL_ID}/messages?limit=10`, {
     headers: {
       'Authorization': `Bot ${TOKEN}`
     }
@@ -19,23 +18,24 @@ async function fetchMessages() {
 
   const messages = await response.json();
   
-  const formatted = messages.map(msg => {
-    // Formatujemy datę na polski standard (np. "05.05.2026, 14:15")
-    const date = new Date(msg.timestamp);
-    const dateString = date.toLocaleDateString('pl-PL') + ', ' + date.toLocaleTimeString('pl-PL', {hour: '2-digit', minute:'2-digit'});
-    
-    // Filtrujemy tylko to, co nas interesuje
-    return {
-      id: msg.id,
-      author: msg.author.username,
-      content: msg.content,
-      date: dateString
-    };
-  });
+  const formatted = messages
+    // FILTR: Zostawia tylko wiadomości, które mają jakąś treść tekstową
+    .filter(msg => msg.content && msg.content.trim() !== '')
+    .map(msg => {
+      const date = new Date(msg.timestamp);
+      const dateString = date.toLocaleDateString('pl-PL') + ', ' + date.toLocaleTimeString('pl-PL', {hour: '2-digit', minute:'2-digit'});
+      
+      return {
+        id: msg.id,
+        author: msg.author.username,
+        content: msg.content,
+        date: dateString
+      };
+    });
 
-  // Zapisujemy wiadomości do pliku announcements.json
-  fs.writeFileSync('announcements.json', JSON.stringify(formatted, null, 2));
-  console.log('Zapisano ogłoszenia!');
+  // Pobieramy tylko 5 ostatnich (po przefiltrowaniu pustych)
+  const finalMessages = formatted.slice(0, 5);
+
+  fs.writeFileSync('announcements.json', JSON.stringify(finalMessages, null, 2));
+  console.log('Zapisano ogłoszenia (bez pustych wpisów)!');
 }
-
-fetchMessages();
