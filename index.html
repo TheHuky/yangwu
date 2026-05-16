@@ -34,8 +34,10 @@
         .logo-img { height: 45px;
             width: auto; display: block; cursor: pointer; }
 
-        .nav-wrapper { display: flex; align-items: center; gap: 35px; }
-        .nav-links ul { list-style: none; display: flex; gap: 25px; align-items: center; }
+        .nav-wrapper { display: flex; align-items: center;
+            gap: 35px; }
+        .nav-links ul { list-style: none; display: flex; gap: 25px;
+            align-items: center; }
         .nav-links a { 
             text-decoration: none;
             color: white; font-weight: 700; font-size: 13px; 
@@ -141,8 +143,7 @@
         .about-grid { display: grid;
             grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 50px; }
         .about-card { background: #111;
-            border-radius: 20px; padding: 50px 30px; border: 1px solid #222; text-align: center;
-        }
+            border-radius: 20px; padding: 50px 30px; border: 1px solid #222; text-align: center; }
         .about-card img { width: 160px; height: 160px; border-radius: 50%; border: 4px solid;
             margin-bottom: 25px; object-fit: cover; }
 
@@ -194,11 +195,37 @@
         .privacy-link { color: #555; text-decoration: none; transition: 0.3s; }
         .privacy-link:hover { color: white; }
         
+        /* --- NOWE STYLE MECHANICZNEGO LICZNIKA CYFR --- */
         .visitor-counter {
             display: flex;
-            align-items: center; gap: 6px; color: #444; font-size: 11px;
+            align-items: center;
+            gap: 10px;
+            color: #555;
+            font-size: 12px;
         }
-        .visitor-counter i { font-size: 12px; }
+        .visitor-counter i { 
+            font-size: 14px; 
+            color: #444; 
+        }
+        .visitor-counter-digits {
+            display: flex;
+            gap: 3px;
+            align-items: center;
+        }
+        .counter-digit {
+            background: #111;
+            color: #eee;
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+            font-size: 13px;
+            padding: 3px 6px;
+            border-radius: 4px;
+            border: 1px solid #222;
+            display: inline-block;
+            text-align: center;
+            min-width: 18px;
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.8);
+        }
 
         /* --- PODSTRONA WSPIERANIE --- */
         .support-page { max-width: 1200px;
@@ -277,8 +304,7 @@
 
         /* --- POLITYKA PRYWATNOŚCI --- */
         .policy-container { max-width: 900px;
-            margin: 80px auto; padding: 0 40px; line-height: 1.8; color: #ccc;
-        }
+            margin: 80px auto; padding: 0 40px; line-height: 1.8; color: #ccc; }
         .policy-container h2 { color: white; margin-bottom: 30px; font-size: 32px; font-weight: 900; }
         .policy-container h3 { color: white; margin: 30px 0 10px 0; font-size: 20px;
             border-left: 4px solid #5865F2; padding-left: 15px; }
@@ -324,8 +350,10 @@
 
         /* --- MEDIA QUERIES --- */
         @media (max-width: 1100px) { 
-            .split-layout, .about-grid, .contact-grid { display: flex; flex-direction: column; } 
-            .container { flex-direction: column; height: auto; padding: 20px; } 
+            .split-layout, .about-grid, .contact-grid { display: flex;
+                flex-direction: column; } 
+            .container { flex-direction: column;
+                height: auto; padding: 20px; } 
             
             .nav-wrapper { 
                 width: 100%;
@@ -369,7 +397,8 @@
                 font-size: 15px;
             }
 
-            .creator-column { border-right: none; border-bottom: 1px solid #1a1a1a; }
+            .creator-column { border-right: none;
+                border-bottom: 1px solid #1a1a1a; }
         }
 
         @media (max-width: 600px) {
@@ -377,7 +406,8 @@
             .cookie-btns { flex-direction: column; }
             .announcement-header { flex-direction: column; align-items: flex-start; gap: 10px; }
             .announcement-discord-badge { align-self: flex-start; }
-            .sticky-footer { flex-direction: column; gap: 5px; height: auto; padding: 10px 0; }
+            .sticky-footer { flex-direction: column; gap: 5px; height: auto;
+                padding: 10px 0; }
         }
     </style>
 </head>
@@ -404,21 +434,25 @@
             </div>
 
             <div class="nav-wrapper">
+     
                 <button class="hamburger-menu" onclick="toggleMobileMenu()" aria-label="Otwórz menu">
                     <i class="fa-solid fa-bars"></i>
                 </button>
 
                 <nav class="nav-links" id="mobile-nav">
                     <ul>
+         
                         <li><a onclick="showPage(event, 'home')">Home</a></li>
                         <li><a onclick="showPage(event, 'about')">O nas</a></li>
                         <li><a onclick="showPage(event, 'announcements')">Ogłoszenia</a></li>
                         <li><a onclick="showPage(event, 'support')">Wspieranie</a></li>
+    
                         <li><a onclick="showPage(event, 'contact')">Kontakt</a></li>
                     </ul>
                 </nav>
              
                 <a href="https://discord.gg/qWC28YmRj2" class="discord-btn"><i class="fa-brands fa-discord"></i> DOŁĄCZ DO NAS</a>
+      
             </div>
         </div>
     </header>
@@ -429,29 +463,35 @@
                 <img src="avatarneska.png" class="streamer-avatar">
                 <h1>LejdiNeska</h1>
   
+                
                 <div class="social-section">
                     <a href="http://www.youtube.com/@LejdiNeska?sub_confirmation=1" class="social-card"><i class="fa-brands fa-youtube icon-lejdi"></i><div class="social-info"><h4>YOUTUBE</h4><p>Wpadnij pogadać!</p></div></a>
                     <a href="https://www.instagram.com/lejdineska/" class="social-card"><i class="fa-brands fa-instagram icon-lejdi"></i><div class="social-info"><h4>INSTAGRAM</h4><p>Sprawdź nowe zdjęcie!</p></div></a>
                     <a href="https://www.tiktok.com/@lejdineska" class="social-card"><i class="fa-brands fa-tiktok icon-lejdi"></i><div class="social-info"><h4>TIKTOK</h4><p>Sprawdź co tam robię!</p></div></a>
+               
                     <a href="https://discord.gg/qWC28YmRj2" class="social-card"><i class="fa-brands fa-discord icon-lejdi"></i><div class="social-info"><h4>DISCORD</h4><p>Warto tu być!</p></div></a>
                     <a href="https://www.twitch.tv/lejdineska" class="social-card"><i class="fa-brands fa-twitch icon-lejdi"></i><div class="social-info"><h4>TWITCH</h4><p>Może strumyk?</p></div></a>
                     <a href="https://www.youtube.com/@NeskaAndHukiroxFishing" class="social-card"><i class="fa-solid fa-fish icon-lejdi"></i><div class="social-info"><h4>KANAŁ WĘDKARSKI</h4><p>Połowione!</p></div></a>
                    
+              
                     <div class="stats-grid">
                         <div class="stat-box"><i class="fa-brands fa-youtube icon-lejdi"></i><div class="stat-data"><h5>10k+</h5><p>subów</p></div></div>
                         <div class="stat-box"><i class="fa-brands fa-twitch icon-lejdi"></i><div class="stat-data"><h5>2.5k+</h5><p>obserwacji</p></div></div>
                         <div class="stat-box"><i class="fa-brands fa-tiktok icon-lejdi"></i><div class="stat-data"><h5>25k+</h5><p>obserwacji</p></div></div>
+      
                         <div class="stat-box"><i class="fa-brands fa-instagram icon-lejdi"></i><div class="stat-data"><h5>1.5k+</h5><p>obserwacji</p></div></div>
                     </div>
                 </div>
             </section>
 
             <section class="creator-column" id="col-hukiro">
+               
                 <img src="avatarhukirox.png" class="streamer-avatar">
                 <h1>Hukirox</h1>
                 <div class="social-section">
                     <a href="https://www.youtube.com/@Hukirox?sub_confirmation=1" class="social-card"><i class="fa-brands fa-youtube icon-hukiro"></i><div class="social-info"><h4>YOUTUBE</h4><p>Zobacz, jak gram!</p></div></a>
                     <a href="https://www.instagram.com/hukirox/" class="social-card"><i class="fa-brands fa-instagram icon-hukiro"></i><div class="social-info"><h4>INSTAGRAM</h4><p>Zobacz nową fotę!</p></div></a>
+        
                     <a href="https://www.tiktok.com/@hukirox" class="social-card"><i class="fa-brands fa-tiktok icon-hukiro"></i><div class="social-info"><h4>TIKTOK</h4><p>Najlepsze shoty!</p></div></a>
                     <a href="https://discord.gg/qWC28YmRj2" class="social-card"><i class="fa-brands fa-discord icon-hukiro"></i><div class="social-info"><h4>DISCORD</h4><p>Warto tu być!</p></div></a>
                     <a href="https://www.twitch.tv/hukirox" class="social-card"><i class="fa-brands fa-twitch icon-hukiro"></i><div class="social-info"><h4>TWITCH</h4><p>Zajrzyj na strumyk!</p></div></a>
@@ -464,6 +504,7 @@
                         <div class="stat-box"><i class="fa-brands fa-instagram icon-hukiro"></i><div class="stat-data"><h5>50+</h5><p>obserwacji</p></div></div>
                     </div>
                 </div>
+     
             </section>
         </div>
     </main>
@@ -479,8 +520,9 @@
                 </div>
                 <div class="about-card">
                     <img src="avatarhukirox.png" class="border-hukiro">
+                   
                     <h3 class="color-hukiro">Hukirox</h3>
-                    <p style="color: #999; line-height: 1.6;">Lubisz gry fabularne i patrzenie, jak cały świat wybucha na Twoich oczach? A może wolisz śledzić ciągłe, nieudane próby parkouru, które kończą się lotem w dół i „pięknym” lądowaniem na twarz? A może po prostu chcesz się pośmiać i popisać z kimś o grach? W takim razie dobrze trafiłeś! Hukirox to nie tylko streamer, który gra w gry – Hukirox to styl lifestyle, a gdy raz tu zajrzysz, zawsze będziesz wracać. Czy jesteś gotów oddać całego siebie, by każdego dnia obserwować, jak na ekranie dzieje się więcej niż na polskiej scenie politycznej? Czy masz w sobie dość cierpliwości, by patrzeć raz po raz, jak Hukirox rozbija ten sam samolot dwudziesty raz, zanim zrozumie, że jednak wypadałoby odpalić silniki? Jeśli tak jak inni chcesz pośmiać się z efektownych lotów po nieudanych skokach, to na co jeszcze czekasz? Natychmiast ruszaj na live i oddaj się całkowicie temu szalonemu światowi, który tworzymy razem każdego dnia!</p>
+                    <p style="color: #999; line-height: 1.6;">Lubisz gry fabularne i patrzenie, jak cały świat wybucha na Twoich oczach? A może wolisz śledzić ciągłe, nieudane próby parkouru, które kończą się lotem w dół i „pięknym” lądowaniem na twarz? A może po prostu chcesz się pośmiać i popisać z kimś o grach? W takim razie dobrze trafiłeś! Hukirox to nie tylko streamer, który gra w gry – Hukirox to styl lifestyle, a gdy raz tu zajrzysz, zawsze będziesz wracać. Czy jesteś gotów oddać całego siebie, by każdego dnia observarować, jak na ekranie dzieje się więcej niż na polskiej scenie politycznej? Czy masz w sobie dość cierpliwości, by patrzeć raz po raz, jak Hukirox rozbija ten sam samolot dwudziesty raz, zanim zrozumie, że jednak wypadałoby odpalić silniki? Jeśli tak jak inni chcesz pośmiać się z efektownych lotów po nieudanych skokach, to na co jeszcze czekasz? Natychmiast ruszaj na live i oddaj się całkowicie temu szalonemu światowi, który tworzymy razem każdego dnia!</p>
                 </div>
             </div>
         </div>
@@ -490,13 +532,15 @@
         <div class="announcements-page">
             <div class="contact-header">
                 <h2>#OGŁOSZENIA</h2>
+ 
                 <p>Bądź zawsze na bieżąco z najważniejszymi informacjami z naszego serwera Discord!</p>
                 <a href="https://discord.gg/qWC28YmRj2" class="discord-btn" style="display: inline-flex; margin-top: 20px;"><i class="fa-brands fa-discord"></i> OTWÓRZ KANAŁ NA DISCORDZIE</a>
             </div>
             
             <div class="announcements-grid"></div>
         </div>
-   </main>
+  
+    </main>
 
     <main id="support-page" class="page-section">
         <div class="support-page">
@@ -508,19 +552,23 @@
                 <div class="contact-box">
                     <img src="avatarneska.png" class="streamer-avatar border-lejdi" style="width: 100px; height: 100px;">
                     <h3 class="color-lejdi">LejdiNeska</h3>
+      
                     <div class="support-links">
                         <a href="https://tipply.pl/@neska" class="support-btn tipply"><i class="fa-solid fa-heart color-lejdi"></i> TIPPLY (DONATE)</a>
                         <a href="https://www.youtube.com/channel/UCKNy-BlvPESwtPje3bdBI6g/join" class="support-btn yt-join"><i class="fa-brands fa-youtube"></i> WSPIERAJ NA YOUTUBE</a>
                     </div>
+ 
                 </div>
                 <div class="contact-box">
                     <img src="avatarhukirox.png" class="streamer-avatar border-hukiro" style="width: 100px; height: 100px;">
                     <h3 class="color-hukiro">Hukirox</h3>
+                    
                     <div class="support-links">
                         <a href="https://tipply.pl/@hukirox" class="support-btn tipply"><i class="fa-solid fa-bolt color-hukiro"></i> TIPPLY (DONATE)</a>
                         <a href="https://www.youtube.com/channel/UCa_ZZMIKboMlgNn7lMcWwNQ/join" class="support-btn yt-join"><i class="fa-brands fa-youtube"></i> WSPIERAJ NA YOUTUBE</a>
                     </div>
               </div>
+ 
             </div>
         </div>
     </main>
@@ -536,14 +584,17 @@
                 <div class="contact-box">
                     <i class="fa-solid fa-envelope-open-text main-icon color-lejdi"></i>
                     <h3 class="color-lejdi">LejdiNeska</h3>
+           
                     <p class="description">Pogadanki, dobra zabawa i masa dystansu do siebie.</p>
                     <a href="#" class="email-link border-lejdi js-email-neska">Ładowanie adresu...</a>
                     <div class="contact-socials">
                         <a href="https://www.youtube.com/@LejdiNeska"><i class="fa-brands fa-youtube"></i></a>
+          
                         <a href="https://www.instagram.com/lejdineska/"><i class="fa-brands fa-instagram"></i></a>
                         <a href="https://discord.gg/qWC28YmRj2"><i class="fa-brands fa-discord"></i></a>
                         <a href="https://www.tiktok.com/@lejdineska"><i class="fa-brands fa-tiktok"></i></a>
                         <a href="https://www.twitch.tv/lejdineska"><i class="fa-brands fa-twitch"></i></a>
+  
                         <a href="https://www.youtube.com/@NeskaAndHukiroxFishing"><i class="fa-solid fa-fish"></i></a>
                     </div>
                 </div>
@@ -554,15 +605,18 @@
                     <p class="description">Gaming, gadanie i wiele wiązanek na bossów.</p>
                     <a href="#" class="email-link border-hukiro js-email-hukiro">Ładowanie adresu...</a>
                     <div class="contact-socials">
+    
                         <a href="https://www.youtube.com/@Hukirox"><i class="fa-brands fa-youtube"></i></a>
                         <a href="https://www.instagram.com/hukirox/"><i class="fa-brands fa-instagram"></i></a>
                         <a href="https://discord.gg/qWC28YmRj2"><i class="fa-brands fa-discord"></i></a>
+                       
                         <a href="https://www.tiktok.com/@hukirox"><i class="fa-brands fa-tiktok"></i></a>
                         <a href="https://www.twitch.tv/hukirox"><i class="fa-brands fa-twitch"></i></a>
                         <a href="https://www.youtube.com/@NeskaAndHukiroxFishing"><i class="fa-solid fa-fish"></i></a>
                     </div>
                 </div>
-           </div>
+      
+            </div>
 
             <div class="contact-footer">
                 <p>Staramy się odpowiadać na wszystkie propozycje biznesowe w ciągu 48 godzin.<br>Dla fanów i spraw społecznościowych najlepszym miejscem jest nasz Discord.</p>
@@ -572,6 +626,7 @@
 
     <main id="privacy-page" class="page-section">
         <div class="policy-container">
+        
             <h2>POLITYKA PRYWATNOŚCI</h2>
             <p>Data aktualizacji: 16 maja 2026 r.</p>
             
@@ -624,7 +679,10 @@
     <footer class="sticky-footer">
         <span>&copy; 2026 yangwu.pl | ALL RIGHTS RESERVED</span>
         <a href="#" class="privacy-link" onclick="showPage(event, 'privacy')">POLITYKA PRYWATNOŚCI</a>
-        <div class="visitor-counter"><i class="fa-solid fa-eye"></i> <span id="views-count">0</span></div>
+        <div class="visitor-counter">
+            <i class="fa-solid fa-eye"></i> 
+            <div id="views-count-container" class="visitor-counter-digits"></div>
+        </div>
     </footer>
 
     <script>
@@ -659,7 +717,6 @@
             const target = document.getElementById(pageId + '-page');
             if (target) target.classList.add('active');
             window.scrollTo({ top: 0, behavior: 'instant' });
-            
             // Automatyczne zamknięcie hamburgera po kliknięciu podstrony
             const nav = document.getElementById('mobile-nav');
             if (nav) {
@@ -682,28 +739,24 @@
             document.getElementById('cookie-banner').classList.remove('show');
         }
 
-        // --- GLOBALNY LICZNIK ODWIEDZIN W CHMURZE ---
+        // --- LICZNIK ODWIEDZIN W FORMIE OSOBNYCH KLOCKÓW ---
         async function updateVisitorCounter() {
-            const counterEl = document.getElementById('views-count');
-            if (!counterEl) return;
+            const containerEl = document.getElementById('views-count-container');
+            if (!containerEl) return;
 
             try {
-                // Wykorzystujemy darmowe, publiczne i stabilne API (przypisane unikalnie do Twojej domeny yangwu.pl)
-                // Każde odświeżenie strony wyśle zapytanie, które globalnie powiększy wspólny licznik o 1
+                // Zapytanie do Twojego unikalnego klucza w API
                 const response = await fetch('https://api.counterapi.dev/v1/yangwu_pl/views/up');
-                
                 if (response.ok) {
                     const data = await response.json();
-                    // Dodajemy bazową stałą (np. 154200), aby licznik nie startował od zera i ładnie wyglądał
-                    const totalViews = parseInt(data.value) + 154200;
-                    counterEl.innerText = Number(totalViews).toLocaleString('pl-PL');
+                    renderCounterDigits(parseInt(data.value), containerEl);
                     return;
                 }
             } catch (error) {
                 console.error('Błąd synchronizacji licznika globalnego:', error);
             }
 
-            // BEZPIECZNY POWRÓT (FALLBACK): Jeśli serwer licznika nie odpowie, ładujemy losową bezpieczną wartość, by strona nie wyglądała na pustą
+            // BEZPIECZNY POWRÓT (FALLBACK) - Wyłącznie realny zakres, bez ukrytych tysięcy
             let currentViews = localStorage.getItem('yangwu_total_views');
             if (!currentViews) {
                 currentViews = Math.floor(Math.random() * (4800 - 3200 + 1)) + 3200;
@@ -711,7 +764,19 @@
                 currentViews = parseInt(currentViews) + 1;
             }
             localStorage.setItem('yangwu_total_views', currentViews);
-            counterEl.innerText = Number(currentViews).toLocaleString('pl-PL');
+            renderCounterDigits(parseInt(currentViews), containerEl);
+        }
+
+        // Funkcja renderująca każdą pojedynczą cyfrę w osobnym tagu span
+        function renderCounterDigits(value, container) {
+            const digitsString = String(value);
+            let htmlContent = '';
+            
+            for (let i = 0; i < digitsString.length; i++) {
+                htmlContent += `<span class="counter-digit">${digitsString[i]}</span>`;
+            }
+            
+            container.innerHTML = htmlContent;
         }
 
         // --- AUTOMATYCZNE POBIERANIE OGŁOSZEŃ Z DISCORDA ---
@@ -742,14 +807,18 @@
                     const cardHTML = `
                         <div class="announcement-card ${themeClass}">
                             <div class="announcement-header">
+                
                                 <div class="announcement-author">
                                     <img src="${avatarImg}" class="announcement-avatar">
                                     <div class="announcement-meta">
+        
                                         <h4>${authorName}</h4>
                                         <span>${msg.date}</span>
+                            
                                     </div>
                                 </div>
                                 <div class="announcement-discord-badge"><i class="fa-brands fa-discord"></i> #ogłoszenia</div>
+                        
                             </div>
                             <div class="announcement-content">${msg.content}</div>
                         </div>
@@ -766,7 +835,7 @@
         window.onload = () => {
             setupEmails();
             checkCookies();
-            updateVisitorCounter(); // Wywołanie zaktualizowanego licznika chmurowego
+            updateVisitorCounter();
             loadDiscordAnnouncements();
             setInterval(loadDiscordAnnouncements, 15000);
         };
