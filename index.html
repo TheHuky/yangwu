@@ -65,6 +65,7 @@
             padding: 5px;
             transition: 0.3s;
             order: -1;
+            /* Umieszcza hamburger przed menu na urządzeniach mobilnych */
         }
         .hamburger-menu:hover { opacity: 0.7; }
 
@@ -143,7 +144,8 @@
         .about-grid { display: grid;
             grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 50px; }
         .about-card { background: #111;
-            border-radius: 20px; padding: 50px 30px; border: 1px solid #222; text-align: center; }
+            border-radius: 20px; padding: 50px 30px; border: 1px solid #222; text-align: center;
+        }
         .about-card img { width: 160px; height: 160px; border-radius: 50%; border: 4px solid;
             margin-bottom: 25px; object-fit: cover; }
 
@@ -194,25 +196,6 @@
         }
         .privacy-link { color: #555; text-decoration: none; transition: 0.3s; }
         .privacy-link:hover { color: white; }
-        
-        /* --- INTEGRACJA LICZNIKA FREECOUNTERSTAT --- */
-        .visitor-counter {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: #555;
-        }
-        .visitor-counter i { 
-            font-size: 14px; 
-            color: #444; 
-        }
-        /* Zapewnienie, że obrazek wygenerowany przez freecounterstat nie zepsuje layoutu stopki */
-        .visitor-counter img {
-            display: inline-block;
-            vertical-align: middle;
-            max-height: 22px;
-            filter: grayscale(20%); /* Opcjonalne dopasowanie stylu */
-        }
 
         /* --- PODSTRONA WSPIERANIE --- */
         .support-page { max-width: 1200px;
@@ -280,6 +263,7 @@
             white-space: pre-line;
         }
         
+        /* Akcenty kolorów w ogłoszeniach */
         .announce-lejdi { border-left: 4px solid #FF007F; }
         .announce-lejdi .announcement-avatar { border-color: #FF007F; }
         .announce-lejdi .announcement-meta h4 { color: #FF007F; }
@@ -290,7 +274,8 @@
 
         /* --- POLITYKA PRYWATNOŚCI --- */
         .policy-container { max-width: 900px;
-            margin: 80px auto; padding: 0 40px; line-height: 1.8; color: #ccc; }
+            margin: 80px auto; padding: 0 40px; line-height: 1.8; color: #ccc;
+        }
         .policy-container h2 { color: white; margin-bottom: 30px; font-size: 32px; font-weight: 900; }
         .policy-container h3 { color: white; margin: 30px 0 10px 0; font-size: 20px;
             border-left: 4px solid #5865F2; padding-left: 15px; }
@@ -351,10 +336,12 @@
             
             .hamburger-menu {
                 display: block;
+                /* Pokazuje hamburger na urządzeniach mobilnych */
             }
 
             .nav-links {
                 display: none;
+                /* Domyślnie ukryte menu mobilne */
                 position: absolute;
                 top: 100%;
                 left: 0;
@@ -365,6 +352,7 @@
                 z-index: 999;
             }
 
+            /* Klasa aktywująca rozwijane menu */
             .nav-links.open {
                 display: block;
             }
@@ -420,23 +408,25 @@
 
             <div class="nav-wrapper">
      
-                <button class="hamburger-menu" onclick="toggleMobileMenu()" aria-label="Otwórz menu">
+               <button class="hamburger-menu" onclick="toggleMobileMenu()" aria-label="Otwórz menu">
                     <i class="fa-solid fa-bars"></i>
                 </button>
 
                 <nav class="nav-links" id="mobile-nav">
                     <ul>
-                        <li><a onclick="showPage(event, 'home')">Home</a></li>
+         
+                       <li><a onclick="showPage(event, 'home')">Home</a></li>
                         <li><a onclick="showPage(event, 'about')">O nas</a></li>
                         <li><a onclick="showPage(event, 'announcements')">Ogłoszenia</a></li>
                         <li><a onclick="showPage(event, 'support')">Wspieranie</a></li>
+    
                         <li><a onclick="showPage(event, 'contact')">Kontakt</a></li>
                     </ul>
                 </nav>
              
                 <a href="https://discord.gg/qWC28YmRj2" class="discord-btn"><i class="fa-brands fa-discord"></i> DOŁĄCZ DO NAS</a>
       
-            </div>
+       </div>
         </div>
     </header>
 
@@ -446,29 +436,35 @@
                 <img src="avatarneska.png" class="streamer-avatar">
                 <h1>LejdiNeska</h1>
   
+                
                 <div class="social-section">
                     <a href="http://www.youtube.com/@LejdiNeska?sub_confirmation=1" class="social-card"><i class="fa-brands fa-youtube icon-lejdi"></i><div class="social-info"><h4>YOUTUBE</h4><p>Wpadnij pogadać!</p></div></a>
                     <a href="https://www.instagram.com/lejdineska/" class="social-card"><i class="fa-brands fa-instagram icon-lejdi"></i><div class="social-info"><h4>INSTAGRAM</h4><p>Sprawdź nowe zdjęcie!</p></div></a>
                     <a href="https://www.tiktok.com/@lejdineska" class="social-card"><i class="fa-brands fa-tiktok icon-lejdi"></i><div class="social-info"><h4>TIKTOK</h4><p>Sprawdź co tam robię!</p></div></a>
-                    <a href="https://discord.gg/qWC28YmRj2" class="social-card"><i class="fa-brands fa-discord icon-lejdi"></i><div class="social-info"><h4>DISCORD</h4><p>Warto tu być!</p></div></a>
+               
+                     <a href="https://discord.gg/qWC28YmRj2" class="social-card"><i class="fa-brands fa-discord icon-lejdi"></i><div class="social-info"><h4>DISCORD</h4><p>Warto tu być!</p></div></a>
                     <a href="https://www.twitch.tv/lejdineska" class="social-card"><i class="fa-brands fa-twitch icon-lejdi"></i><div class="social-info"><h4>TWITCH</h4><p>Może strumyk?</p></div></a>
                     <a href="https://www.youtube.com/@NeskaAndHukiroxFishing" class="social-card"><i class="fa-solid fa-fish icon-lejdi"></i><div class="social-info"><h4>KANAŁ WĘDKARSKI</h4><p>Połowione!</p></div></a>
                    
+              
                     <div class="stats-grid">
                         <div class="stat-box"><i class="fa-brands fa-youtube icon-lejdi"></i><div class="stat-data"><h5>10k+</h5><p>subów</p></div></div>
                         <div class="stat-box"><i class="fa-brands fa-twitch icon-lejdi"></i><div class="stat-data"><h5>2.5k+</h5><p>obserwacji</p></div></div>
                         <div class="stat-box"><i class="fa-brands fa-tiktok icon-lejdi"></i><div class="stat-data"><h5>25k+</h5><p>obserwacji</p></div></div>
+      
                         <div class="stat-box"><i class="fa-brands fa-instagram icon-lejdi"></i><div class="stat-data"><h5>1.5k+</h5><p>obserwacji</p></div></div>
                     </div>
                 </div>
             </section>
 
             <section class="creator-column" id="col-hukiro">
-                <img src="avatarhukirox.png" class="streamer-avatar">
+               
+                 <img src="avatarhukirox.png" class="streamer-avatar">
                 <h1>Hukirox</h1>
                 <div class="social-section">
                     <a href="https://www.youtube.com/@Hukirox?sub_confirmation=1" class="social-card"><i class="fa-brands fa-youtube icon-hukiro"></i><div class="social-info"><h4>YOUTUBE</h4><p>Zobacz, jak gram!</p></div></a>
                     <a href="https://www.instagram.com/hukirox/" class="social-card"><i class="fa-brands fa-instagram icon-hukiro"></i><div class="social-info"><h4>INSTAGRAM</h4><p>Zobacz nową fotę!</p></div></a>
+        
                     <a href="https://www.tiktok.com/@hukirox" class="social-card"><i class="fa-brands fa-tiktok icon-hukiro"></i><div class="social-info"><h4>TIKTOK</h4><p>Najlepsze shoty!</p></div></a>
                     <a href="https://discord.gg/qWC28YmRj2" class="social-card"><i class="fa-brands fa-discord icon-hukiro"></i><div class="social-info"><h4>DISCORD</h4><p>Warto tu być!</p></div></a>
                     <a href="https://www.twitch.tv/hukirox" class="social-card"><i class="fa-brands fa-twitch icon-hukiro"></i><div class="social-info"><h4>TWITCH</h4><p>Zajrzyj na strumyk!</p></div></a>
@@ -481,7 +477,8 @@
                         <div class="stat-box"><i class="fa-brands fa-instagram icon-hukiro"></i><div class="stat-data"><h5>50+</h5><p>obserwacji</p></div></div>
                     </div>
                 </div>
-            </section>
+     
+        </section>
         </div>
     </main>
 
@@ -496,8 +493,9 @@
                 </div>
                 <div class="about-card">
                     <img src="avatarhukirox.png" class="border-hukiro">
-                    <h3 class="color-hukiro">Hukirox</h3>
-                    <p style="color: #999; line-height: 1.6;">Lubisz gry fabularne i patrzenie, jak cały świat wybucha na Twoich oczach? A może wolisz śledzić ciągłe, nieudane próby parkouru, które kończą się lotem w dół i „pięknym” lądowaniem na twarz? A może po prostu chcesz się pośmiać i popisać z kimś o grach? W takim razie dobrze trafiłeś! Hukirox to nie tylko streamer, który gra w gry – Hukirox to style lifestyle, a gdy raz tu zajrzysz, zawsze będziesz wracać. Czy jesteś gotów oddać całego siebie, by każdego dnia observarować, jak na ekranie dzieje się więcej niż na polskiej scenie politycznej? Czy masz w sobie dość cierpliwości, by patrzeć raz po raz, jak Hukirox rozbija ten sam samolot dwudziesty raz, zanim zrozumie, że jednak wypadałoby odpalić silniki? Jeśli tak jak inni chcesz pośmiać się z efektownych lotów po nieudanych skokach, to na co jeszcze czekasz? Natychmiast ruszaj na live i oddaj się całkowicie temu szalonemu światowi, który tworzymy razem każdego dnia!</p>
+                   
+                     <h3 class="color-hukiro">Hukirox</h3>
+                    <p style="color: #999; line-height: 1.6;">Lubisz gry fabularne i patrzenie, jak cały świat wybucha na Twoich oczach? A może wolisz śledzić ciągłe, nieudane próby parkouru, które kończą się lotem w dół i „pięknym” lądowaniem na twarz? A może po prostu chcesz się pośmiać i popisać z kimś o grach? W takim razie dobrze trafiłeś! Hukirox to nie tylko streamer, który gra w gry – Hukirox to styl lifestyle, a gdy raz tu zajrzysz, zawsze będziesz wracać. Czy jesteś gotów oddać całego siebie, by każdego dnia obserwować, jak na ekranie dzieje się więcej niż na polskiej scenie politycznej? Czy masz w sobie dość cierpliwości, by patrzeć raz po raz, jak Hukirox rozbija ten sam samolot dwudziesty raz, zanim zrozumie, że jednak wypadałoby odpalić silniki? Jeśli tak jak inni chcesz pośmiać się z efektownych lotów po nieudanych skokach, to na co jeszcze czekasz? Natychmiast ruszaj na live i oddaj się całkowicie temu szalonemu światowi, który tworzymy razem każdego dnia!</p>
                 </div>
             </div>
         </div>
@@ -507,11 +505,14 @@
         <div class="announcements-page">
             <div class="contact-header">
                 <h2>#OGŁOSZENIA</h2>
+ 
                 <p>Bądź zawsze na bieżąco z najważniejszymi informacjami z naszego serwera Discord!</p>
                 <a href="https://discord.gg/qWC28YmRj2" class="discord-btn" style="display: inline-flex; margin-top: 20px;"><i class="fa-brands fa-discord"></i> OTWÓRZ KANAŁ NA DISCORDZIE</a>
             </div>
+            
             <div class="announcements-grid"></div>
         </div>
+  
     </main>
 
     <main id="support-page" class="page-section">
@@ -524,19 +525,23 @@
                 <div class="contact-box">
                     <img src="avatarneska.png" class="streamer-avatar border-lejdi" style="width: 100px; height: 100px;">
                     <h3 class="color-lejdi">LejdiNeska</h3>
+      
                     <div class="support-links">
                         <a href="https://tipply.pl/@neska" class="support-btn tipply"><i class="fa-solid fa-heart color-lejdi"></i> TIPPLY (DONATE)</a>
                         <a href="https://www.youtube.com/channel/UCKNy-BlvPESwtPje3bdBI6g/join" class="support-btn yt-join"><i class="fa-brands fa-youtube"></i> WSPIERAJ NA YOUTUBE</a>
                     </div>
+ 
                 </div>
                 <div class="contact-box">
                     <img src="avatarhukirox.png" class="streamer-avatar border-hukiro" style="width: 100px; height: 100px;">
                     <h3 class="color-hukiro">Hukirox</h3>
+                    
                     <div class="support-links">
                         <a href="https://tipply.pl/@hukirox" class="support-btn tipply"><i class="fa-solid fa-bolt color-hukiro"></i> TIPPLY (DONATE)</a>
                         <a href="https://www.youtube.com/channel/UCa_ZZMIKboMlgNn7lMcWwNQ/join" class="support-btn yt-join"><i class="fa-brands fa-youtube"></i> WSPIERAJ NA YOUTUBE</a>
                     </div>
               </div>
+ 
             </div>
         </div>
     </main>
@@ -552,14 +557,17 @@
                 <div class="contact-box">
                     <i class="fa-solid fa-envelope-open-text main-icon color-lejdi"></i>
                     <h3 class="color-lejdi">LejdiNeska</h3>
+           
                     <p class="description">Pogadanki, dobra zabawa i masa dystansu do siebie.</p>
                     <a href="#" class="email-link border-lejdi js-email-neska">Ładowanie adresu...</a>
                     <div class="contact-socials">
                         <a href="https://www.youtube.com/@LejdiNeska"><i class="fa-brands fa-youtube"></i></a>
+          
                         <a href="https://www.instagram.com/lejdineska/"><i class="fa-brands fa-instagram"></i></a>
                         <a href="https://discord.gg/qWC28YmRj2"><i class="fa-brands fa-discord"></i></a>
                         <a href="https://www.tiktok.com/@lejdineska"><i class="fa-brands fa-tiktok"></i></a>
                         <a href="https://www.twitch.tv/lejdineska"><i class="fa-brands fa-twitch"></i></a>
+  
                         <a href="https://www.youtube.com/@NeskaAndHukiroxFishing"><i class="fa-solid fa-fish"></i></a>
                     </div>
                 </div>
@@ -570,14 +578,17 @@
                     <p class="description">Gaming, gadanie i wiele wiązanek na bossów.</p>
                     <a href="#" class="email-link border-hukiro js-email-hukiro">Ładowanie adresu...</a>
                     <div class="contact-socials">
+    
                         <a href="https://www.youtube.com/@Hukirox"><i class="fa-brands fa-youtube"></i></a>
                         <a href="https://www.instagram.com/hukirox/"><i class="fa-brands fa-instagram"></i></a>
                         <a href="https://discord.gg/qWC28YmRj2"><i class="fa-brands fa-discord"></i></a>
-                        <a href="https://www.tiktok.com/@hukirox"><i class="fa-brands fa-tiktok"></i></a>
+                       
+                    <a href="https://www.tiktok.com/@hukirox"><i class="fa-brands fa-tiktok"></i></a>
                         <a href="https://www.twitch.tv/hukirox"><i class="fa-brands fa-twitch"></i></a>
                         <a href="https://www.youtube.com/@NeskaAndHukiroxFishing"><i class="fa-solid fa-fish"></i></a>
                     </div>
                 </div>
+      
             </div>
 
             <div class="contact-footer">
@@ -588,33 +599,52 @@
 
     <main id="privacy-page" class="page-section">
         <div class="policy-container">
+        
             <h2>POLITYKA PRYWATNOŚCI</h2>
             <p>Data aktualizacji: 16 maja 2026 r.</p>
-            <p>Niniejsza Polityka Prywatności określa zasady przetwarzania danych osobowych użytkowników serwisu <strong>yangwu.pl</strong>. Dbanie o Twoją prywatność jest dla nam kluczowe, dlatego stosujemy wysokie standardy ochrony danych zgodne z RODO.</p>
+            
+            <p>Niniejsza Polityka Prywatności określa zasady przetwarzania danych osobowych użytkowników serwisu <strong>yangwu.pl</strong>. Dbanie o Twoją prywatność jest dla nam kluczowe, dlatego stosujemy wysokie standardy ochrony danych zgodne z RODO (Ogólnym Rozporządzeniem o Ochronie Danych).</p>
+            
             <h3>1. Kto jest Administratorem Twoich danych?</h3>
             <p>Administratorem danych osobowych są właściciele strony YANGWU – twórcy znani jako <strong>LejdiNeska</strong> oraz <strong>Hukirox</strong>. Możesz się z nami skontaktować bezpośrednio poprzez adresy e-mail podane w sekcji „Kontakt” na Stronie.</p>
+            
             <h3>2. Jakie dane gromadzimy i w jakim celu?</h3>
             <p>Strona ma charakter informacyjny i minimalizujemy zbieranie danych do niezbędnego minimum:</p>
             <ul>
                 <li><strong>Kontakt e-mail:</strong> Przesyłając do nas wiadomość, dobrowolnie podajesz nam swój adres e-mail oraz inne informacje zawarte w treści wiadomości. Dane te przetwarzamy wyłącznie w celu udzielenia odpowiedzi na Twoje zapytanie.</li>
-                <li><strong>Logi serwera:</strong> Podczas korzystania ze Strony, nasz serwer automatycznie zapisuje standardowe dane techniczne (np. adres IP, typ przeglądarki, czas wizyty). Dane te służą wyłącznie celom statystycznym i administracyjnym.</li>
+                <li><strong>Logi serwera:</strong> Podczas korzystania ze Strony, nasz serwer automatycznie zapisuje standardowe dane techniczne (np. adres IP, typ przeglądarki, czas wizyty). Dane te służą wyłącznie celom statystycznym i administracyjnym (zapewnienie bezpieczeństwa Strony).</li>
                 <li><strong>Pliki Cookies:</strong> Używamy ciasteczek w celu poprawnego działania interfejsu (np. zapamiętanie faktu zaakceptowania banera cookies).</li>
             </ul>
+            
             <h3>3. Podstawa prawna przetwarzania</h3>
             <p>Twoje dane przetwarzamy na podstawie:</p>
             <ul>
                 <li><strong>Art. 6 ust. 1 lit. f RODO</strong> (prawnie uzasadniony interes) – w zakresie utrzymania kontaktu z użytkownikami, prowadzenia statystyk oraz zapewnienia bezpieczeństwa Strony.</li>
                 <li><strong>Art. 6 ust. 1 lit. a RODO</strong> (zgoda) – w przypadku plików cookies, które nie są niezbędne do technicznego działania strony.</li>
             </ul>
+
             <h3>4. Wsparcie finansowe i Serwisy zewnętrzne</h3>
             <p>Strona contains odnośniki do zewnętrznych platform (<strong>Tipply.pl</strong>, <strong>YouTube</strong>, <strong>Discord</strong>, <strong>Instagram</strong>, <strong>Twitch</strong>, <strong>TikTok</strong>).</p>
-            <p><strong>Ważne:</strong> Nie przetwarzamy Twoich danych płatniczych. Jeśli zdecydujesz się nas wesprzeć przez Tipply lub YouTube Join, Twoje dane are przetwarzane wyłącznie przez te podmioty zgodnie z ich własnymi politykami prywatności.</p>
+            <p><strong>Ważne:</strong> Nie przetwarzamy Twoich danych płatniczych. Jeśli zdecydujesz się nas wesprzeć przez Tipply lub YouTube Join, Twoje dane (takie jak imię/nick, kwota, dane karty) are przetwarzane wyłącznie przez te podmioty zgodnie z ich własnymi politykami prywatności. Zachęcamy do zapoznania się z nimi przed dokonaniem wpłaty.</p>
+
             <h3>5. Udostępnianie danych</h3>
-            <p>Nigdy nie sprzedajemy Twoich danych podmiotom trzecim. Twoje dane mogą być przekazywane jedynie dostawcom usług technicznych (np. hostingodawca).</p>
+            <p>Nigdy nie sprzedajemy Twoich danych podmiotom trzecim. Twoje dane mogą być przekazywane jedynie dostawcom usług technicznych (np. hostingodawca), z którymi mamy zawarte stosowne umowy powierzenia przetwarzania danych.</p>
+
             <h3>6. Twoje Prawa</h3>
-            <p>W związku z RODO przysługuje Ci prawo do dostępu do swoich danych, sprostowania, usunięcia („prawo do bycia zapomnianym”), ograniczenia przetwarzania, wniesienia sprzeciwu oraz skargi do UODO.</p>
+            <p>W związku z RODO przysługuje Ci prawo do:</p>
+            <ul>
+                <li>Dostępu do swoich danych oraz otrzymania ich kopi.</li>
+                <li>Sprostowania (poprawiania) swoich danych.</li>
+                <li>Usunięcia danych („prawo do bycia zapomnianym”).</li>
+     
+               <li>Ograniczenia przetwarzania danych.</li>
+                <li>Wniesienia sprzeciwu wobec przetwarzania.</li>
+                <li>Wniesienia skargi do organu nadzorczego (Prezesa Urzędu Ochrony Danych Osobowych).</li>
+            </ul>
+
             <h3>7. Okres przechowywania danych</h3>
-            <p>Dane z korespondencji e-mail przechowujemy przez okres niezbędny do obsługi zapytania oraz do celów dowodowych. Standardowe logi serwera są przechowywane zgodnie z polityką firmy hostingowej (zazwyczaj do 30 dni).</p>
+            <p>Dane z korespondencji e-mail przechowujemy przez okres niezbędny do obsługi zapytania oraz do celów dowodowych (zabezpieczenie przed ewentualnymi roszczeniami). Standardowe logi serwera są przechowywane zgodnie z polityką firmy hostingowej (zazwyczaj do 30 dni).</p>
+
             <h3>8. Zmiany w polityce</h3>
             <p>Zastrzegamy sobie prawo do aktualizacji niniejszej polityki w przypadku zmian w prawa lub funkcjonalności Strony. Każda zmiana będzie publikowana na tej podstronie wraz z datą aktualizacji.</p>
         </div>
@@ -623,32 +653,22 @@
     <footer class="sticky-footer">
         <span>&copy; 2026 yangwu.pl | ALL RIGHTS RESERVED</span>
         <a href="#" class="privacy-link" onclick="showPage(event, 'privacy')">POLITYKA PRYWATNOŚCI</a>
-        
-        <div class="visitor-counter">
-            <i class="fa-solid fa-eye"></i> 
-            <div id="sfc28m9b6m6f966p8ftx8mcl2e9x61bbyg8"></div>
-            <noscript>
-                <a href="https://www.freecounterstat.com" title="free website counter">
-                    <img src="https://counter10.fastestcc.com/private/freecounterstat.php?id=28m9b6m6f966p8ftx8mcl2e9x61bbyg8" border="0" title="free website counter" alt="free website counter">
-                </a>
-            </noscript>
-        </div>
     </footer>
-
-    <script type="text/javascript" src="https://counter10.fastestcc.com/private/counter.js?id=28m9b6m6f966p8ftx8mcl2e9x61bbyg8&amp;ln=pl"></script>
 
     <script>
         // --- ZABEZPIECZENIE MAILI ---
         function setupEmails() {
             const emails = [
                 { class: '.js-email-neska', user: 'theineskaa', domain: 'gmail.com' },
-                { class: '.js-email-hukiro', user: 'business.hukirox', domain: 'gmail.com' }
+ 
+               { class: '.js-email-hukiro', user: 'business.hukirox', domain: 'gmail.com' }
             ];
             emails.forEach(e => {
                 const el = document.querySelector(e.class);
                 if(el) {
                     const full = e.user + '@' + e.domain;
                     el.href = 'mailto:' + full;
+           
                     el.innerText = full;
                 }
             });
@@ -669,6 +689,7 @@
             const target = document.getElementById(pageId + '-page');
             if (target) target.classList.add('active');
             window.scrollTo({ top: 0, behavior: 'instant' });
+            // Automatyczne zamknięcie hamburgera po kliknięciu podstrony
             const nav = document.getElementById('mobile-nav');
             if (nav) {
                 nav.classList.remove('open');
@@ -718,14 +739,18 @@
                     const cardHTML = `
                         <div class="announcement-card ${themeClass}">
                             <div class="announcement-header">
+                
                                 <div class="announcement-author">
                                     <img src="${avatarImg}" class="announcement-avatar">
                                     <div class="announcement-meta">
+        
                                         <h4>${authorName}</h4>
                                         <span>${msg.date}</span>
+                            
                                     </div>
                                 </div>
                                 <div class="announcement-discord-badge"><i class="fa-brands fa-discord"></i> #ogłoszenia</div>
+                        
                             </div>
                             <div class="announcement-content">${msg.content}</div>
                         </div>
@@ -738,7 +763,7 @@
             }
         }
 
-        // Inicjalizacja skryptów po załadowaniu strony
+        // Inicjalizacja wszystkich skryptów po ładowaniu strony
         window.onload = () => {
             setupEmails();
             checkCookies();
