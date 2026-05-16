@@ -11,8 +11,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="49ac7549-751f-4323-b2a3-1336000b8496"></script>
-    
     <style>
         /* FIX: Stabilizacja paska przewijania */
         html { scrollbar-gutter: stable; }
@@ -33,10 +31,13 @@
             position: relative;
         }
         
-        .logo-img { height: 45px; width: auto; display: block; cursor: pointer; }
+        .logo-img { height: 45px;
+            width: auto; display: block; cursor: pointer; }
 
-        .nav-wrapper { display: flex; align-items: center; gap: 35px; }
-        .nav-links ul { list-style: none; display: flex; gap: 25px; align-items: center; }
+        .nav-wrapper { display: flex; align-items: center;
+            gap: 35px; }
+        .nav-links ul { list-style: none; display: flex; gap: 25px;
+            align-items: center; }
         .nav-links a { 
             text-decoration: none;
             color: white; font-weight: 700; font-size: 13px; 
@@ -48,35 +49,50 @@
             background: #5865F2;
             color: white !important; text-decoration: none;
             padding: 10px 22px; border-radius: 8px; font-size: 12px; font-weight: 700; 
-            transition: 0.3s; display: flex; align-items: center; gap: 8px;
+            transition: 0.3s; display: flex; align-items: center;
+            gap: 8px;
         }
         .discord-btn:hover { background: #4752c4; transform: scale(1.05); }
 
         /* --- HAMBURGER MENU BUTTON --- */
         .hamburger-menu {
-            display: none; background: none; border: none; color: white; font-size: 24px;
-            cursor: pointer; padding: 5px; transition: 0.3s; order: -1;
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 5px;
+            transition: 0.3s;
+            order: -1;
+            /* Umieszcza hamburger przed menu na urządzeniach mobilnych */
         }
         .hamburger-menu:hover { opacity: 0.7; }
 
         /* --- PODSTRONY --- */
-        .page-section { display: none; animation: fadeIn 0.4s ease-in-out; }
+        .page-section { display: none;
+            animation: fadeIn 0.4s ease-in-out; }
         .page-section.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         /* --- STRONA GŁÓWNA (HOME) --- */
-        .split-layout { display: flex; width: 100%; min-height: 100vh; }
+        .split-layout { display: flex;
+            width: 100%; min-height: 100vh; }
         .creator-column {
-            flex: 1; padding: 70px 30px; border-right: 1px solid #1a1a1a;
+            flex: 1;
+            padding: 70px 30px; border-right: 1px solid #1a1a1a;
             display: flex; flex-direction: column; align-items: center; text-align: center;
         }
         .creator-column:last-child { border-right: none; }
-        .streamer-avatar { width: 180px; height: 180px; border-radius: 50%; border: 5px solid transparent; object-fit: cover; margin-bottom: 25px; }
+        .streamer-avatar { width: 180px; height: 180px; border-radius: 50%; border: 5px solid transparent;
+            object-fit: cover; margin-bottom: 25px; }
 
         .social-card {
-            display: flex; align-items: center; background: #111; border-radius: 12px;
+            display: flex;
+            align-items: center; background: #111; border-radius: 12px;
             padding: 15px; margin-bottom: 12px; text-decoration: none; color: white;
-            border: 1px solid #222; transition: 0.3s ease;
+            border: 1px solid #222;
+            transition: 0.3s ease;
         }
         .social-card:hover { transform: translateX(10px); background: #1a1a1a; }
         .social-card i { font-size: 26px; margin-right: 18px; width: 35px; text-align: center; }
@@ -86,36 +102,68 @@
 
         /* --- STATYSTYKI (LICZNIKI) --- */
         .stats-grid {
-            display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
-            width: 100%; max-width: 450px; margin-top: 15px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            width: 100%;
+            max-width: 450px;
+            margin-top: 15px;
         }
         .stat-box {
-            background: #111; border: 1px solid #222; border-radius: 12px; padding: 12px 15px;
-            display: flex; align-items: center; gap: 15px; text-align: left;
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 12px 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-align: left;
         }
-        .stat-box i { font-size: 20px; width: 25px; text-align: center; }
-        .stat-data h5 { font-size: 15px; font-weight: 900; line-height: 1.2; }
-        .stat-data p { font-size: 11px; opacity: 0.5; text-transform: uppercase; letter-spacing: 0.5px; }
-        
+        .stat-box i {
+            font-size: 20px;
+            width: 25px;
+            text-align: center;
+        }
+        .stat-data h5 {
+            font-size: 15px;
+            font-weight: 900;
+            line-height: 1.2;
+        }
+        .stat-data p {
+            font-size: 11px;
+            opacity: 0.5;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
         #col-lejdi .stat-box { border-color: rgba(255, 0, 127, 0.15); }
         #col-hukiro .stat-box { border-color: rgba(0, 255, 0, 0.15); }
 
         /* --- O NAS --- */
-        .about-page { max-width: 1100px; margin: 80px auto; padding: 0 20px; }
-        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 50px; }
-        .about-card { background: #111; border-radius: 20px; padding: 50px 30px; border: 1px solid #222; text-align: center; }
-        .about-card img { width: 160px; height: 160px; border-radius: 50%; border: 4px solid; margin-bottom: 25px; object-fit: cover; }
+        .about-page { max-width: 1100px;
+            margin: 80px auto; padding: 0 20px; }
+        .about-grid { display: grid;
+            grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 50px; }
+        .about-card { background: #111;
+            border-radius: 20px; padding: 50px 30px; border: 1px solid #222; text-align: center;
+        }
+        .about-card img { width: 160px; height: 160px; border-radius: 50%; border: 4px solid;
+            margin-bottom: 25px; object-fit: cover; }
 
         /* --- KONTAKT --- */
-        .contact-page { max-width: 1200px; margin: 80px auto; padding: 0 20px; }
+        .contact-page { max-width: 1200px;
+            margin: 80px auto; padding: 0 20px; }
         .contact-header { text-align: center; margin-bottom: 60px; }
         .contact-header h2 { font-size: 50px; font-weight: 900; margin-bottom: 20px; }
-        .contact-header p { font-size: 18px; opacity: 0.6; max-width: 700px; margin: 0 auto; line-height: 1.6; }
+        .contact-header p { font-size: 18px; opacity: 0.6; max-width: 700px; margin: 0 auto;
+            line-height: 1.6; }
         
-        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        .contact-grid { display: grid;
+            grid-template-columns: 1fr 1fr; gap: 40px; }
         .contact-box { 
-            background: #111; border-radius: 24px; padding: 40px; border: 1px solid #222; 
-            display: flex; flex-direction: column; align-items: center; text-align: center; transition: 0.3s;
+            background: #111;
+            border-radius: 24px; padding: 40px; border: 1px solid #222; 
+            display: flex; flex-direction: column; align-items: center; text-align: center;
+            transition: 0.3s;
         }
         .contact-box:hover { border-color: #333; transform: translateY(-5px); }
         .contact-box i.main-icon { font-size: 50px; margin-bottom: 20px; }
@@ -123,7 +171,8 @@
         .contact-box .description { font-size: 14px; opacity: 0.5; margin-bottom: 25px; line-height: 1.5; }
         
         .email-link { 
-            color: white; text-decoration: none; font-weight: 700; font-size: 18px; 
+            color: white;
+            text-decoration: none; font-weight: 700; font-size: 18px; 
             border-bottom: 2px solid; padding-bottom: 5px; transition: 0.3s; word-break: break-all;
         }
         .email-link:hover { opacity: 0.7; }
@@ -137,27 +186,34 @@
 
         /* --- STOPKA --- */
         .sticky-footer {
-            position: fixed; bottom: 0; left: 0; width: 100%; height: 60px;
+            position: fixed;
+            bottom: 0; left: 0; width: 100%; height: 60px;
             background: #050505; border-top: 1px solid #1a1a1a;
-            display: flex; align-items: center; justify-content: center; gap: 30px;
+            display: flex; align-items: center; justify-content: center;
+            gap: 30px;
             z-index: 1001; font-size: 12px; font-weight: 700; color: #555;
             letter-spacing: 1px; text-transform: uppercase;
         }
         .privacy-link { color: #555; text-decoration: none; transition: 0.3s; }
         .privacy-link:hover { color: white; }
         
-        /* Stylizacja dla nowej, oficjalnej odznaki Umami */
-        .visitor-counter { display: flex; align-items: center; gap: 8px; }
-        .visitor-counter img { height: 20px; width: auto; opacity: 0.75; transition: 0.3s; }
-        .visitor-counter img:hover { opacity: 1; }
+        .visitor-counter {
+            display: flex;
+            align-items: center; gap: 6px; color: #444; font-size: 11px;
+        }
+        .visitor-counter i { font-size: 12px; }
 
         /* --- PODSTRONA WSPIERANIE --- */
-        .support-page { max-width: 1200px; margin: 80px auto; padding: 0 20px; }
-        .support-links { display: flex; flex-direction: column; gap: 15px; width: 100%; margin-top: 25px; }
+        .support-page { max-width: 1200px;
+            margin: 80px auto; padding: 0 20px; }
+        .support-links { display: flex; flex-direction: column;
+            gap: 15px; width: 100%; margin-top: 25px; }
         .support-btn {
-            display: flex; align-items: center; justify-content: center; gap: 10px;
+            display: flex;
+            align-items: center; justify-content: center; gap: 10px;
             padding: 18px; border-radius: 12px; text-decoration: none; color: white;
-            font-weight: 900; font-size: 14px; transition: 0.3s; border: 1px solid transparent;
+            font-weight: 900; font-size: 14px; transition: 0.3s;
+            border: 1px solid transparent;
         }
         .support-btn.tipply { background: #222; border-color: #333; }
         .support-btn.tipply:hover { background: #2a2a2a; transform: scale(1.02); }
@@ -165,30 +221,53 @@
         .support-btn.yt-join:hover { background: #cc0000; transform: scale(1.02); }
 
         /* --- PODSTRONA OGŁOSZENIA --- */
-        .announcements-page { max-width: 1000px; margin: 80px auto; padding: 0 20px; }
-        .announcements-grid { display: flex; flex-direction: column; gap: 25px; margin-top: 40px; }
+        .announcements-page { max-width: 1000px;
+            margin: 80px auto; padding: 0 20px; }
+        .announcements-grid { display: flex; flex-direction: column;
+            gap: 25px; margin-top: 40px; }
         
         .announcement-card {
-            background: #111; border: 1px solid #222; border-radius: 16px; padding: 25px;
-            position: relative; transition: 0.3s ease;
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 16px;
+            padding: 25px;
+            position: relative;
+            transition: 0.3s ease;
         }
         .announcement-card:hover { border-color: #333; transform: translateY(-2px); }
         
         .announcement-header {
-            display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px;
-            border-bottom: 1px solid #1a1a1a; padding-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #1a1a1a;
+            padding-bottom: 15px;
         }
         .announcement-author { display: flex; align-items: center; gap: 12px; }
-        .announcement-avatar { width: 40px; height: 40px; border-radius: 50%; border: 2px solid; object-fit: cover; }
+        .announcement-avatar { width: 40px; height: 40px; border-radius: 50%; border: 2px solid;
+            object-fit: cover; }
         .announcement-meta h4 { font-size: 16px; font-weight: 900; }
         .announcement-meta span { font-size: 11px; opacity: 0.4; text-transform: uppercase; letter-spacing: 0.5px; }
         
         .announcement-discord-badge {
-            background: rgba(88, 101, 242, 0.1); color: #5865F2; padding: 6px 12px;
-            border-radius: 20px; font-size: 11px; font-weight: 700; display: flex; align-items: center; gap: 6px;
+            background: rgba(88, 101, 242, 0.1);
+            color: #5865F2;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
         
-        .announcement-content { font-size: 15px; line-height: 1.6; color: #ccc; white-space: pre-line; }
+        .announcement-content {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #ccc;
+            white-space: pre-line;
+        }
         
         /* Akcenty kolorów w ogłoszeniach */
         .announce-lejdi { border-left: 4px solid #FF007F; }
@@ -200,9 +279,12 @@
         .announce-hukiro .announcement-meta h4 { color: #00ff00; }
 
         /* --- POLITYKA PRYWATNOŚCI --- */
-        .policy-container { max-width: 900px; margin: 80px auto; padding: 0 40px; line-height: 1.8; color: #ccc; }
+        .policy-container { max-width: 900px;
+            margin: 80px auto; padding: 0 40px; line-height: 1.8; color: #ccc;
+        }
         .policy-container h2 { color: white; margin-bottom: 30px; font-size: 32px; font-weight: 900; }
-        .policy-container h3 { color: white; margin: 30px 0 10px 0; font-size: 20px; border-left: 4px solid #5865F2; padding-left: 15px; }
+        .policy-container h3 { color: white; margin: 30px 0 10px 0; font-size: 20px;
+            border-left: 4px solid #5865F2; padding-left: 15px; }
         .policy-container p { margin-bottom: 15px; }
         .policy-container ul { margin: 0 0 20px 25px; }
         .policy-container li { margin-bottom: 8px; }
@@ -220,9 +302,11 @@
 
         /* --- COOKIE BANNER --- */
         .cookie-banner {
-            position: fixed; bottom: -100%; left: 50%; transform: translateX(-50%);
+            position: fixed;
+            bottom: -100%; left: 50%; transform: translateX(-50%);
             width: 90%; max-width: 600px; background: #141414; border: 1px solid #222;
-            border-radius: 16px; padding: 25px; z-index: 2000; display: flex;
+            border-radius: 16px; padding: 25px;
+            z-index: 2000; display: flex;
             flex-direction: column; gap: 15px; box-shadow: 0 20px 50px rgba(0,0,0,0.9);
             transition: bottom 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
@@ -231,7 +315,8 @@
         .cookie-content strong { color: white; font-weight: 900; }
         .cookie-btns { display: flex; gap: 10px; }
         .cookie-btn {
-            flex: 1; padding: 12px; border-radius: 8px; border: none;
+            flex: 1;
+            padding: 12px; border-radius: 8px; border: none;
             font-weight: 800; font-size: 12px; cursor: pointer; transition: 0.3s;
             text-transform: uppercase; letter-spacing: 1px;
         }
@@ -242,24 +327,57 @@
 
         /* --- MEDIA QUERIES --- */
         @media (max-width: 1100px) { 
-            .split-layout, .about-grid, .contact-grid { display: flex; flex-direction: column; } 
-            .container { flex-direction: column; height: auto; padding: 20px; } 
+            .split-layout, .about-grid, .contact-grid { display: flex;
+                flex-direction: column; } 
+            .container { flex-direction: column;
+                height: auto; padding: 20px; } 
             
             .nav-wrapper { 
-                width: 100%; flex-direction: row !important;
-                justify-content: space-between; align-items: center; margin-top: 20px;
+                width: 100%;
+                flex-direction: row !important;
+                justify-content: space-between;
+                align-items: center;
+                margin-top: 20px;
             } 
             
-            .hamburger-menu { display: block; }
-            .nav-links {
-                display: none; position: absolute; top: 100%; left: 0; width: 100%;
-                background: #050505; border-bottom: 1px solid #1a1a1a; padding: 20px 0; z-index: 999;
+            .hamburger-menu {
+                display: block;
+                /* Pokazuje hamburger na urządzeniach mobilnych */
             }
 
-            .nav-links.open { display: block; }
-            .nav-links ul { flex-direction: column; gap: 20px; width: 100%; text-align: center; }
-            .nav-links a { display: block; padding: 10px 0; font-size: 15px; }
-            .creator-column { border-right: none; border-bottom: 1px solid #1a1a1a; }
+            .nav-links {
+                display: none;
+                /* Domyślnie ukryte menu mobilne */
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: #050505;
+                border-bottom: 1px solid #1a1a1a;
+                padding: 20px 0;
+                z-index: 999;
+            }
+
+            /* Klasa aktywująca rozwijane menu */
+            .nav-links.open {
+                display: block;
+            }
+
+            .nav-links ul {
+                flex-direction: column;
+                gap: 20px;
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 10px 0;
+                font-size: 15px;
+            }
+
+            .creator-column { border-right: none;
+                border-bottom: 1px solid #1a1a1a; }
         }
 
         @media (max-width: 600px) {
@@ -267,7 +385,8 @@
             .cookie-btns { flex-direction: column; }
             .announcement-header { flex-direction: column; align-items: flex-start; gap: 10px; }
             .announcement-discord-badge { align-self: flex-start; }
-            .sticky-footer { flex-direction: column; gap: 5px; height: auto; padding: 10px 0; }
+            .sticky-footer { flex-direction: column; gap: 5px; height: auto;
+                padding: 10px 0; }
         }
     </style>
 </head>
@@ -286,6 +405,7 @@
 
     <header class="main-header">
         <div class="container">
+            
             <div class="logo">
                 <a onclick="showPage(event, 'home')">
                     <img src="LOGO.png" alt="YANGWU" class="logo-img">
@@ -293,21 +413,25 @@
             </div>
 
             <div class="nav-wrapper">
+     
                 <button class="hamburger-menu" onclick="toggleMobileMenu()" aria-label="Otwórz menu">
                     <i class="fa-solid fa-bars"></i>
                 </button>
 
                 <nav class="nav-links" id="mobile-nav">
                     <ul>
+         
                         <li><a onclick="showPage(event, 'home')">Home</a></li>
                         <li><a onclick="showPage(event, 'about')">O nas</a></li>
                         <li><a onclick="showPage(event, 'announcements')">Ogłoszenia</a></li>
                         <li><a onclick="showPage(event, 'support')">Wspieranie</a></li>
+    
                         <li><a onclick="showPage(event, 'contact')">Kontakt</a></li>
                     </ul>
                 </nav>
              
                 <a href="https://discord.gg/qWC28YmRj2" class="discord-btn"><i class="fa-brands fa-discord"></i> DOŁĄCZ DO NAS</a>
+      
             </div>
         </div>
     </header>
@@ -318,29 +442,35 @@
                 <img src="avatarneska.png" class="streamer-avatar">
                 <h1>LejdiNeska</h1>
   
+                
                 <div class="social-section">
                     <a href="http://www.youtube.com/@LejdiNeska?sub_confirmation=1" class="social-card"><i class="fa-brands fa-youtube icon-lejdi"></i><div class="social-info"><h4>YOUTUBE</h4><p>Wpadnij pogadać!</p></div></a>
                     <a href="https://www.instagram.com/lejdineska/" class="social-card"><i class="fa-brands fa-instagram icon-lejdi"></i><div class="social-info"><h4>INSTAGRAM</h4><p>Sprawdź nowe zdjęcie!</p></div></a>
                     <a href="https://www.tiktok.com/@lejdineska" class="social-card"><i class="fa-brands fa-tiktok icon-lejdi"></i><div class="social-info"><h4>TIKTOK</h4><p>Sprawdź co tam robię!</p></div></a>
+               
                     <a href="https://discord.gg/qWC28YmRj2" class="social-card"><i class="fa-brands fa-discord icon-lejdi"></i><div class="social-info"><h4>DISCORD</h4><p>Warto tu być!</p></div></a>
                     <a href="https://www.twitch.tv/lejdineska" class="social-card"><i class="fa-brands fa-twitch icon-lejdi"></i><div class="social-info"><h4>TWITCH</h4><p>Może strumyk?</p></div></a>
                     <a href="https://www.youtube.com/@NeskaAndHukiroxFishing" class="social-card"><i class="fa-solid fa-fish icon-lejdi"></i><div class="social-info"><h4>KANAŁ WĘDKARSKI</h4><p>Połowione!</p></div></a>
                    
+              
                     <div class="stats-grid">
                         <div class="stat-box"><i class="fa-brands fa-youtube icon-lejdi"></i><div class="stat-data"><h5>10k+</h5><p>subów</p></div></div>
                         <div class="stat-box"><i class="fa-brands fa-twitch icon-lejdi"></i><div class="stat-data"><h5>2.5k+</h5><p>obserwacji</p></div></div>
                         <div class="stat-box"><i class="fa-brands fa-tiktok icon-lejdi"></i><div class="stat-data"><h5>25k+</h5><p>obserwacji</p></div></div>
+      
                         <div class="stat-box"><i class="fa-brands fa-instagram icon-lejdi"></i><div class="stat-data"><h5>1.5k+</h5><p>obserwacji</p></div></div>
                     </div>
                 </div>
             </section>
 
             <section class="creator-column" id="col-hukiro">
+               
                 <img src="avatarhukirox.png" class="streamer-avatar">
                 <h1>Hukirox</h1>
                 <div class="social-section">
                     <a href="https://www.youtube.com/@Hukirox?sub_confirmation=1" class="social-card"><i class="fa-brands fa-youtube icon-hukiro"></i><div class="social-info"><h4>YOUTUBE</h4><p>Zobacz, jak gram!</p></div></a>
                     <a href="https://www.instagram.com/hukirox/" class="social-card"><i class="fa-brands fa-instagram icon-hukiro"></i><div class="social-info"><h4>INSTAGRAM</h4><p>Zobacz nową fotę!</p></div></a>
+        
                     <a href="https://www.tiktok.com/@hukirox" class="social-card"><i class="fa-brands fa-tiktok icon-hukiro"></i><div class="social-info"><h4>TIKTOK</h4><p>Najlepsze shoty!</p></div></a>
                     <a href="https://discord.gg/qWC28YmRj2" class="social-card"><i class="fa-brands fa-discord icon-hukiro"></i><div class="social-info"><h4>DISCORD</h4><p>Warto tu być!</p></div></a>
                     <a href="https://www.twitch.tv/hukirox" class="social-card"><i class="fa-brands fa-twitch icon-hukiro"></i><div class="social-info"><h4>TWITCH</h4><p>Zajrzyj na strumyk!</p></div></a>
@@ -353,6 +483,7 @@
                         <div class="stat-box"><i class="fa-brands fa-instagram icon-hukiro"></i><div class="stat-data"><h5>50+</h5><p>obserwacji</p></div></div>
                     </div>
                 </div>
+     
             </section>
         </div>
     </main>
@@ -368,6 +499,7 @@
                 </div>
                 <div class="about-card">
                     <img src="avatarhukirox.png" class="border-hukiro">
+                   
                     <h3 class="color-hukiro">Hukirox</h3>
                     <p style="color: #999; line-height: 1.6;">Lubisz gry fabularne i patrzenie, jak cały świat wybucha na Twoich oczach? A może wolisz śledzić ciągłe, nieudane próby parkouru, które kończą się lotem w dół i „pięknym” lądowaniem na twarz? A może po prostu chcesz się pośmiać i popisać z kimś o grach? W takim razie dobrze trafiłeś! Hukirox to nie tylko streamer, który gra w gry – Hukirox to styl lifestyle, a gdy raz tu zajrzysz, zawsze będziesz wracać. Czy jesteś gotów oddać całego siebie, by każdego dnia obserwować, jak na ekranie dzieje się więcej niż na polskiej scenie politycznej? Czy masz w sobie dość cierpliwości, by patrzeć raz po raz, jak Hukirox rozbija ten sam samolot dwudziesty raz, zanim zrozumie, że jednak wypadałoby odpalić silniki? Jeśli tak jak inni chcesz pośmiać się z efektownych lotów po nieudanych skokach, to na co jeszcze czekasz? Natychmiast ruszaj na live i oddaj się całkowicie temu szalonemu światowi, który tworzymy razem każdego dnia!</p>
                 </div>
@@ -379,12 +511,14 @@
         <div class="announcements-page">
             <div class="contact-header">
                 <h2>#OGŁOSZENIA</h2>
+ 
                 <p>Bądź zawsze na bieżąco z najważniejszymi informacjami z naszego serwera Discord!</p>
                 <a href="https://discord.gg/qWC28YmRj2" class="discord-btn" style="display: inline-flex; margin-top: 20px;"><i class="fa-brands fa-discord"></i> OTWÓRZ KANAŁ NA DISCORDZIE</a>
             </div>
             
             <div class="announcements-grid"></div>
         </div>
+  
     </main>
 
     <main id="support-page" class="page-section">
@@ -397,19 +531,23 @@
                 <div class="contact-box">
                     <img src="avatarneska.png" class="streamer-avatar border-lejdi" style="width: 100px; height: 100px;">
                     <h3 class="color-lejdi">LejdiNeska</h3>
+      
                     <div class="support-links">
                         <a href="https://tipply.pl/@neska" class="support-btn tipply"><i class="fa-solid fa-heart color-lejdi"></i> TIPPLY (DONATE)</a>
                         <a href="https://www.youtube.com/channel/UCKNy-BlvPESwtPje3bdBI6g/join" class="support-btn yt-join"><i class="fa-brands fa-youtube"></i> WSPIERAJ NA YOUTUBE</a>
                     </div>
+ 
                 </div>
                 <div class="contact-box">
                     <img src="avatarhukirox.png" class="streamer-avatar border-hukiro" style="width: 100px; height: 100px;">
                     <h3 class="color-hukiro">Hukirox</h3>
+                    
                     <div class="support-links">
                         <a href="https://tipply.pl/@hukirox" class="support-btn tipply"><i class="fa-solid fa-bolt color-hukiro"></i> TIPPLY (DONATE)</a>
                         <a href="https://www.youtube.com/channel/UCa_ZZMIKboMlgNn7lMcWwNQ/join" class="support-btn yt-join"><i class="fa-brands fa-youtube"></i> WSPIERAJ NA YOUTUBE</a>
                     </div>
-                </div>
+              </div>
+ 
             </div>
         </div>
     </main>
@@ -425,14 +563,17 @@
                 <div class="contact-box">
                     <i class="fa-solid fa-envelope-open-text main-icon color-lejdi"></i>
                     <h3 class="color-lejdi">LejdiNeska</h3>
+           
                     <p class="description">Pogadanki, dobra zabawa i masa dystansu do siebie.</p>
                     <a href="#" class="email-link border-lejdi js-email-neska">Ładowanie adresu...</a>
                     <div class="contact-socials">
                         <a href="https://www.youtube.com/@LejdiNeska"><i class="fa-brands fa-youtube"></i></a>
+          
                         <a href="https://www.instagram.com/lejdineska/"><i class="fa-brands fa-instagram"></i></a>
                         <a href="https://discord.gg/qWC28YmRj2"><i class="fa-brands fa-discord"></i></a>
                         <a href="https://www.tiktok.com/@lejdineska"><i class="fa-brands fa-tiktok"></i></a>
                         <a href="https://www.twitch.tv/lejdineska"><i class="fa-brands fa-twitch"></i></a>
+  
                         <a href="https://www.youtube.com/@NeskaAndHukiroxFishing"><i class="fa-solid fa-fish"></i></a>
                     </div>
                 </div>
@@ -443,14 +584,17 @@
                     <p class="description">Gaming, gadanie i wiele wiązanek na bossów.</p>
                     <a href="#" class="email-link border-hukiro js-email-hukiro">Ładowanie adresu...</a>
                     <div class="contact-socials">
+    
                         <a href="https://www.youtube.com/@Hukirox"><i class="fa-brands fa-youtube"></i></a>
                         <a href="https://www.instagram.com/hukirox/"><i class="fa-brands fa-instagram"></i></a>
                         <a href="https://discord.gg/qWC28YmRj2"><i class="fa-brands fa-discord"></i></a>
+                       
                         <a href="https://www.tiktok.com/@hukirox"><i class="fa-brands fa-tiktok"></i></a>
                         <a href="https://www.twitch.tv/hukirox"><i class="fa-brands fa-twitch"></i></a>
                         <a href="https://www.youtube.com/@NeskaAndHukiroxFishing"><i class="fa-solid fa-fish"></i></a>
                     </div>
                 </div>
+      
             </div>
 
             <div class="contact-footer">
@@ -461,6 +605,7 @@
 
     <main id="privacy-page" class="page-section">
         <div class="policy-container">
+        
             <h2>POLITYKA PRYWATNOŚCI</h2>
             <p>Data aktualizacji: 16 maja 2026 r.</p>
             
@@ -472,7 +617,7 @@
             <h3>2. Jakie dane gromadzimy i w jakim celu?</h3>
             <p>Strona ma charakter informacyjny i minimalizujemy zbieranie danych do niezbędnego minimum:</p>
             <ul>
-                <li><strong>Kontakt e-mail:</strong> Przesyłając do nas wiadomość, dobrowolnie podajesz nam swój adres e-mail oraz inne informacje zawarte w treści wiadomości. Dane te przetwarzamy wyłącznie w celu udzielenia odpowiedzi na Twoje zapytanie.</li>
+                <li><strong>Kontakt e-mail:</strong> Przesyłając do nas wiadomość, dobrowolnie podajesz nam swój adres e-mail oraz inne informacje zawarte in treści wiadomości. Dane te przetwarzamy wyłącznie w celu udzielenia odpowiedzi na Twoje zapytanie.</li>
                 <li><strong>Logi serwera:</strong> Podczas korzystania ze Strony, nasz serwer automatycznie zapisuje standardowe dane techniczne (np. adres IP, typ przeglądarki, czas wizyty). Dane te służą wyłącznie celom statystycznym i administracyjnym (zapewnienie bezpieczeństwa Strony).</li>
                 <li><strong>Pliki Cookies:</strong> Używamy ciasteczek w celu poprawnego działania interfejsu (np. zapamiętanie faktu zaakceptowania banera cookies).</li>
             </ul>
@@ -497,6 +642,7 @@
                 <li>Dostępu do swoich danych oraz otrzymania ich kopi.</li>
                 <li>Sprostowania (poprawiania) swoich danych.</li>
                 <li>Usunięcia danych („prawo do bycia zapomnianym”).</li>
+     
                 <li>Ograniczenia przetwarzania danych.</li>
                 <li>Wniesienia sprzeciwu wobec przetwarzania.</li>
                 <li>Wniesienia skargi do organu nadzorczego (Prezesa Urzędu Ochrony Danych Osobowych).</li>
@@ -513,11 +659,10 @@
     <footer class="sticky-footer">
         <span>&copy; 2026 yangwu.pl | ALL RIGHTS RESERVED</span>
         <a href="#" class="privacy-link" onclick="showPage(event, 'privacy')">POLITYKA PRYWATNOŚCI</a>
-        
-        <div class="visitor-counter">
-            <img src="https://cloud.umami.is/api/websites/49ac7549-751f-4323-b2a3-1336000b8496/badge.svg?startAt=0" alt="Umami Wyświetlenia">
-        </div>
+        <div class="visitor-counter"><i class="fa-solid fa-eye"></i> <span id="views-count">Ładowanie...</span></div>
     </footer>
+
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="49ac7549-751f-4323-b2a3-1336000b8496"></script>
 
     <script>
         // --- ZABEZPIECZENIE MAILI ---
@@ -551,10 +696,10 @@
             const target = document.getElementById(pageId + '-page');
             if (target) target.classList.add('active');
             window.scrollTo({ top: 0, behavior: 'instant' });
-            
+            // Automatyczne zamknięcie hamburgera po kliknięciu podstrony
             const nav = document.getElementById('mobile-nav');
             if (nav) {
-                nav.classList.remove('open');
+                nav.remove('open');
             }
         }
 
@@ -571,6 +716,41 @@
         function acceptCookies() {
             localStorage.setItem('yangwu_cookies', 'true');
             document.getElementById('cookie-banner').classList.remove('show');
+        }
+
+        // --- LICZNIK ODWIEDZIN OPARTY O PUBLICZNE API UMAMI CLOUD ---
+        async function updateVisitorCounter() {
+            const counterEl = document.getElementById('views-count');
+            if (!counterEl) return;
+
+            // Parametry Twojej witryny pobrane z udostępnionego linku
+            const websiteId = '49ac7549-751f-4323-b2a3-1336000b8496';
+            const shareToken = '7J5GfKBKRPhrZ1rm';
+            
+            // Definiujemy ramy czasowe "all the time" (od 2020 roku do teraz)
+            const startAt = new Date('2020-01-01').getTime();
+            const endAt = Date.now();
+
+            try {
+                // Zapytanie do publicznego punktu końcowego Umami, przeznaczonego dla udostępnionych paneli
+                const response = await fetch(`https://cloud.umami.is/api/share/${shareToken}/stats?id=${websiteId}&startAt=${startAt}&endAt=${endAt}`);
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    
+                    // Pobieramy łączną liczbę wyświetleń (pageviews)
+                    // Jeśli wolisz unikalnych użytkowników, zmień na: data.visitors.value
+                    const totalViews = data.pageviews.value; 
+                    
+                    // Wyświetlenie sformatowanej liczby (np. 1 234) zgodnie z lokalizacją pl-PL
+                    counterEl.innerText = Number(totalViews).toLocaleString('pl-PL');
+                } else {
+                    throw new Error('Nie udało się pobrać danych z Umami');
+                }
+            } catch (error) {
+                console.error('Błąd licznika Umami:', error);
+                counterEl.innerText = '—';
+            }
         }
 
         // --- AUTOMATYCZNE POBIERANIE OGŁOSZEŃ Z DISCORDA ---
@@ -601,14 +781,18 @@
                     const cardHTML = `
                         <div class="announcement-card ${themeClass}">
                             <div class="announcement-header">
+                
                                 <div class="announcement-author">
                                     <img src="${avatarImg}" class="announcement-avatar">
                                     <div class="announcement-meta">
+        
                                         <h4>${authorName}</h4>
                                         <span>${msg.date}</span>
+                            
                                     </div>
                                 </div>
                                 <div class="announcement-discord-badge"><i class="fa-brands fa-discord"></i> #ogłoszenia</div>
+                        
                             </div>
                             <div class="announcement-content">${msg.content}</div>
                         </div>
@@ -625,6 +809,7 @@
         window.onload = () => {
             setupEmails();
             checkCookies();
+            updateVisitorCounter(); // Wywołanie zaktualizowanego licznika chmurowego z Umami
             loadDiscordAnnouncements();
             setInterval(loadDiscordAnnouncements, 15000);
         };
