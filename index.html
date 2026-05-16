@@ -572,42 +572,40 @@
             const counterEl = document.getElementById('views-count');
             if (!counterEl) return;
 
-            // KROK 1: Wklej tutaj swoje dane z Umami
-            const UMAMI_WEBSITE_ID = "49ac7549-751f-4323-b2a3-1336000b8496"; 
-            const UMAMI_SHARE_ID = "7J5GfKBKRPhrZ1rm";
+            // 1. WPISZ TUTAJ SWÓJ SHARE ID (TOKEN) Z ZAKŁADKI "SHARE" W UMAMI
+            // To jest ten ciąg znaków z linku, np. "AbC1dEfGhIjK"
+            const UMAMI_SHARE_ID = "TWÓJ_SHARE_ID_Z_UMAMI";
 
-            // Budujemy bezpieczne zapytanie do publicznego punktu końcowego Umami Cloud
-            const url = `https://cloud.umami.is/api/websites/${UMAMI_WEBSITE_ID}/stats?startAt=0&endAt=${new Date().getTime()}`;
+            // Nowy, oficjalny i bezpieczny URL dla publicznych statystyk Umami Cloud
+            const url = `https://cloud.umami.is/api/share/${UMAMI_SHARE_ID}/stats?startAt=0&endAt=${new Date().getTime()}`;
 
             try {
                 const response = await fetch(url, {
                     method: 'GET',
                     headers: {
-                        // Publiczny nagłówek x-umami-share-token pozwala ominąć blokady CORS na Twojej stronie
-                        'x-umami-share-token': UMAMI_SHARE_ID
+                        'Accept': 'application/json'
                     }
                 });
 
                 if (response.ok) {
                     const data = await response.json();
                     
-                    // Umami zwraca obiekt, w którym 'pageviews' zawiera całkowitą liczbę odsłon (unikalnych lub sumarycznych)
-                    // Pobieramy wartość 'value' z obiektu pageviews
-                    const totalViews = parseInt(data.pageviews.value) || 0;
-                    
-                    // Wyświetlamy sformatowaną liczbę w liczniku
-                    counterEl.innerText = Number(totalViews).toLocaleString('pl-PL');
-                    return;
+                    // Wyciągamy sumę odsłon (pageviews) z odpowiedzi API
+                    if (data && data.pageviews && data.pageviews.value !== undefined) {
+                        const totalViews = parseInt(data.pageviews.value);
+                        counterEl.innerText = Number(totalViews).toLocaleString('pl-PL');
+                        return;
+                    }
                 } else {
-                    console.error('Umami zwróciło błąd:', response.status);
+                    console.error('Umami API zwróciło status:', response.status);
                 }
             } catch (error) {
-                console.error('Błąd podczas pobierania danych z Umami:', error);
+                console.error('Błąd połączenia z API Umami:', error);
             }
 
-            // Zapasowy fallback lokalny, jeśli połączenie z Umami chwilowo zawiedzie
-            let currentViews = localStorage.getItem('yangwu_total_views') || 0;
-            counterEl.innerText = Number(currentViews).toLocaleString('pl-PL');
+            // Fallback: Jeśli API nie odpowie, pokazuje 0 lub ostatnią zapisaną realną wartość, zamiast zmyślonych tysięcy
+            const savedViews = localStorage.getItem('yangwu_real_views') || "0";
+            counterEl.innerText = Number(savedViews).toLocaleString('pl-PL');
         }
 
         // --- AUTOMATYCZNE POBIERANIE OGŁOSZEŃ Z DISCORDA ---
