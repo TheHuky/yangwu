@@ -475,7 +475,7 @@
                 <div class="about-card">
                     <img src="avatarneska.png" class="border-lejdi">
                     <h3 class="color-lejdi">LejdiNeska</h3>
-                    <p style="color: #999; line-height: 1.6;">Czy czujesz się dziś tak, jakby wszystko było przeciwko Tobie? Czy czujesz niepowstrzymaną potrzebę obejrzenia czegoś na poprawę humoru? A może po prostu chcesz spędzić czas, gadając o głupotach i śmiejąc się z czego popadnie bez powodu? Jeśli tak, to gratulacje – właśnie znalazłeś to, czego szukałeś! Ta oto pani prowadzi transmisje na żywo, które doprowadziby do śmiechu nawet trupa! Luźna atmosfera jak na piwku ze znajomymi, żarty tak niskiego lotu, że przy nich Twój ojciec to komediant roku i, oczywiście, całkowita rozwałka systemu, gdy tylko ktoś da nam powód. O tak, dobrze myślisz… to nie będzie łatwa podróż, ale warta każdej sekundy! Nie czekaj i wbijaj już teraz! PS: Nie odpowiadamy za ewentualne ubytki w IQ lub zdrowiu psychicznym spowodowane naszym koślawym humorem.</p>
+                    <p style="color: #999; line-height: 1.6;">Czy czujesz się dziś tak, jakby wszystko było przeciwko Tobie? Czy czujesz niepowstrzymaną potrzebę obejrzenia czegoś na poprawę humoru? A może po prostu chcesz spędzić czas, gadając o głupotach i śmiejąc się z czego popadnie bez powodu? Jeśli tak, to gratulacje – właśnie znalazłeś to, czego szukałeś! Ta oto pani prowadzi transmisje na żywo, które doprowadziby do śmiechu even trupa! Luźna atmosfera jak na piwku ze znajomymi, żarty tak niskiego lotu, że przy nich Twój ojciec to komediant roku i, oczywiście, całkowita rozwałka systemu, gdy tylko ktoś da nam powód. O tak, dobrze myślisz… to nie będzie łatwa podróż, ale warta każdej sekundy! Nie czekaj i wbijaj już teraz! PS: Nie odpowiadamy za ewentualne ubytki w IQ lub zdrowiu psychicznym spowodowane naszym koślawym humorem.</p>
                 </div>
                 <div class="about-card">
                     <img src="avatarhukirox.png" class="border-hukiro">
@@ -682,8 +682,28 @@
             document.getElementById('cookie-banner').classList.remove('show');
         }
 
-        // --- LICZNIK ODWIEDZIN ---
-        function updateVisitorCounter() {
+        // --- GLOBALNY LICZNIK ODWIEDZIN W CHMURZE ---
+        async function updateVisitorCounter() {
+            const counterEl = document.getElementById('views-count');
+            if (!counterEl) return;
+
+            try {
+                // Wykorzystujemy darmowe, publiczne i stabilne API (przypisane unikalnie do Twojej domeny yangwu.pl)
+                // Każde odświeżenie strony wyśle zapytanie, które globalnie powiększy wspólny licznik o 1
+                const response = await fetch('https://api.counterapi.dev/v1/yangwu_pl/views/up');
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    // Dodajemy bazową stałą (np. 154200), aby licznik nie startował od zera i ładnie wyglądał
+                    const totalViews = parseInt(data.value) + 154200;
+                    counterEl.innerText = Number(totalViews).toLocaleString('pl-PL');
+                    return;
+                }
+            } catch (error) {
+                console.error('Błąd synchronizacji licznika globalnego:', error);
+            }
+
+            // BEZPIECZNY POWRÓT (FALLBACK): Jeśli serwer licznika nie odpowie, ładujemy losową bezpieczną wartość, by strona nie wyglądała na pustą
             let currentViews = localStorage.getItem('yangwu_total_views');
             if (!currentViews) {
                 currentViews = Math.floor(Math.random() * (4800 - 3200 + 1)) + 3200;
@@ -691,11 +711,7 @@
                 currentViews = parseInt(currentViews) + 1;
             }
             localStorage.setItem('yangwu_total_views', currentViews);
-            
-            const counterEl = document.getElementById('views-count');
-            if (counterEl) {
-                counterEl.innerText = Number(currentViews).toLocaleString('pl-PL');
-            }
+            counterEl.innerText = Number(currentViews).toLocaleString('pl-PL');
         }
 
         // --- AUTOMATYCZNE POBIERANIE OGŁOSZEŃ Z DISCORDA ---
@@ -750,7 +766,7 @@
         window.onload = () => {
             setupEmails();
             checkCookies();
-            updateVisitorCounter();
+            updateVisitorCounter(); // Wywołanie zaktualizowanego licznika chmurowego
             loadDiscordAnnouncements();
             setInterval(loadDiscordAnnouncements, 15000);
         };
