@@ -146,8 +146,10 @@
         .privacy-link { color: #555; text-decoration: none; transition: 0.3s; }
         .privacy-link:hover { color: white; }
         
-        .visitor-counter { display: flex; align-items: center; gap: 6px; color: #444; font-size: 11px; }
-        .visitor-counter i { font-size: 12px; }
+        /* Stylizacja dla nowej, oficjalnej odznaki Umami */
+        .visitor-counter { display: flex; align-items: center; gap: 8px; }
+        .visitor-counter img { height: 20px; width: auto; opacity: 0.75; transition: 0.3s; }
+        .visitor-counter img:hover { opacity: 1; }
 
         /* --- PODSTRONA WSPIERANIE --- */
         .support-page { max-width: 1200px; margin: 80px auto; padding: 0 20px; }
@@ -377,7 +379,7 @@
         <div class="announcements-page">
             <div class="contact-header">
                 <h2>#OGŁOSZENIA</h2>
-                <p>Bądź zawsze na bieżąco z najważniejszymi informaczymi z naszego serwera Discord!</p>
+                <p>Bądź zawsze na bieżąco z najważniejszymi informacjami z naszego serwera Discord!</p>
                 <a href="https://discord.gg/qWC28YmRj2" class="discord-btn" style="display: inline-flex; margin-top: 20px;"><i class="fa-brands fa-discord"></i> OTWÓRZ KANAŁ NA DISCORDZIE</a>
             </div>
             
@@ -511,7 +513,10 @@
     <footer class="sticky-footer">
         <span>&copy; 2026 yangwu.pl | ALL RIGHTS RESERVED</span>
         <a href="#" class="privacy-link" onclick="showPage(event, 'privacy')">POLITYKA PRYWATNOŚCI</a>
-        <div class="visitor-counter"><i class="fa-solid fa-eye"></i> <span id="views-count">Ładowanie...</span></div>
+        
+        <div class="visitor-counter">
+            <img src="https://cloud.umami.is/api/websites/49ac7549-751f-4323-b2a3-1336000b8496/badge.svg?startAt=0" alt="Umami Wyświetlenia">
+        </div>
     </footer>
 
     <script>
@@ -568,47 +573,6 @@
             document.getElementById('cookie-banner').classList.remove('show');
         }
 
-        // --- INTEGRACJA LICZNIKA WYŚWIETLEŃ UMAMI ---
-        function initUmamiCounter() {
-            const counterEl = document.getElementById('views-count');
-            if (!counterEl) return;
-
-            // Nasłuchujemy na moment, w którym skrypt śledzący Umami pobierze poprawne dane z chmury.
-            // Zamiast nielegalnego fetch(), wyciągamy autentyczne dane, które Umami zbiera dla Twojej domeny.
-            window.addEventListener('umami:track', () => {
-                updateUmamiDisplay();
-            });
-
-            // Awaryjne doładowanie symulacji lub danych lokalnych, gdyby sieć była przeciążona
-            setTimeout(() => {
-                if (counterEl.innerText === "Ładowanie...") {
-                    let mockViews = localStorage.getItem('yangwu_mock_views');
-                    if (!mockViews) {
-                        mockViews = Math.floor(Math.random() * (156800 - 154200 + 1)) + 154200;
-                    } else {
-                        mockViews = parseInt(mockViews) + 1;
-                    }
-                    localStorage.setItem('yangwu_mock_views', mockViews);
-                    counterEl.innerText = Number(mockViews).toLocaleString('pl-PL');
-                }
-            }, 1200);
-        }
-
-        function updateUmamiDisplay() {
-            const counterEl = document.getElementById('views-count');
-            // Jeśli umami poprawnie działa w oknie przeglądarki, nadpisujemy tekst realną statystyką sesyjną podrasowaną o stałą bazową
-            if (window.umami && counterEl) {
-                let baseViews = 154200; // Twoja startowa baza, by licznik dumnie wyglądał
-                let storageKey = 'yangwu_umami_session_hits';
-                let sessionHits = parseInt(sessionStorage.getItem(storageKey) || "0") + 1;
-                sessionStorage.setItem(storageKey, sessionHits);
-                
-                // Finalny miks wyświetleń przekazywany na stronę
-                let currentTotal = baseViews + sessionHits;
-                counterEl.innerText = Number(currentTotal).toLocaleString('pl-PL');
-            }
-        }
-
         // --- AUTOMATYCZNE POBIERANIE OGŁOSZEŃ Z DISCORDA ---
         async function loadDiscordAnnouncements() {
             const container = document.querySelector('.announcements-grid');
@@ -661,7 +625,6 @@
         window.onload = () => {
             setupEmails();
             checkCookies();
-            initUmamiCounter(); // Inicjalizacja bezpiecznego i zintegrowanego systemu Umami
             loadDiscordAnnouncements();
             setInterval(loadDiscordAnnouncements, 15000);
         };
