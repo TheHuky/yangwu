@@ -31,13 +31,10 @@
             position: relative;
         }
         
-        .logo-img { height: 45px;
-            width: auto; display: block; cursor: pointer; }
+        .logo-img { height: 45px; width: auto; display: block; cursor: pointer; }
 
-        .nav-wrapper { display: flex; align-items: center;
-            gap: 35px; }
-        .nav-links ul { list-style: none; display: flex; gap: 25px;
-            align-items: center; }
+        .nav-wrapper { display: flex; align-items: center; gap: 35px; }
+        .nav-links ul { list-style: none; display: flex; gap: 25px; align-items: center; }
         .nav-links a { 
             text-decoration: none;
             color: white; font-weight: 700; font-size: 13px; 
@@ -49,8 +46,7 @@
             background: #5865F2;
             color: white !important; text-decoration: none;
             padding: 10px 22px; border-radius: 8px; font-size: 12px; font-weight: 700; 
-            transition: 0.3s; display: flex; align-items: center;
-            gap: 8px;
+            transition: 0.3s; display: flex; align-items: center; gap: 8px;
         }
         .discord-btn:hover { background: #4752c4; transform: scale(1.05); }
 
@@ -69,14 +65,12 @@
         .hamburger-menu:hover { opacity: 0.7; }
 
         /* --- PODSTRONY --- */
-        .page-section { display: none;
-            animation: fadeIn 0.4s ease-in-out; }
+        .page-section { display: none; animation: fadeIn 0.4s ease-in-out; }
         .page-section.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         /* --- STRONA GŁÓWNA (HOME) --- */
-        .split-layout { display: flex;
-            width: 100%; min-height: 100vh; }
+        .split-layout { display: flex; width: 100%; min-height: 100vh; }
         .creator-column {
             flex: 1;
             padding: 70px 30px; border-right: 1px solid #1a1a1a;
@@ -90,8 +84,7 @@
             display: flex;
             align-items: center; background: #111; border-radius: 12px;
             padding: 15px; margin-bottom: 12px; text-decoration: none; color: white;
-            border: 1px solid #222;
-            transition: 0.3s ease;
+            border: 1px solid #222; transition: 0.3s ease;
         }
         .social-card:hover { transform: translateX(10px); background: #1a1a1a; }
         .social-card i { font-size: 26px; margin-right: 18px; width: 35px; text-align: center; }
@@ -138,26 +131,18 @@
         #col-hukiro .stat-box { border-color: rgba(0, 255, 0, 0.15); }
 
         /* --- O NAS --- */
-        .about-page { max-width: 1100px;
-            margin: 80px auto; padding: 0 20px; }
-        .about-grid { display: grid;
-            grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 50px; }
-        .about-card { background: #111;
-            border-radius: 20px; padding: 50px 30px; border: 1px solid #222; text-align: center;
-        }
-        .about-card img { width: 160px; height: 160px; border-radius: 50%; border: 4px solid;
-            margin-bottom: 25px; object-fit: cover; }
+        .about-page { max-width: 1100px; margin: 80px auto; padding: 0 20px; }
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 50px; }
+        .about-card { background: #111; border-radius: 20px; padding: 50px 30px; border: 1px solid #222; text-align: center; }
+        .about-card img { width: 160px; height: 160px; border-radius: 50%; border: 4px solid; margin-bottom: 25px; object-fit: cover; }
 
         /* --- KONTAKT --- */
-        .contact-page { max-width: 1200px;
-            margin: 80px auto; padding: 0 20px; }
+        .contact-page { max-width: 1200px; margin: 80px auto; padding: 0 20px; }
         .contact-header { text-align: center; margin-bottom: 60px; }
         .contact-header h2 { font-size: 50px; font-weight: 900; margin-bottom: 20px; }
-        .contact-header p { font-size: 18px; opacity: 0.6; max-width: 700px; margin: 0 auto;
-            line-height: 1.6; }
+        .contact-header p { font-size: 18px; opacity: 0.6; max-width: 700px; margin: 0 auto; line-height: 1.6; }
         
-        .contact-grid { display: grid;
-            grid-template-columns: 1fr 1fr; gap: 40px; }
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
         .contact-box { 
             background: #111;
             border-radius: 24px; padding: 40px; border: 1px solid #222; 
@@ -188,8 +173,7 @@
             position: fixed;
             bottom: 0; left: 0; width: 100%; height: 60px;
             background: #050505; border-top: 1px solid #1a1a1a;
-            display: flex; align-items: center; justify-content: center;
-            gap: 30px;
+            display: flex; align-items: center; justify-content: center; gap: 30px;
             z-index: 1001; font-size: 12px; font-weight: 700; color: #555;
             letter-spacing: 1px; text-transform: uppercase;
         }
@@ -203,16 +187,13 @@
         .visitor-counter i { font-size: 12px; }
 
         /* --- PODSTRONA WSPIERANIE --- */
-        .support-page { max-width: 1200px;
-            margin: 80px auto; padding: 0 20px; }
-        .support-links { display: flex; flex-direction: column;
-            gap: 15px; width: 100%; margin-top: 25px; }
+        .support-page { max-width: 1200px; margin: 80px auto; padding: 0 20px; }
+        .support-links { display: flex; flex-direction: column; gap: 15px; width: 100%; margin-top: 25px; }
         .support-btn {
             display: flex;
             align-items: center; justify-content: center; gap: 10px;
             padding: 18px; border-radius: 12px; text-decoration: none; color: white;
-            font-weight: 900; font-size: 14px; transition: 0.3s;
-            border: 1px solid transparent;
+            font-weight: 900; font-size: 14px; transition: 0.3s; border: 1px solid transparent;
         }
         .support-btn.tipply { background: #222; border-color: #333; }
         .support-btn.tipply:hover { background: #2a2a2a; transform: scale(1.02); }
@@ -220,10 +201,8 @@
         .support-btn.yt-join:hover { background: #cc0000; transform: scale(1.02); }
 
         /* --- PODSTRONA OGŁOSZENIA --- */
-        .announcements-page { max-width: 1000px;
-            margin: 80px auto; padding: 0 20px; }
-        .announcements-grid { display: flex; flex-direction: column;
-            gap: 25px; margin-top: 40px; }
+        .announcements-page { max-width: 1000px; margin: 80px auto; padding: 0 20px; }
+        .announcements-grid { display: flex; flex-direction: column; gap: 25px; margin-top: 40px; }
         
         .announcement-card {
             background: #111;
@@ -244,8 +223,7 @@
             padding-bottom: 15px;
         }
         .announcement-author { display: flex; align-items: center; gap: 12px; }
-        .announcement-avatar { width: 40px; height: 40px; border-radius: 50%; border: 2px solid;
-            object-fit: cover; }
+        .announcement-avatar { width: 40px; height: 40px; border-radius: 50%; border: 2px solid; object-fit: cover; }
         .announcement-meta h4 { font-size: 16px; font-weight: 900; }
         .announcement-meta span { font-size: 11px; opacity: 0.4; text-transform: uppercase; letter-spacing: 0.5px; }
         
@@ -278,11 +256,9 @@
         .announce-hukiro .announcement-meta h4 { color: #00ff00; }
 
         /* --- POLITYKA PRYWATNOŚCI --- */
-        .policy-container { max-width: 900px;
-            margin: 80px auto; padding: 0 40px; line-height: 1.8; color: #ccc; }
+        .policy-container { max-width: 900px; margin: 80px auto; padding: 0 40px; line-height: 1.8; color: #ccc; }
         .policy-container h2 { color: white; margin-bottom: 30px; font-size: 32px; font-weight: 900; }
-        .policy-container h3 { color: white; margin: 30px 0 10px 0; font-size: 20px;
-            border-left: 4px solid #5865F2; padding-left: 15px; }
+        .policy-container h3 { color: white; margin: 30px 0 10px 0; font-size: 20px; border-left: 4px solid #5865F2; padding-left: 15px; }
         .policy-container p { margin-bottom: 15px; }
         .policy-container ul { margin: 0 0 20px 25px; }
         .policy-container li { margin-bottom: 8px; }
@@ -303,8 +279,7 @@
             position: fixed;
             bottom: -100%; left: 50%; transform: translateX(-50%);
             width: 90%; max-width: 600px; background: #141414; border: 1px solid #222;
-            border-radius: 16px; padding: 25px;
-            z-index: 2000; display: flex;
+            border-radius: 16px; padding: 25px; z-index: 2000; display: flex;
             flex-direction: column; gap: 15px; box-shadow: 0 20px 50px rgba(0,0,0,0.9);
             transition: bottom 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
@@ -325,10 +300,8 @@
 
         /* --- MEDIA QUERIES --- */
         @media (max-width: 1100px) { 
-            .split-layout, .about-grid, .contact-grid { display: flex;
-                flex-direction: column; } 
-            .container { flex-direction: column;
-                height: auto; padding: 20px; } 
+            .split-layout, .about-grid, .contact-grid { display: flex; flex-direction: column; } 
+            .container { flex-direction: column; height: auto; padding: 20px; } 
             
             .nav-wrapper { 
                 width: 100%;
@@ -360,20 +333,17 @@
             }
 
             .nav-links ul {
-                flex-direction: column;
-                gap: 20px;
+                flex-direction: column; gap: 20px;
                 width: 100%;
                 text-align: center;
             }
 
             .nav-links a {
-                display: block;
-                padding: 10px 0;
+                display: block; padding: 10px 0;
                 font-size: 15px;
             }
 
-            .creator-column { border-right: none;
-                border-bottom: 1px solid #1a1a1a; }
+            .creator-column { border-right: none; border-bottom: 1px solid #1a1a1a; }
         }
 
         @media (max-width: 600px) {
@@ -381,8 +351,7 @@
             .cookie-btns { flex-direction: column; }
             .announcement-header { flex-direction: column; align-items: flex-start; gap: 10px; }
             .announcement-discord-badge { align-self: flex-start; }
-            .sticky-footer { flex-direction: column; gap: 5px; height: auto;
-                padding: 10px 0; }
+            .sticky-footer { flex-direction: column; gap: 5px; height: auto; padding: 10px 0; }
         }
     </style>
 </head>
@@ -497,7 +466,7 @@
                     <img src="avatarhukirox.png" class="border-hukiro">
                    
                     <h3 class="color-hukiro">Hukirox</h3>
-                    <p style="color: #999; line-height: 1.6;">Lubisz gry fabularne i patrzenie, jak cały świat wybucha na Twoich oczach? A może wolisz śledzić ciągłe, nieudane próby parkouru, które kończą się lotem w dół i „pięknym” lądowaniem na twarz? A może po prostu chcesz się pośmiać i popisać z kimś o grach? W takim razie dobrze trafiłeś! Hukirox to nie tylko streamer, który gra w gry – Hukirox to lifestyle, a gdy raz tu zajrzysz, zawsze będziesz wracać. Czy jesteś gotów oddać całego siebie, by każdego dnia obserwować, jak na ekranie dzieje się więcej niż na polskiej scenie politycznej? Czy masz w sobie dość cierpliwości, by patrzeć raz po raz, jak Hukirox rozbija ten sam samolot dwudziesty raz, zanim zrozumie, że jednak wypadałoby odpalić silniki? Jeśli tak jak inni chcesz pośmiać się z efektownych lotów po nieudanych skokach, to na co jeszcze czekasz? Natychmiast ruszaj na live i oddaj się całkowicie temu szalonemu światowi, który tworzymy razem każdego dnia!</p>
+                    <p style="color: #999; line-height: 1.6;">Lubisz gry fabularne i patrzenie, jak cały świat wybucha na Twoich oczach? A może wolisz śledzić ciągłe, nieudane próby parkouru, które kończą się lotem w dół i „pięknym” lądowaniem na twarz? A może po prostu chcesz się pośmiać i popisać z kimś o grach? W takim razie dobrze trafiłeś! Hukirox to nie tylko streamer, który gra w gry – Hukirox to styl lifestyle, a gdy raz tu zajrzysz, zawsze będziesz wracać. Czy jesteś gotów oddać całego siebie, by każdego dnia obserwować, jak na ekranie dzieje się więcej niż na polskiej scenie politycznej? Czy masz w sobie dość cierpliwości, by patrzeć raz po raz, jak Hukirox rozbija ten sam samolot dwudziesty raz, zanim zrozumie, że jednak wypadałoby odpalić silniki? Jeśli tak jak inni chcesz pośmiać się z efektownych lotów po nieudanych skokach, to na co jeszcze czekasz? Natychmiast ruszaj na live i oddaj się całkowicie temu szalonemu światowi, który tworzymy razem każdego dnia!</p>
                 </div>
             </div>
         </div>
@@ -630,7 +599,7 @@
             <p><strong>Ważne:</strong> Nie przetwarzamy Twoich danych płatniczych. Jeśli zdecydujesz się nas wesprzeć przez Tipply lub YouTube Join, Twoje dane (takie jak imię/nick, kwota, dane karty) are przetwarzane wyłącznie przez te podmioty zgodnie z ich własnymi politykami prywatności. Zachęcamy do zapoznania się z nimi przed dokonaniem wpłaty.</p>
 
             <h3>5. Udostępnianie danych</h3>
-            <p>Nigdy nie sprzedajemy Twoich danych podmiotom trzecim. Twoje dane mogą być przekazywane jedynie dostawcom usług technicznych (np. hostingovawca), z którymi mamy zawarte stosowne umowy powierzenia przetwarzania danych.</p>
+            <p>Nigdy nie sprzedajemy Twoich danych podmiotom trzecim. Twoje dane mogą być przekazywane jedynie dostawcom usług technicznych (np. hostingodawca), z którymi mamy zawarte stosowne umowy powierzenia przetwarzania danych.</p>
 
             <h3>6. Twoje Prawa</h3>
             <p>W związku z RODO przysługuje Ci prawo do:</p>
@@ -663,6 +632,7 @@
         function setupEmails() {
             const emails = [
                 { class: '.js-email-neska', user: 'theineskaa', domain: 'gmail.com' },
+ 
                 { class: '.js-email-hukiro', user: 'business.hukirox', domain: 'gmail.com' }
             ];
             emails.forEach(e => {
@@ -670,6 +640,7 @@
                 if(el) {
                     const full = e.user + '@' + e.domain;
                     el.href = 'mailto:' + full;
+           
                     el.innerText = full;
                 }
             });
@@ -707,7 +678,6 @@
             }
         }
 
-        // --- ZAAKCEPTOWANIE COOKIES ---
         function acceptCookies() {
             localStorage.setItem('yangwu_cookies', 'true');
             document.getElementById('cookie-banner').classList.remove('show');
@@ -719,31 +689,29 @@
             if (!counterEl) return;
 
             try {
-                // Zmiana API na publiczny, stabilny i darmowy serwer MojoAuth CountAPI, który nie wymaga rejestracji
-                // Link automatycznie nalicza unikalne wejście pod podaną nazwę i od razu zwraca poprawną liczbę
-                const response = await fetch('https://api.mojoauth.com/count/hit/yangwu_github_io_2026');
+                // Wykorzystujemy darmowe, publiczne i stabilne API
+                // Zmieniono nazwę na 'yangwu_pl_v2', aby zresetować licznik do zera
+                const response = await fetch('https://api.counterapi.dev/v1/yangwu_pl_v2/views/up');
                 if (response.ok) {
                     const data = await response.json();
-                    let totalViews = parseInt(data.value);
-                    
-                    if (!isNaN(totalViews) && totalViews > 0) {
-                        counterEl.innerText = Number(totalViews).toLocaleString('pl-PL');
-                        return;
-                    }
+                    // Usunięto sztuczne dodawanie + 154200, licznik pokazuje teraz czysty wynik
+                    const totalViews = parseInt(data.value);
+                    counterEl.innerText = Number(totalViews).toLocaleString('pl-PL');
+                    return;
                 }
             } catch (error) {
                 console.error('Błąd synchronizacji licznika globalnego:', error);
             }
 
-            // BEZPIECZNY POWRÓT (FALLBACK): Jeśli sieć nie odpowie, używamy pamięci przeglądarki użytkownika
-            let currentViews = localStorage.getItem('yangwu_total_views');
+            // BEZPIECZNY POWRÓT (FALLBACK): Jeśli serwer licznika nie odpowie
+            let currentViews = localStorage.getItem('yangwu_total_views_v2');
             if (!currentViews) {
+                // Zamiast losować, w przypadku błędu API pierwsze wejście to 1
                 currentViews = 1;
             } else {
                 currentViews = parseInt(currentViews) + 1;
-                if (isNaN(currentViews)) currentViews = 1;
             }
-            localStorage.setItem('yangwu_total_views', currentViews);
+            localStorage.setItem('yangwu_total_views_v2', currentViews);
             counterEl.innerText = Number(currentViews).toLocaleString('pl-PL');
         }
 
@@ -775,14 +743,18 @@
                     const cardHTML = `
                         <div class="announcement-card ${themeClass}">
                             <div class="announcement-header">
+                
                                 <div class="announcement-author">
                                     <img src="${avatarImg}" class="announcement-avatar">
                                     <div class="announcement-meta">
+        
                                         <h4>${authorName}</h4>
                                         <span>${msg.date}</span>
+                            
                                     </div>
                                 </div>
                                 <div class="announcement-discord-badge"><i class="fa-brands fa-discord"></i> #ogłoszenia</div>
+                        
                             </div>
                             <div class="announcement-content">${msg.content}</div>
                         </div>
@@ -799,7 +771,7 @@
         window.onload = () => {
             setupEmails();
             checkCookies();
-            updateVisitorCounter(); // Wywołanie sprawnego licznika chmurowego
+            updateVisitorCounter(); // Wywołanie zaktualizowanego licznika chmurowego
             loadDiscordAnnouncements();
             setInterval(loadDiscordAnnouncements, 15000);
         };
