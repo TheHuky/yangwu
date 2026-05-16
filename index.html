@@ -144,14 +144,23 @@
             position: fixed; bottom: 0; left: 0; width: 100%; height: 60px;
             background: #050505; border-top: 1px solid #1a1a1a;
             display: flex; align-items: center; justify-content: center; gap: 30px;
-            z-index: 1011; font-size: 12px; font-weight: 700; color: #555;
+            z-index: 1001; font-size: 12px; font-weight: 700; color: #555;
             letter-spacing: 1px; text-transform: uppercase;
         }
         .privacy-link { color: #555; text-decoration: none; transition: 0.3s; }
         .privacy-link:hover { color: white; }
         
-        .visitor-counter { display: flex; align-items: center; gap: 6px; color: #444; font-size: 11px; }
-        .visitor-counter i { font-size: 12px; }
+        /* Stylizacja wbudowanej odznaki Umami tak, aby pasowała do ciemnego motywu strony */
+        .visitor-counter { display: flex; align-items: center; gap: 6px; }
+        .visitor-counter umami-badge :part(badge) {
+            background: transparent !important;
+            color: #444 !important;
+            font-family: 'Inter', sans-serif !important;
+            font-size: 11px !important;
+            font-weight: 700 !important;
+            border: none !important;
+            padding: 0 !important;
+        }
 
         /* --- PODSTRONA WSPIERANIE --- */
         .support-page { max-width: 1200px; margin: 80px auto; padding: 0 20px; }
@@ -366,7 +375,7 @@
                 <div class="about-card">
                     <img src="avatarhukirox.png" class="border-hukiro">
                     <h3 class="color-hukiro">Hukirox</h3>
-                    <p style="color: #999; line-height: 1.6;">Lubisz gry fabularne i patrzenie, jak cały świat wybucha na Twoich oczach? A może wolisz śledzić ciągłe, nieudane próby parkouru, które kończą się lotem w dół i „pięknym” lądowaniem na twarz? A może po prostu chcesz się pośmiać i popisać z kimś o grach? W takim razie dobrze trafiłeś! Hukirox to nie tylko streamer, który gra w gry – Hukirox to styl lifestyle, a gdy raz tu zajrzysz, zawsze będziesz wracać. Czy jesteś gotów oddać całego siebie, by każdego dnia obserwować, jak na ekranie dzieje się więcej niż na polskiej scenie politycznej? Czy masz w sobie dość cierpliwości, by patrzeć raz po raz, jak Hukirox rozbija ten sam samolot dwudziesty raz, zanim zrozumie, że jednak wypadałoby odpalić silniki? Jeśli tak jak inni chcesz pośmiać się z efektownych lotów po nieudanych skokach, to na co jeszcze czekasz? Natychmiast ruszaj na live i oddaj się całkowicie temu szalonemu światowi, który tworzymy razem każdego dnia!</p>
+                    <p style="color: #999; line-height: 1.6;">Lubisz gry fabularne i patrzenie, jak cały świat wybucha na Twoich oczach? A może wolisz śledzić ciągłe, nieudane próby parkouru, które kończą się lotem w dół i „pięknym” lądowaniem na twarz? A może po prostu chcesz się pośmiać i popisać z kimś o grach? W takim razie dobrze trafiłeś! Hukirox to nie tylko streamer, który gra w gry – Hukirox to styl lifestyle, a gdy raz tu zajrzysz, zawsze będziesz wracać. Czy jesteś gotów oddać całego siebie, by każdego dnia obserwować, jak na ekranie dzieje się więcej niż na polskiej scenie politycznej? Czy masz w sobie dość cierpliwości, by patrzeć raz po raz, jak Hukirox rozbija ten sam samolot dwudziesty raz, zanim zrozumie, że jednak wypadałoby odpalić silniki? Jeśli tak jak inni chcesz pośmiać się z efektownych lotów po nieudanych skokach, to na co jeszcze czekasz? Natychmiast ruszaj na live i oddaj się całkowicie temu szalonemu światovi, który tworzymy razem każdego dnia!</p>
                 </div>
             </div>
         </div>
@@ -376,7 +385,7 @@
         <div class="announcements-page">
             <div class="contact-header">
                 <h2>#OGŁOSZENIA</h2>
-                <p>Bądź zawsze na bieżąco z najważniejszymi informacjami z naszego serwera Discord!</p>
+                <p>Bądź zawsze na bieżąco z najważniejszymi informackiem z naszego serwera Discord!</p>
                 <a href="https://discord.gg/qWC28YmRj2" class="discord-btn" style="display: inline-flex; margin-top: 20px;"><i class="fa-brands fa-discord"></i> OTWÓRZ KANAŁ NA DISCORDZIE</a>
             </div>
             
@@ -510,7 +519,15 @@
     <footer class="sticky-footer">
         <span>&copy; 2026 yangwu.pl | ALL RIGHTS RESERVED</span>
         <a href="#" class="privacy-link" onclick="showPage(event, 'privacy')">POLITYKA PRYWATNOŚCI</a>
-        <div class="visitor-counter"><i class="fa-solid fa-eye"></i> <span id="views-count">0</span></div>
+        
+        <div class="visitor-counter">
+            <i class="fa-solid fa-eye" style="font-size: 12px; color: #444; margin-right: -2px;"></i>
+            
+            <script async src="https://cloud.umami.is/script.js" 
+                    data-website-id="TUTAJ_WKLEJ_WEBSITE_ID" 
+                    data-badge="pageviews">
+            </script>
+        </div>
     </footer>
 
     <script>
@@ -545,7 +562,6 @@
             const target = document.getElementById(pageId + '-page');
             if (target) target.classList.add('active');
             window.scrollTo({ top: 0, behavior: 'instant' });
-            // Automatyczne zamknięcie hamburgera po kliknięciu podstrony
             const nav = document.getElementById('mobile-nav');
             if (nav) {
                 nav.classList.remove('open');
@@ -565,47 +581,6 @@
         function acceptCookies() {
             localStorage.setItem('yangwu_cookies', 'true');
             document.getElementById('cookie-banner').classList.remove('show');
-        }
-
-// --- GLOBALNY LICZNIK ODWIEDZIN Z UMAMI ---
-        async function updateVisitorCounter() {
-            const counterEl = document.getElementById('views-count');
-            if (!counterEl) return;
-
-            // 1. WPISZ TUTAJ SWÓJ SHARE ID (TOKEN) Z ZAKŁADKI "SHARE" W UMAMI
-            // To jest ten ciąg znaków z linku, np. "AbC1dEfGhIjK"
-            const UMAMI_SHARE_ID = "TWÓJ_SHARE_ID_Z_UMAMI";
-
-            // Nowy, oficjalny i bezpieczny URL dla publicznych statystyk Umami Cloud
-            const url = `https://cloud.umami.is/api/share/${UMAMI_SHARE_ID}/stats?startAt=0&endAt=${new Date().getTime()}`;
-
-            try {
-                const response = await fetch(url, {
-                    method: 'GET',
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                });
-
-                if (response.ok) {
-                    const data = await response.json();
-                    
-                    // Wyciągamy sumę odsłon (pageviews) z odpowiedzi API
-                    if (data && data.pageviews && data.pageviews.value !== undefined) {
-                        const totalViews = parseInt(data.pageviews.value);
-                        counterEl.innerText = Number(totalViews).toLocaleString('pl-PL');
-                        return;
-                    }
-                } else {
-                    console.error('Umami API zwróciło status:', response.status);
-                }
-            } catch (error) {
-                console.error('Błąd połączenia z API Umami:', error);
-            }
-
-            // Fallback: Jeśli API nie odpowie, pokazuje 0 lub ostatnią zapisaną realną wartość, zamiast zmyślonych tysięcy
-            const savedViews = localStorage.getItem('yangwu_real_views') || "0";
-            counterEl.innerText = Number(savedViews).toLocaleString('pl-PL');
         }
 
         // --- AUTOMATYCZNE POBIERANIE OGŁOSZEŃ Z DISCORDA ---
@@ -656,11 +631,9 @@
             }
         }
 
-        // Inicjalizacja wszystkich skryptów po ładowaniu strony
         window.onload = () => {
             setupEmails();
             checkCookies();
-            updateVisitorCounter(); // Wywołanie zaktualizowanego licznika chmurowego
             loadDiscordAnnouncements();
             setInterval(loadDiscordAnnouncements, 15000);
         };
