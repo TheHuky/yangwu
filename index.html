@@ -497,7 +497,7 @@
                     <img src="avatarhukirox.png" class="border-hukiro">
                    
                     <h3 class="color-hukiro">Hukirox</h3>
-                    <p style="color: #999; line-height: 1.6;">Lubisz gry fabularne i patrzenie, jak cały świat wybucha na Twoich oczach? A może wolisz śledzić ciągłe, nieudane próby parkouru, które kończą się lotem w dół i „pięknym” lądowaniem na twarz? A może po prostu chcesz się pośmiać i popisać z kimś o grach? W takim razie dobrze trafiłeś! Hukirox to nie tylko streamer, który gra w gry – Hukirox to styl lifestyle, a gdy raz tu zajrzysz, zawsze będziesz wracać. Czy jesteś gotów oddać całego siebie, by każdego dnia obserwować, jak na ekranie dzieje się więcej niż na polskiej scenie politycznej? Czy masz w sobie dość cierpliwości, by patrzeć raz po raz, jak Hukirox rozbija ten sam samolot dwudziesty raz, zanim zrozumie, że jednak wypadałoby odpalić silniki? Jeśli tak jak inni chcesz pośmiać się z efektownych lotów po nieudanych skokach, to na co jeszcze czekasz? Natychmiast ruszaj na live i oddaj się całkowicie temu szalonemu światowi, który tworzymy razem każdego dnia!</p>
+                    <p style="color: #999; line-height: 1.6;">Lubisz gry fabularne i patrzenie, jak cały świat wybucha na Twoich oczach? A może wolisz śledzić ciągłe, nieudane próby parkouru, które kończą się lotem w dół i „pięknym” lądowaniem na twarz? A może po prostu chcesz się pośmiać i popisać z kimś o grach? W takim razie dobrze trafiłeś! Hukirox to nie tylko streamer, który gra w gry – Hukirox to lifestyle, a gdy raz tu zajrzysz, zawsze będziesz wracać. Czy jesteś gotów oddać całego siebie, by każdego dnia obserwować, jak na ekranie dzieje się więcej niż na polskiej scenie politycznej? Czy masz w sobie dość cierpliwości, by patrzeć raz po raz, jak Hukirox rozbija ten sam samolot dwudziesty raz, zanim zrozumie, że jednak wypadałoby odpalić silniki? Jeśli tak jak inni chcesz pośmiać się z efektownych lotów po nieudanych skokach, to na co jeszcze czekasz? Natychmiast ruszaj na live i oddaj się całkowicie temu szalonemu światowi, który tworzymy razem każdego dnia!</p>
                 </div>
             </div>
         </div>
@@ -719,25 +719,29 @@
             if (!counterEl) return;
 
             try {
-                // Nowy klucz 'yangwu_pl_nowy2026' gwarantuje, że licznik wystartuje od 0 w bazie danych
-                const response = await fetch('https://api.counterapi.dev/v1/yangwu_pl_nowy2026/views/up');
+                // Zmiana API na publiczny, stabilny i darmowy serwer MojoAuth CountAPI, który nie wymaga rejestracji
+                // Link automatycznie nalicza unikalne wejście pod podaną nazwę i od razu zwraca poprawną liczbę
+                const response = await fetch('https://api.mojoauth.com/count/hit/yangwu_github_io_2026');
                 if (response.ok) {
                     const data = await response.json();
-                    // Usunęliśmy dodawanie liczby 154200. Pokazujemy czysty, realny stan z chmury.
-                    const totalViews = parseInt(data.value);
-                    counterEl.innerText = Number(totalViews).toLocaleString('pl-PL');
-                    return;
+                    let totalViews = parseInt(data.value);
+                    
+                    if (!isNaN(totalViews) && totalViews > 0) {
+                        counterEl.innerText = Number(totalViews).toLocaleString('pl-PL');
+                        return;
+                    }
                 }
             } catch (error) {
                 console.error('Błąd synchronizacji licznika globalnego:', error);
             }
 
-            // BEZPIECZNY POWRÓT (FALLBACK): Jeśli serwer licznika nie odpowie
+            // BEZPIECZNY POWRÓT (FALLBACK): Jeśli sieć nie odpowie, używamy pamięci przeglądarki użytkownika
             let currentViews = localStorage.getItem('yangwu_total_views');
             if (!currentViews) {
-                currentViews = 0; // Zaczynamy od 0 zamiast losowej wartości
+                currentViews = 1;
             } else {
                 currentViews = parseInt(currentViews) + 1;
+                if (isNaN(currentViews)) currentViews = 1;
             }
             localStorage.setItem('yangwu_total_views', currentViews);
             counterEl.innerText = Number(currentViews).toLocaleString('pl-PL');
@@ -795,7 +799,7 @@
         window.onload = () => {
             setupEmails();
             checkCookies();
-            updateVisitorCounter(); // Wywołanie zaktualizowanego licznika chmurowego
+            updateVisitorCounter(); // Wywołanie sprawnego licznika chmurowego
             loadDiscordAnnouncements();
             setInterval(loadDiscordAnnouncements, 15000);
         };
