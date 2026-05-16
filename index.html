@@ -9,668 +9,323 @@
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="apple-touch-icon" href="favicon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">\
     
     <style>
         /* FIX: Stabilizacja paska przewijania */
         html { scrollbar-gutter: stable; }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background-color: #0b0b0b; color: white; overflow-x: hidden; padding-bottom: 60px; }
+        body { background-color: #0b0b0b; color: white; overflow-x: hidden; -webkit-tap-highlight-color: transparent; }
 
-        /* --- HEADER --- */
-        .main-header {
-            background-color: #050505;
-            padding: 10px 0; border-bottom: 1px solid #1a1a1a;
-            width: 100%; position: sticky; top: 0; z-index: 1000;
+        /* Menu Nawigacji */
+        .navbar {
+            position: fixed; top: 0; left: 0; width: 100%; padding: 20px 50px;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(11, 11, 11, 0.85); backdrop-filter: blur(10px); z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
-        .container {
-            max-width: 1400px;
-            margin: 0 auto; display: flex;
-            justify-content: space-between; align-items: center; padding: 0 40px; height: 60px;
-            position: relative;
+        .logo { font-size: 24px; font-weight: 900; letter-spacing: 2px; color: #fff; text-decoration: none; display: flex; align-items: center; gap: 10px; }
+        .logo span { color: #ff0055; }
+        .logo img { height: 32px; width: auto; border-radius: 50%; }
+        
+        .nav-links { display: flex; gap: 30px; list-style: none; }
+        .nav-links a { color: #aaa; text-decoration: none; font-weight: 700; font-size: 15px; transition: 0.3s; cursor: pointer; }
+        .nav-links a:hover, .nav-links a.active { color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.3); }
+
+        /* Mobilny Hamburger */
+        .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 6px; z-index: 101; }
+        .hamburger span { width: 30px; height: 3px; background-color: white; transition: 0.3s; transform-origin: left; }
+        
+        /* Aktywny hamburger cross */
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg); }
+
+        /* Główne Kontenery Stron */
+        .page { display: none; min-height: 100vh; padding-top: 100px; width: 100%; opacity: 0; transition: opacity 0.4s ease; }
+        .page.active { display: block; opacity: 1; }
+
+        /* STRONA GŁÓWNA: Split Screen */
+        .split-container { display: flex; height: calc(100vh - 100px); width: 100%; position: relative; }
+        .creator-section { 
+            flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; 
+            position: relative; overflow: hidden; transition: flex 0.6s cubic-bezier(0.25, 1, 0.5, 1); text-decoration: none; color: white;
         }
         
-        .logo-img { height: 45px;
-            width: auto; display: block; cursor: pointer; }
+        /* Grafika tła dla sekcji twórców */
+        .creator-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover; background-position: center; filter: brightness(0.3) grayscale(0.4);
+            transition: transform 0.6s ease, filter 0.6s ease; z-index: 1;
+        }
+        .neska .creator-bg { background-image: url('neska-bg.png'); }
+        .hukiro .creator-bg { background-image: url('hukiro-bg.png'); }
 
-        .nav-wrapper { display: flex; align-items: center; gap: 35px; }
-        .nav-links ul { list-style: none; display: flex; gap: 25px; align-items: center; }
-        .nav-links a { 
-            text-decoration: none;
-            color: white; font-weight: 700; font-size: 13px; 
-            cursor: pointer; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px;
-        }
-        .nav-links a:hover { opacity: 0.7; }
-        
-        .discord-btn {
-            background: #5865F2;
-            color: white !important; text-decoration: none;
-            padding: 10px 22px; border-radius: 8px; font-size: 12px; font-weight: 700; 
-            transition: 0.3s; display: flex; align-items: center;
-            gap: 8px;
-        }
-        .discord-btn:hover { background: #4752c4; transform: scale(1.05); }
+        .creator-content { position: relative; z-index: 2; text-align: center; pointer-events: none; }
+        .creator-section h2 { font-size: 50px; font-weight: 900; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 10px; transition: transform 0.4s ease; }
+        .creator-section p { font-size: 16px; color: #ccc; letter-spacing: 1px; }
 
-        /* --- HAMBURGER MENU BUTTON --- */
-        .hamburger-menu {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-            padding: 5px;
-            transition: 0.3s;
-            order: -1; /* Umieszcza hamburger przed menu na urządzeniach mobilnych */
+        /* Efekty Hover na dużych ekranach */
+        @media (min-width: 992px) {
+            .creator-section:hover { flex: 1.3; }
+            .creator-section:hover .creator-bg { transform: scale(1.05); filter: brightness(0.55) grayscale(0); }
+            .creator-section:hover h2 { transform: scale(1.1); }
+            .neska:hover h2 { color: #ff0055; text-shadow: 0 0 20px rgba(255,0,85,0.6); }
+            .hukiro:hover h2 { color: #00ddff; text-shadow: 0 0 20px rgba(0,221,255,0.6); }
         }
-        .hamburger-menu:hover { opacity: 0.7; }
 
-        /* --- PODSTRONY --- */
-        .page-section { display: none;
-            animation: fadeIn 0.4s ease-in-out; }
-        .page-section.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        /* Linia podziału pośrodku */
+        .split-divider {
+            position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 2px; height: 100%;
+            background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.1), transparent); z-index: 3; pointer-events: none;
+        }
 
-        /* --- STRONA GŁÓWNA (HOME) --- */
-        .split-layout { display: flex;
-            width: 100%; min-height: 100vh; }
-        .creator-column {
-            flex: 1;
-            padding: 70px 30px; border-right: 1px solid #1a1a1a;
-            display: flex; flex-direction: column; align-items: center; text-align: center;
+        /* FOOTER / DOLNY PANEL */
+        .bottom-panel {
+            background-color: #070707; padding: 40px 50px; border-top: 1px solid rgba(255,255,255,0.05);
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;
         }
-        .creator-column:last-child { border-right: none; }
-        .streamer-avatar { width: 180px; height: 180px; border-radius: 50%; border: 5px solid transparent;
-            object-fit: cover; margin-bottom: 25px; }
+        .counter-box { display: flex; align-items: center; gap: 15px; }
+        .counter-icon { width: 45px; height: 45px; background: rgba(255,255,255,0.03); border-radius: 12px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.08); color: #ff0055; font-size: 18px; }
+        .counter-info h4 { font-size: 12px; text-transform: uppercase; color: #666; letter-spacing: 1px; }
+        .counter-info p { font-size: 20px; font-weight: 900; color: #fff; }
 
-        .social-card {
-            display: flex;
-            align-items: center; background: #111; border-radius: 12px;
-            padding: 15px; margin-bottom: 12px; text-decoration: none; color: white;
-            border: 1px solid #222;
-            transition: 0.3s ease;
-        }
-        .social-card:hover { transform: translateX(10px); background: #1a1a1a; }
-        .social-card i { font-size: 26px; margin-right: 18px; width: 35px; text-align: center; }
-        .social-section { width: 100%; max-width: 450px; margin: 30px 0; text-align: left; }
-        .social-info h4 { font-size: 15px; font-weight: 900; }
-        .social-info p { font-size: 12px; opacity: 0.5; }
+        .footer-links { display: flex; gap: 20px; }
+        .footer-links a { color: #555; text-decoration: none; font-size: 13px; transition: 0.3s; }
+        .footer-links a:hover { color: #fff; }
 
-        /* --- STATYSTYKI (LICZNIKI) --- */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            width: 100%;
-            max-width: 450px;
-            margin-top: 15px;
-        }
-        .stat-box {
-            background: #111;
-            border: 1px solid #222;
-            border-radius: 12px;
-            padding: 12px 15px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            text-align: left;
-        }
-        .stat-box i {
-            font-size: 20px;
-            width: 25px;
-            text-align: center;
-        }
-        .stat-data h5 {
-            font-size: 15px;
-            font-weight: 900;
-            line-height: 1.2;
-        }
-        .stat-data p {
-            font-size: 11px;
-            opacity: 0.5;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        #col-lejdi .stat-box { border-color: rgba(255, 0, 127, 0.15); }
-        #col-hukiro .stat-box { border-color: rgba(0, 255, 0, 0.15); }
+        /* PODSTRONY: O nas, Współpraca */
+        .content-container { max-width: 900px; margin: 0 auto; padding: 40px 20px 80px 20px; }
+        .page-title { font-size: 40px; font-weight: 900; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 2px; }
+        .page-subtitle { color: #666; font-size: 16px; margin-bottom: 40px; }
+        .text-block { color: #bcbcbc; font-size: 16px; line-height: 1.8; margin-bottom: 30px; }
 
-        /* --- O NAS --- */
-        .about-page { max-width: 1100px;
-            margin: 80px auto; padding: 0 20px; }
-        .about-grid { display: grid;
-            grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 50px; }
-        .about-card { background: #111;
-            border-radius: 20px; padding: 50px 30px; border: 1px solid #222; text-align: center;
-        }
-        .about-card img { width: 160px; height: 160px; border-radius: 50%; border: 4px solid;
-            margin-bottom: 25px; object-fit: cover; }
+        /* Sekcja Współpraca */
+        .coop-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 40px; }
+        .coop-card { background: #111; border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; padding: 30px; transition: 0.3s; }
+        .coop-card:hover { border-color: rgba(255,255,255,0.15); transform: translateY(-3px); }
+        .coop-card h3 { font-size: 22px; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .coop-card.neska-card h3 { color: #ff0055; }
+        .coop-card.hukiro-card h3 { color: #00ddff; }
+        .mail-link { display: inline-flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.03); padding: 12px 20px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.05); color: #fff; font-weight: 700; text-decoration: none; margin-top: 15px; transition: 0.3s; cursor: pointer; }
+        .mail-link:hover { background: #fff; color: #000; }
 
-        /* --- KONTAKT --- */
-        .contact-page { max-width: 1200px;
-            margin: 80px auto; padding: 0 20px; }
-        .contact-header { text-align: center; margin-bottom: 60px; }
-        .contact-header h2 { font-size: 50px; font-weight: 900; margin-bottom: 20px; }
-        .contact-header p { font-size: 18px; opacity: 0.6; max-width: 700px; margin: 0 auto;
-            line-height: 1.6; }
-        
-        .contact-grid { display: grid;
-            grid-template-columns: 1fr 1fr; gap: 40px; }
-        .contact-box { 
-            background: #111;
-            border-radius: 24px; padding: 40px; border: 1px solid #222; 
-            display: flex; flex-direction: column; align-items: center; text-align: center;
-            transition: 0.3s;
-        }
-        .contact-box:hover { border-color: #333; transform: translateY(-5px); }
-        .contact-box i.main-icon { font-size: 50px; margin-bottom: 20px; }
-        .contact-box h3 { font-size: 28px; font-weight: 900; margin-bottom: 10px; }
-        .contact-box .description { font-size: 14px; opacity: 0.5; margin-bottom: 25px; line-height: 1.5; }
-        
-        .email-link { 
-            color: white;
-            text-decoration: none; font-weight: 700; font-size: 18px; 
-            border-bottom: 2px solid; padding-bottom: 5px; transition: 0.3s; word-break: break-all;
-        }
-        .email-link:hover { opacity: 0.7; }
+        /* Baner Cookies RODO */
+        .cookie-banner { position: fixed; bottom: -100px; left: 50%; transform: translateX(-50%); width: calc(100% - 40px); max-width: 600px; background: #161616; border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 20px; z-index: 1000; display: flex; flex-direction: column; gap: 15px; box-shadow: 0 20px 40px rgba(0,0,0,0.8); transition: bottom 0.5s cubic-bezier(0.25, 1, 0.5, 1); }
+        .cookie-banner.show { bottom: 20px; }
+        .cookie-text { font-size: 13px; color: #ccc; line-height: 1.6; }
+        .cookie-text a { color: #ff0055; text-decoration: none; }
+        .cookie-buttons { display: flex; gap: 10px; justify-content: flex-end; }
+        .cookie-btn { padding: 10px 20px; border-radius: 8px; border: none; font-weight: 700; font-size: 13px; cursor: pointer; transition: 0.2s; }
+        .cookie-accept { background: #fff; color: #000; }
+        .cookie-accept:hover { background: #e0e0e0; }
 
-        .contact-socials { display: flex; gap: 20px; margin-top: 30px; }
-        .contact-socials a { color: white; font-size: 20px; opacity: 0.4; transition: 0.3s; }
-        .contact-socials a:hover { opacity: 1; transform: scale(1.2); }
+        /* SEKCA INTEGRACJI DISCORDA (OGŁOSZENIA) */
+        .announcements-wrapper { margin-top: 50px; }
+        .announcements-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-top: 20px; }
+        .announcement-card { background: #121212; border: 1px solid rgba(255,255,255,0.04); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 15px; position: relative; overflow: hidden; }
+        .announcement-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: #5865F2; }
+        .announcement-header { display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px; }
+        .announcement-author { display: flex; align-items: center; gap: 10px; }
+        .announcement-avatar { width: 35px; height: 35px; border-radius: 50%; background: #2a2a2a; }
+        .announcement-meta h4 { font-size: 13px; font-weight: 700; color: #fff; }
+        .announcement-meta span { font-size: 11px; color: #555; }
+        .announcement-discord-badge { font-size: 11px; color: #5865F2; font-weight: 700; display: flex; align-items: center; gap: 5px; }
+        .announcement-content { font-size: 13.5px; color: #b3b3b3; line-height: 1.6; white-space: pre-wrap; }
 
-        .contact-footer { text-align: center; margin-top: 60px; padding-top: 40px; border-top: 1px solid #1a1a1a; }
-        .contact-footer p { opacity: 0.4; font-size: 13px; }
-
-        /* --- STOPKA --- */
-        .sticky-footer {
-            position: fixed;
-            bottom: 0; left: 0; width: 100%; height: 60px;
-            background: #050505; border-top: 1px solid #1a1a1a;
-            display: flex; align-items: center; justify-content: center;
-            gap: 30px;
-            z-index: 1001; font-size: 12px; font-weight: 700; color: #555;
-            letter-spacing: 1px; text-transform: uppercase;
-        }
-        .privacy-link { color: #555; text-decoration: none; transition: 0.3s; }
-        .privacy-link:hover { color: white; }
-        
-        .visitor-counter {
-            display: flex;
-            align-items: center; gap: 6px; color: #444; font-size: 11px;
-        }
-        .visitor-counter i { font-size: 12px; }
-
-        /* --- PODSTRONA WSPIERANIE --- */
-        .support-page { max-width: 1200px;
-            margin: 80px auto; padding: 0 20px; }
-        .support-links { display: flex; flex-direction: column;
-            gap: 15px; width: 100%; margin-top: 25px; }
-        .support-btn {
-            display: flex;
-            align-items: center; justify-content: center; gap: 10px;
-            padding: 18px; border-radius: 12px; text-decoration: none; color: white;
-            font-weight: 900; font-size: 14px; transition: 0.3s;
-            border: 1px solid transparent;
-        }
-        .support-btn.tipply { background: #222; border-color: #333; }
-        .support-btn.tipply:hover { background: #2a2a2a; transform: scale(1.02); }
-        .support-btn.yt-join { background: #ff0000; }
-        .support-btn.yt-join:hover { background: #cc0000; transform: scale(1.02); }
-
-        /* --- PODSTRONA OGŁOSZENIA --- */
-        .announcements-page { max-width: 1000px;
-            margin: 80px auto; padding: 0 20px; }
-        .announcements-grid { display: flex; flex-direction: column;
-            gap: 25px; margin-top: 40px; }
-        
-        .announcement-card {
-            background: #111;
-            border: 1px solid #222;
-            border-radius: 16px;
-            padding: 25px;
-            position: relative;
-            transition: 0.3s ease;
-        }
-        .announcement-card:hover { border-color: #333; transform: translateY(-2px); }
-        
-        .announcement-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 15px;
-            border-bottom: 1px solid #1a1a1a;
-            padding-bottom: 15px;
-        }
-        .announcement-author { display: flex; align-items: center; gap: 12px; }
-        .announcement-avatar { width: 40px; height: 40px; border-radius: 50%; border: 2px solid;
-            object-fit: cover; }
-        .announcement-meta h4 { font-size: 16px; font-weight: 900; }
-        .announcement-meta span { font-size: 11px; opacity: 0.4; text-transform: uppercase; letter-spacing: 0.5px; }
-        
-        .announcement-discord-badge {
-            background: rgba(88, 101, 242, 0.1);
-            color: #5865F2;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        
-        .announcement-content {
-            font-size: 15px;
-            line-height: 1.6;
-            color: #ccc;
-            white-space: pre-line;
-        }
-        
-        /* Akcenty kolorów w ogłoszeniach */
-        .announce-lejdi { border-left: 4px solid #FF007F; }
-        .announce-lejdi .announcement-avatar { border-color: #FF007F; }
-        .announce-lejdi .announcement-meta h4 { color: #FF007F; }
-        
-        .announce-hukiro { border-left: 4px solid #00ff00; }
-        .announce-hukiro .announcement-avatar { border-color: #00ff00; }
-        .announce-hukiro .announcement-meta h4 { color: #00ff00; }
-
-        /* --- POLITYKA PRYWATNOŚCI --- */
-        .policy-container { max-width: 900px;
-            margin: 80px auto; padding: 0 40px; line-height: 1.8; color: #ccc;
-        }
-        .policy-container h2 { color: white; margin-bottom: 30px; font-size: 32px; font-weight: 900; }
-        .policy-container h3 { color: white; margin: 30px 0 10px 0; font-size: 20px;
-            border-left: 4px solid #5865F2; padding-left: 15px; }
-        .policy-container p { margin-bottom: 15px; }
-        .policy-container ul { margin: 0 0 20px 25px; }
-        .policy-container li { margin-bottom: 8px; }
-
-        /* --- KOLORY PERSONALNE --- */
-        #col-lejdi h1, .color-lejdi { color: #FF007F !important; }
-        #col-lejdi .streamer-avatar, .border-lejdi { border-color: #FF007F !important; }
-        #col-lejdi .social-card i, .icon-lejdi { color: #FF007F; }
-        #col-lejdi .social-card:hover { border-color: #FF007F; }
-
-        #col-hukiro h1, .color-hukiro { color: #00ff00 !important; }
-        #col-hukiro .streamer-avatar, .border-hukiro { border-color: #00ff00 !important; }
-        #col-hukiro .social-card i, .icon-hukiro { color: #00ff00; }
-        #col-hukiro .social-card:hover { border-color: #00ff00; }
-
-        /* --- COOKIE BANNER --- */
-        .cookie-banner {
-            position: fixed;
-            bottom: -100%; left: 50%; transform: translateX(-50%);
-            width: 90%; max-width: 600px; background: #141414; border: 1px solid #222;
-            border-radius: 16px; padding: 25px;
-            z-index: 2000; display: flex;
-            flex-direction: column; gap: 15px; box-shadow: 0 20px 50px rgba(0,0,0,0.9);
-            transition: bottom 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .cookie-banner.show { bottom: 80px; }
-        .cookie-content { font-size: 13px; color: #999; line-height: 1.6; }
-        .cookie-content strong { color: white; font-weight: 900; }
-        .cookie-btns { display: flex; gap: 10px; }
-        .cookie-btn {
-            flex: 1;
-            padding: 12px; border-radius: 8px; border: none;
-            font-weight: 800; font-size: 12px; cursor: pointer; transition: 0.3s;
-            text-transform: uppercase; letter-spacing: 1px;
-        }
-        .btn-accept { background: white; color: black; }
-        .btn-accept:hover { background: #ccc; transform: scale(1.02); }
-        .btn-settings { background: #222; color: white; border: 1px solid #333; }
-        .btn-settings:hover { background: #333; }
-
-        /* --- MEDIA QUERIES --- */
-        @media (max-width: 1100px) { 
-            .split-layout, .about-grid, .contact-grid { display: flex; flex-direction: column; } 
-            .container { flex-direction: column; height: auto; padding: 20px; } 
-            
-            .nav-wrapper { 
-                width: 100%;
-                flex-direction: row !important;
-                justify-content: space-between;
-                align-items: center;
-                margin-top: 20px;
-            } 
-            
-            .hamburger-menu {
-                display: block; /* Pokazuje hamburger na urządzeniach mobilnych */
-            }
-
+        /* RESPONSYWNOŚĆ (Ekrany Mobilne) */
+        @media (max-width: 991px) {
+            .navbar { padding: 20px; }
+            .hamburger { display: flex; }
             .nav-links {
-                display: none; /* Domyślnie ukryte menu mobilne */
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background: #050505;
-                border-bottom: 1px solid #1a1a1a;
-                padding: 20px 0;
-                z-index: 999;
+                position: fixed; top: 0; right: -100%; width: 250px; height: 100vh;
+                background: #0f0f0f; flex-direction: column; padding: 100px 30px;
+                transition: right 0.4s ease; border-left: 1px solid rgba(255,255,255,0.05);
             }
-
-            /* Klasa aktywująca rozwijane menu */
-            .nav-links.open {
-                display: block;
-            }
-
-            .nav-links ul {
-                flex-direction: column;
-                gap: 20px;
-                width: 100%;
-                text-align: center;
-            }
-
-            .nav-links a {
-                display: block;
-                padding: 10px 0;
-                font-size: 15px;
-            }
-
-            .creator-column { border-right: none; border-bottom: 1px solid #1a1a1a; }
-        }
-
-        @media (max-width: 600px) {
-            .cookie-banner.show { bottom: 70px; }
-            .cookie-btns { flex-direction: column; }
-            .announcement-header { flex-direction: column; align-items: flex-start; gap: 10px; }
-            .announcement-discord-badge { align-self: flex-start; }
-            .sticky-footer { flex-direction: column; gap: 5px; height: auto; padding: 10px 0; }
+            .nav-links.active { right: 0; }
+            .split-container { flex-direction: column; height: auto; }
+            .creator-section { height: 50vh; min-height: 350px; }
+            .creator-section h2 { font-size: 36px; }
+            .coop-grid { grid-template-columns: 1fr; }
+            .bottom-panel { flex-direction: column; text-align: center; padding: 30px 20px; }
+            .counter-box { flex-direction: column; gap: 8px; }
         }
     </style>
 </head>
 <body>
 
-    <div id="cookie-banner" class="cookie-banner">
-        <div class="cookie-content">
-            <p><strong>REKLAMY? NIE TUTAJ! 🍪</strong><br>
-            Używamy ciasteczek, aby upewnić się, że strona działa jak należy. Klikając „Akceptuję”, pozwalasz nam na zachowanie Twoich preferencji wizualnych. Więcej info znajdziesz w polityce.</p>
+    <nav class="navbar">
+        <a class="logo" onclick="showPage('home')">
+            <img src="logo.png" alt="YangWu">
+            YANG<span>WU</span>
+        </a>
+        <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+            <span></span><span></span><span></span>
         </div>
-        <div class="cookie-btns">
-            <button class="cookie-btn btn-settings" onclick="showPage(event, 'privacy')">Polityka Prywatności</button>
-            <button class="cookie-btn btn-accept" onclick="acceptCookies()">Akceptuję</button>
+        <ul class="nav-links" id="nav-links">
+            <li><a onclick="showPage('home')" class="nav-item active" data-page="home">Strona Główna</a></li>
+            <li><a onclick="showPage('about')" class="nav-item" data-page="about">O nas</a></li>
+            <li><a onclick="showPage('coop')" class="nav-item" data-page="coop">Współpraca</a></li>
+        </ul>
+    </nav>
+
+    <main id="home-page" class="page active">
+        <div class="split-container">
+            <a href="https://lejdineska.pl" target="_blank" class="creator-section neska">
+                <div class="creator-bg"></div>
+                <div class="creator-content">
+                    <h2>LejdiNeska</h2>
+                    <p>Streamerka & Content Creator</p>
+                </div>
+            </a>
+            <div class="split-divider"></div>
+            <a href="https://hukirox.pl" target="_blank" class="creator-section hukiro">
+                <div class="creator-bg"></div>
+                <div class="creator-content">
+                    <h2>Hukirox</h2>
+                    <p>Streamer & Content Creator</p>
+                </div>
+            </a>
+        </div>
+    </main>
+
+    <section id="about-page" class="page">
+        <div class="content-container">
+            <h1 class="page-title">O nas</h1>
+            <p class="page-subtitle">Kim jesteśmy i co tworzymy</p>
+            <div class="text-block">
+                Witamy na oficjalnej platformie duetu <strong>YangWu</strong>. Jesteśmy parą niezależnych twórców internetowych, których połączyła wspólna pasja do gamingu, streamingu na żywo oraz budowania zaangażowanych społeczności. Nasz projekt to fuzja dwóch różnych osobowości, stylów rozgrywki i podejścia do rozrywki, co pozwala nam tworzyć unikalny i wielowymiarowy content.
+            </div>
+            <div class="text-block">
+                Każde z nas wnosi do projektu YangWu swoją indywidualną markę, jednak to razem tworzymy unikalną synergię, którą doceniają tysiące widzów. Dbamy o najwyższą jakość transmisji, autentyczny kontakt z widownią oraz stały rozwój naszych kanałów społecznościowych.
+            </div>
+
+            <div class="announcements-wrapper">
+                <h2 style="font-size: 24px; text-transform: uppercase; font-weight: 900; letter-spacing: 1px;">Aktualności ze społeczności</h2>
+                <p style="color:#555; font-size:14px; margin-bottom:20px;">Ostatnie ogłoszenia zsynchronizowane bezpośrednio z naszego serwera Discord</p>
+                <div class="announcements-grid" id="discord-announcements">
+                    <p style="color:#555; font-size:14px; grid-column: 1/-1; text-align:center;">Ładowanie aktualnych komunikatów...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="coop-page" class="page">
+        <div class="content-container">
+            <h1 class="page-title">Współpraca</h1>
+            <p class="page-subtitle">Zrealizujmy razem innowacyjny projekt marketingowy</p>
+            <div class="text-block">
+                Jesteśmy otwarci na komercyjną oraz barterową współpracę z markami, które utożsamiają się z rynkiem nowoczesnych mediów, gamingu oraz szeroko pojętej popkultury. Oferujemy szeroki wachlarz świadczeń reklamowych: od lokowania produktu podczas transmisji live, przez dedykowane posty w mediach społecznościowych, aż po pełnowymiarowe kampanie ambasadorskie.
+            </div>
+            
+            <div class="coop-grid">
+                <div class="coop-card neska-card">
+                    <h3>LejdiNeska</h3>
+                    <p style="color: #888; font-size: 14px; line-height: 1.6;">Skontaktuj się bezpośrednio w sprawach kampanii, lokowań oraz projektów dedykowanych dla marki LejdiNeska.</p>
+                    <a class="mail-link" data-user="kontakt" data-domain="lejdineska.pl" onclick="handleMailClick(this)">
+                        <i class="fa-regular fa-envelope"></i> Pokaż adres E-mail
+                    </a>
+                </div>
+                <div class="coop-card hukiro-card">
+                    <h3>Hukirox</h3>
+                    <p style="color: #888; font-size: 14px; line-height: 1.6;">Napisz w sprawie współprac dedykowanych, turniejów, wsparcia sprzętowego oraz kampanii na kanałach Hukiroxa.</p>
+                    <a class="mail-link" data-user="kontakt" data-domain="hukirox.pl" onclick="handleMailClick(this)">
+                        <i class="fa-regular fa-envelope"></i> Pokaż adres E-mail
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bottom-panel">
+        <div class="counter-box">
+            <div class="counter-icon"><i class="fa-solid fa-chart-simple"></i></div>
+            <div class="counter-info">
+                <h4>Łączne odsłony witryny</h4>
+                <p id="views-count">Loading...</p>
+            </div>
+        </div>
+        <div class="footer-links">
+            <a onclick="showPage('privacy')" style="cursor:pointer;">Polityka Prywatności</a>
+            <span style="color:#333;">&copy; 2026 YangWu. All rights reserved.</span>
+        </div>
+    </footer>
+
+    <section id="privacy-page" class="page">
+        <div class="content-container" style="font-size:14px; color:#aaa; line-height:1.7;">
+            <h1 class="page-title" style="font-size:28px; color:#fff;">Polityka Prywatności</h1>
+            <p class="page-subtitle">Ostatnia aktualizacja: 16 maja 2026 r.</p>
+            <h3 style="color:#fff; margin:20px 0 10px 0;">1. Informacje Ogólne</h3>
+            <p>Niniejsza Polityka Prywatności określa zasady przetwarzania i ochrony danych osobowych użytkowników korzystających z serwisu internetowego yangwu.pl.</p>
+            <h3 style="color:#fff; margin:20px 0 10px 0;">2. Logi Analityczne (Umami Analytics)</h3>
+            <p>Serwis korzysta z chmurowego narzędzia analitycznego Umami Cloud w celu zbierania w pełni anonimowych statystyk odwiedzin (takich jak wyświetlenia stron czy przybliżone typy urządzeń). Narzędzie to szanuje prywatność użytkowników: nie gromadzi danych osobowych, nie zapisuje adresów IP w bazie i nie stosuje śledzących plików cookie (jest w pełni cookie-less).</p>
+            <h3 style="color:#fff; margin:20px 0 10px 0;">3. Pliki Cookies</h3>
+            <p>Witryna stosuje wyłącznie techniczne pliki cookie niezbędne do zapamiętania preferencji dotyczących akceptacji polityki prywatności (plik `cookie_consent`). Serwis nie wykorzystuje reklamowych ani marketingowych plików cookie firm trzecich.</p>
+            <button onclick="showPage('home')" class="mail-link" style="margin-top:30px;">Powrót do strony głównej</button>
+        </div>
+    </section>
+
+    <div class="cookie-banner" id="cookie-banner">
+        <div class="cookie-text">
+            Szanujemy Twoją prywatność. Serwis wykorzystuje wyłącznie niezbędne pliki cookie do poprawnego działania mechanizmów sesyjnych. Analiza ruchu odbywa się w sposób w pełni anonimowy za pomocą narzędzia Umami Cloud, bez śledzenia Twoich danych osobowych. Więcej szczegółów znajdziesz w naszej <a onclick="showPage('privacy')" style="cursor:pointer; text-decoration:underline;">Polityka Prywatności</a>.
+        </div>
+        <div class="cookie-buttons">
+            <button class="cookie-btn cookie-accept" onclick="acceptCookies()">Rozumiem i akceptuję</button>
         </div>
     </div>
 
-    <header class="main-header">
-        <div class="container">
-            
-            <div class="logo">
-                <a onclick="showPage(event, 'home')">
-                    <img src="LOGO.png" alt="YANGWU" class="logo-img">
-                </a>
-            </div>
-
-            <div class="nav-wrapper">
-                <button class="hamburger-menu" onclick="toggleMobileMenu()" aria-label="Otwórz menu">
-                    <i class="fa-solid fa-bars"></i>
-                </button>
-
-                <nav class="nav-links" id="mobile-nav">
-                    <ul>
-                        <li><a onclick="showPage(event, 'home')">Home</a></li>
-                        <li><a onclick="showPage(event, 'about')">O nas</a></li>
-                        <li><a onclick="showPage(event, 'announcements')">Ogłoszenia</a></li>
-                        <li><a onclick="showPage(event, 'support')">Wspieranie</a></li>
-                        <li><a onclick="showPage(event, 'contact')">Kontakt</a></li>
-                    </ul>
-                </nav>
-             
-                <a href="https://discord.gg/qWC28YmRj2" class="discord-btn"><i class="fa-brands fa-discord"></i> DOŁĄCZ DO NAS</a>
-            </div>
-        </div>
-    </header>
-
-    <main id="home-page" class="page-section active">
-        <div class="split-layout">
-            <section class="creator-column" id="col-lejdi">
-                <img src="avatarneska.png" class="streamer-avatar">
-                <h1>LejdiNeska</h1>
-  
-                <div class="social-section">
-                    <a href="http://www.youtube.com/@LejdiNeska?sub_confirmation=1" class="social-card"><i class="fa-brands fa-youtube icon-lejdi"></i><div class="social-info"><h4>YOUTUBE</h4><p>Wpadnij pogadać!</p></div></a>
-                    <a href="https://www.instagram.com/lejdineska/" class="social-card"><i class="fa-brands fa-instagram icon-lejdi"></i><div class="social-info"><h4>INSTAGRAM</h4><p>Sprawdź nowe zdjęcie!</p></div></a>
-                    <a href="https://www.tiktok.com/@lejdineska" class="social-card"><i class="fa-brands fa-tiktok icon-lejdi"></i><div class="social-info"><h4>TIKTOK</h4><p>Sprawdź co tam robię!</p></div></a>
-                    <a href="https://discord.gg/qWC28YmRj2" class="social-card"><i class="fa-brands fa-discord icon-lejdi"></i><div class="social-info"><h4>DISCORD</h4><p>Warto tu być!</p></div></a>
-                    <a href="https://www.twitch.tv/lejdineska" class="social-card"><i class="fa-brands fa-twitch icon-lejdi"></i><div class="social-info"><h4>TWITCH</h4><p>Może strumyk?</p></div></a>
-                    <a href="https://www.youtube.com/@NeskaAndHukiroxFishing" class="social-card"><i class="fa-solid fa-fish icon-lejdi"></i><div class="social-info"><h4>KANAŁ WĘDKARSKI</h4><p>Połowione!</p></div></a>
-                   
-                    <div class="stats-grid">
-                        <div class="stat-box"><i class="fa-brands fa-youtube icon-lejdi"></i><div class="stat-data"><h5>10k+</h5><p>subów</p></div></div>
-                        <div class="stat-box"><i class="fa-brands fa-twitch icon-lejdi"></i><div class="stat-data"><h5>2.5k+</h5><p>obserwacji</p></div></div>
-                        <div class="stat-box"><i class="fa-brands fa-tiktok icon-lejdi"></i><div class="stat-data"><h5>25k+</h5><p>obserwacji</p></div></div>
-                        <div class="stat-box"><i class="fa-brands fa-instagram icon-lejdi"></i><div class="stat-data"><h5>1.5k+</h5><p>obserwacji</p></div></div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="creator-column" id="col-hukiro">
-                <img src="avatarhukirox.png" class="streamer-avatar">
-                <h1>Hukirox</h1>
-                <div class="social-section">
-                    <a href="https://www.youtube.com/@Hukirox?sub_confirmation=1" class="social-card"><i class="fa-brands fa-youtube icon-hukiro"></i><div class="social-info"><h4>YOUTUBE</h4><p>Zobacz, jak gram!</p></div></a>
-                    <a href="https://www.instagram.com/hukirox/" class="social-card"><i class="fa-brands fa-instagram icon-hukiro"></i><div class="social-info"><h4>INSTAGRAM</h4><p>Zobacz nową fotę!</p></div></a>
-                    <a href="https://www.tiktok.com/@hukirox" class="social-card"><i class="fa-brands fa-tiktok icon-hukiro"></i><div class="social-info"><h4>TIKTOK</h4><p>Najlepsze shoty!</p></div></a>
-                    <a href="https://discord.gg/qWC28YmRj2" class="social-card"><i class="fa-brands fa-discord icon-hukiro"></i><div class="social-info"><h4>DISCORD</h4><p>Warto tu być!</p></div></a>
-                    <a href="https://www.twitch.tv/hukirox" class="social-card"><i class="fa-brands fa-twitch icon-hukiro"></i><div class="social-info"><h4>TWITCH</h4><p>Zajrzyj na strumyk!</p></div></a>
-                    <a href="https://www.youtube.com/@NeskaAndHukiroxFishing" class="social-card"><i class="fa-solid fa-fish icon-hukiro"></i><div class="social-info"><h4>KANAŁ WĘDKARSKI</h4><p>Połowione!</p></div></a>
-                    
-                    <div class="stats-grid">
-                        <div class="stat-box"><i class="fa-brands fa-youtube icon-hukiro"></i><div class="stat-data"><h5>1.5k+</h5><p>subów</p></div></div>
-                        <div class="stat-box"><i class="fa-brands fa-twitch icon-hukiro"></i><div class="stat-data"><h5>150+</h5><p>obserwacji</p></div></div>
-                        <div class="stat-box"><i class="fa-brands fa-tiktok icon-hukiro"></i><div class="stat-data"><h5>6.5k+</h5><p>obserwacji</p></div></div>
-                        <div class="stat-box"><i class="fa-brands fa-instagram icon-hukiro"></i><div class="stat-data"><h5>50+</h5><p>obserwacji</p></div></div>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </main>
-
-    <main id="about-page" class="page-section">
-        <div class="about-page">
-            <h2 style="text-align: center; font-size: 50px; font-weight: 900; margin-bottom: 30px;">POZNAJ TWÓRCÓW</h2>
-            <div class="about-grid">
-                <div class="about-card">
-                    <img src="avatarneska.png" class="border-lejdi">
-                    <h3 class="color-lejdi">LejdiNeska</h3>
-                    <p style="color: #999; line-height: 1.6;">Czy czujesz się dziś tak, jakby wszystko było przeciwko Tobie? Czy czujesz niepowstrzymaną potrzebę obejrzenia czegoś na poprawę humoru? A może po prostu chcesz spędzić czas, gadając o głupotach i śmiejąc się z czego popadnie bez powodu? Jeśli tak, to gratulacje – właśnie znalazłeś to, czego szukałeś! Ta oto pani prowadzi transmisje na żywo, które doprowadziby do śmiechu even trupa! Luźna atmosfera jak na piwku ze znajomymi, żarty tak niskiego lotu, że przy nich Twój ojciec to komediant roku i, oczywiście, całkowita rozwałka systemu, gdy tylko ktoś da nam powód. O tak, dobrze myślisz… to nie będzie łatwa podróż, ale warta każdej sekundy! Nie czekaj i wbijaj już teraz! PS: Nie odpowiadamy za ewentualne ubytki w IQ lub zdrowiu psychicznym spowodowane naszym koślawym humorem.</p>
-                </div>
-                <div class="about-card">
-                    <img src="avatarhukirox.png" class="border-hukiro">
-                    <h3 class="color-hukiro">Hukirox</h3>
-                    <p style="color: #999; line-height: 1.6;">Lubisz gry fabularne i patrzenie, jak cały świat wybucha na Twoich oczach? A może wolisz śledzić ciągłe, nieudane próby parkouru, które kończą się lotem w dół i „pięknym” lądowaniem na twarz? A może po prostu chcesz się pośmiać i popisać z kimś o grach? W takim razie dobrze trafiłeś! Hukirox to nie tylko streamer, który gra w gry – Hukirox to styl lifestyle, a gdy raz tu zajrzysz, zawsze będziesz wracać. Czy jesteś gotów oddać całego siebie, by każdego dnia obserwować, jak na ekranie dzieje się więcej niż na polskiej scenie politycznej? Czy masz w sobie dość cierpliwości, by patrzeć raz po raz, jak Hukirox rozbija ten sam samolot dwudziesty raz, zanim zrozumie, że jednak wypadałoby odpalić silniki? Jeśli tak jak inni chcesz pośmiać się z efektownych lotów po nieudanych skokach, to na co jeszcze czekasz? Natychmiast ruszaj na live i oddaj się całkowicie temu szalonemu światowi, który tworzymy razem każdego dnia!</p>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <main id="announcements-page" class="page-section">
-        <div class="announcements-page">
-            <div class="contact-header">
-                <h2>#OGŁOSZENIA</h2>
-                <p>Bądź zawsze na bieżąco z najważniejszymi informacjami z naszego serwera Discord!</p>
-                <a href="https://discord.gg/qWC28YmRj2" class="discord-btn" style="display: inline-flex; margin-top: 20px;"><i class="fa-brands fa-discord"></i> OTWÓRZ KANAŁ NA DISCORDZIE</a>
-            </div>
-            
-            <div class="announcements-grid"></div>
-        </div>
-   </main>
-
-    <main id="support-page" class="page-section">
-        <div class="support-page">
-            <div class="contact-header">
-                <h2>WESPRZYJ NAS</h2>
-                <p>Twoje wsparcie pozwala nam tworzyć jeszcze lepsze materiały! Wybierz twórcę, którego chcesz wesprzeć.</p>
-            </div>
-            <div class="contact-grid">
-                <div class="contact-box">
-                    <img src="avatarneska.png" class="streamer-avatar border-lejdi" style="width: 100px; height: 100px;">
-                    <h3 class="color-lejdi">LejdiNeska</h3>
-                    <div class="support-links">
-                        <a href="https://tipply.pl/@neska" class="support-btn tipply"><i class="fa-solid fa-heart color-lejdi"></i> TIPPLY (DONATE)</a>
-                        <a href="https://www.youtube.com/channel/UCKNy-BlvPESwtPje3bdBI6g/join" class="support-btn yt-join"><i class="fa-brands fa-youtube"></i> WSPIERAJ NA YOUTUBE</a>
-                    </div>
-                </div>
-                <div class="contact-box">
-                    <img src="avatarhukirox.png" class="streamer-avatar border-hukiro" style="width: 100px; height: 100px;">
-                    <h3 class="color-hukiro">Hukirox</h3>
-                    <div class="support-links">
-                        <a href="https://tipply.pl/@hukirox" class="support-btn tipply"><i class="fa-solid fa-bolt color-hukiro"></i> TIPPLY (DONATE)</a>
-                        <a href="https://www.youtube.com/channel/UCa_ZZMIKboMlgNn7lMcWwNQ/join" class="support-btn yt-join"><i class="fa-brands fa-youtube"></i> WSPIERAJ NA YOUTUBE</a>
-                    </div>
-              </div>
-            </div>
-        </div>
-    </main>
-
-    <main id="contact-page" class="page-section">
-        <div class="contact-page">
-            <div class="contact-header">
-                <h2>WSPÓŁPRACA</h2>
-                <p>Jesteś zainteresowany współpracą reklamową? Napisz do nas.</p>
-            </div>
-
-            <div class="contact-grid">
-                <div class="contact-box">
-                    <i class="fa-solid fa-envelope-open-text main-icon color-lejdi"></i>
-                    <h3 class="color-lejdi">LejdiNeska</h3>
-                    <p class="description">Pogadanki, dobra zabawa i masa dystansu do siebie.</p>
-                    <a href="#" class="email-link border-lejdi js-email-neska">Ładowanie adresu...</a>
-                    <div class="contact-socials">
-                        <a href="https://www.youtube.com/@LejdiNeska"><i class="fa-brands fa-youtube"></i></a>
-                        <a href="https://www.instagram.com/lejdineska/"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="https://discord.gg/qWC28YmRj2"><i class="fa-brands fa-discord"></i></a>
-                        <a href="https://www.tiktok.com/@lejdineska"><i class="fa-brands fa-tiktok"></i></a>
-                        <a href="https://www.twitch.tv/lejdineska"><i class="fa-brands fa-twitch"></i></a>
-                        <a href="https://www.youtube.com/@NeskaAndHukiroxFishing"><i class="fa-solid fa-fish"></i></a>
-                    </div>
-                </div>
-
-                <div class="contact-box">
-                    <i class="fa-solid fa-envelope-open-text main-icon color-hukiro"></i>
-                    <h3 class="color-hukiro">Hukirox</h3>
-                    <p class="description">Gaming, gadanie i wiele wiązanek na bossów.</p>
-                    <a href="#" class="email-link border-hukiro js-email-hukiro">Ładowanie adresu...</a>
-                    <div class="contact-socials">
-                        <a href="https://www.youtube.com/@Hukirox"><i class="fa-brands fa-youtube"></i></a>
-                        <a href="https://www.instagram.com/hukirox/"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="https://discord.gg/qWC28YmRj2"><i class="fa-brands fa-discord"></i></a>
-                        <a href="https://www.tiktok.com/@hukirox"><i class="fa-brands fa-tiktok"></i></a>
-                        <a href="https://www.twitch.tv/hukirox"><i class="fa-brands fa-twitch"></i></a>
-                        <a href="https://www.youtube.com/@NeskaAndHukiroxFishing"><i class="fa-solid fa-fish"></i></a>
-                    </div>
-                </div>
-           </div>
-
-            <div class="contact-footer">
-                <p>Staramy się odpowiadać na wszystkie propozycje biznesowe w ciągu 48 godzin.<br>Dla fanów i spraw społecznościowych najlepszym miejscem jest nasz Discord.</p>
-            </div>
-        </div>
-    </main>
-
-    <main id="privacy-page" class="page-section">
-        <div class="policy-container">
-            <h2>POLITYKA PRYWATNOŚCI</h2>
-            <p>Data aktualizacji: 16 maja 2026 r.</p>
-            
-            <p>Niniejsza Polityka Prywatności określa zasady przetwarzania danych osobowych użytkowników serwisu <strong>yangwu.pl</strong>. Dbanie o Twoją prywatność jest dla nam kluczowe, dlatego stosujemy wysokie standardy ochrony danych zgodne z RODO (Ogólnym Rozporządzeniem o Ochronie Danych).</p>
-            
-            <h3>1. Kto jest Administratorem Twoich danych?</h3>
-            <p>Administratorem danych osobowych są właściciele strony YANGWU – twórcy znani jako <strong>LejdiNeska</strong> oraz <strong>Hukirox</strong>. Możesz się z nami skontaktować bezpośrednio poprzez adresy e-mail podane w sekcji „Kontakt” na Stronie.</p>
-            
-            <h3>2. Jakie dane gromadzimy i w jakim celu?</h3>
-            <p>Strona ma charakter informacyjny i minimalizujemy zbieranie danych do niezbędnego minimum:</p>
-            <ul>
-                <li><strong>Kontakt e-mail:</strong> Przesyłając do nas wiadomość, dobrowolnie podajesz nam swój adres e-mail oraz inne informacje zawarte w treści wiadomości. Dane te przetwarzamy wyłącznie w celu udzielenia odpowiedzi na Twoje zapytanie.</li>
-                <li><strong>Logi serwera:</strong> Podczas korzystania ze Strony, nasz serwer automatycznie zapisuje standardowe dane techniczne (np. adres IP, typ przeglądarki, czas wizyty). Dane te służą wyłącznie celom statystycznym i administracyjnym (zapewnienie bezpieczeństwa Strony).</li>
-                <li><strong>Pliki Cookies:</strong> Używamy ciasteczek w celu poprawnego działania interfejsu (np. zapamiętanie faktu zaakceptowania banera cookies).</li>
-            </ul>
-            
-            <h3>3. Podstawa prawna przetwarzania</h3>
-            <p>Twoje dane przetwarzamy na podstawie:</p>
-            <ul>
-                <li><strong>Art. 6 ust. 1 lit. f RODO</strong> (prawnie uzasadniony interes) – w zakresie utrzymania kontaktu z użytkownikami, prowadzenia statystyk oraz zapewnienia bezpieczeństwa Strony.</li>
-                <li><strong>Art. 6 ust. 1 lit. a RODO</strong> (zgoda) – w przypadku plików cookies, które nie są niezbędne do technicznego działania strony.</li>
-            </ul>
-
-            <h3>4. Wsparcie finansowe i Serwisy zewnętrzne</h3>
-            <p>Strona contains odnośniki do zewnętrznych platform (<strong>Tipply.pl</strong>, <strong>YouTube</strong>, <strong>Discord</strong>, <strong>Instagram</strong>, <strong>Twitch</strong>, <strong>TikTok</strong>).</p>
-            <p><strong>Ważne:</strong> Nie przetwarzamy Twoich danych płatniczych. Jeśli zdecydujesz się nas wesprzeć przez Tipply lub YouTube Join, Twoje dane (takie jak imię/nick, kwota, dane karty) are przetwarzane wyłącznie przez te podmioty zgodnie z ich własnymi politykami prywatności. Zachęcamy do zapoznania się z nimi przed dokonaniem wpłaty.</p>
-
-            <h3>5. Udostępnianie danych</h3>
-            <p>Nigdy nie sprzedajemy Twoich danych podmiotom trzecim. Twoje dane mogą być przekazywane jedynie dostawcom usług technicznych (np. hostingodawca), z którymi mamy zawarte stosowne umowy powierzenia przetwarzania danych.</p>
-
-            <h3>6. Twoje Prawa</h3>
-            <p>W związku z RODO przysługuje Ci prawo do:</p>
-            <ul>
-                <li>Dostępu do swoich danych oraz otrzymania ich kopi.</li>
-                <li>Sprostowania (poprawiania) swoich danych.</li>
-                <li>Usunięcia danych („prawo do bycia zapomnianym”).</li>
-                <li>Ograniczenia przetwarzania danych.</li>
-                <li>Wniesienia sprzeciwu wobec przetwarzania.</li>
-                <li>Wniesienia skargi do organu nadzorczego (Prezesa Urzędu Ochrony Danych Osobowych).</li>
-            </ul>
-
-            <h3>7. Okres przechowywania danych</h3>
-            <p>Dane z korespondencji e-mail przechowujemy przez okres niezbędny do obsługi zapytania oraz do celów dowodowych (zabezpieczenie przed ewentualnymi roszczeniami). Standardowe logi serwera są przechowywane zgodnie z polityką firmy hostingowej (zazwyczaj do 30 dni).</p>
-
-            <h3>8. Zmiany w polityce</h3>
-            <p>Zastrzegamy sobie prawo do aktualizacji niniejszej polityki w przypadku zmian w prawa lub funkcjonalności Strony. Każda zmiana będzie publikowana na tej podstronie wraz z datą aktualizacji.</p>
-        </div>
-    </main>
-
-    <footer class="sticky-footer">
-        <span>&copy; 2026 yangwu.pl | ALL RIGHTS RESERVED</span>
-        <a href="#" class="privacy-link" onclick="showPage(event, 'privacy')">POLITYKA PRYWATNOŚCI</a>
-        <div class="visitor-counter"><i class="fa-solid fa-eye"></i> <span id="views-count">0</span></div>
-    </footer>
-
     <script>
-        // --- ZABEZPIECZENIE MAILI ---
-        function setupEmails() {
-            const emails = [
-                { class: '.js-email-neska', user: 'theineskaa', domain: 'gmail.com' },
-                { class: '.js-email-hukiro', user: 'business.hukirox', domain: 'gmail.com' }
-            ];
-            emails.forEach(e => {
-                const el = document.querySelector(e.class);
-                if(el) {
-                    const full = e.user + '@' + e.domain;
-                    el.href = 'mailto:' + full;
-                    el.innerText = full;
-                }
-            });
-        }
+        // --- FUNKCJE NAWIGACJI (SPA) ---
+        function showPage(pageId) {
+            // Ukryj wszystkie strony i zdejmij klasę aktywnego linku
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
 
-        // --- OBSŁUGA MENU MOBILNEGO ---
-        function toggleMobileMenu() {
-            const nav = document.getElementById('mobile-nav');
-            if (nav) {
-                nav.classList.toggle('open');
+            // Aktywuj wybraną stronę
+            const targetPage = document.getElementById(`${pageId}-page`);
+            if (targetPage) {
+                targetPage.classList.add('active');
+                window.scrollTo(0, 0);
+            }
+
+            // Podświetl odpowiedni element w menu
+            const targetNavItem = document.querySelector(`.nav-item[data-page="${pageId}"]`);
+            if (targetNavItem) {
+                targetNavItem.classList.add('active');
+            }
+
+            // Zamknij menu mobilne jeśli jest otwarte
+            const menu = document.getElementById('nav-links');
+            const hamburger = document.getElementById('hamburger');
+            if (menu.classList.contains('active')) {
+                menu.classList.remove('active');
+                hamburger.classList.remove('active');
             }
         }
 
-        // --- NAWIGACJA ---
-        function showPage(event, pageId) {
-            if (event) event.preventDefault();
-            document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
-            const target = document.getElementById(pageId + '-page');
-            if (target) target.classList.add('active');
-            window.scrollTo({ top: 0, behavior: 'instant' });
-            
-            // Automatyczne zamknięcie hamburgera po kliknięciu podstrony
-            const nav = document.getElementById('mobile-nav');
-            if (nav) {
-                nav.classList.remove('open');
+        // Menu Mobilne Hamburger
+        function toggleMenu() {
+            document.getElementById('nav-links').classList.toggle('active');
+            document.getElementById('hamburger').classList.toggle('active');
+        }
+
+        // --- BEZPIECZNE ODKODOWYWANIE ADRESÓW E-MAIL ---
+        function handleMailClick(element) {
+            const user = element.getAttribute('data-user');
+            const domain = element.getAttribute('data-domain');
+            if (user && domain) {
+                const fullEmail = `${user}@${domain}`;
+                element.innerHTML = `<i class="fa-regular fa-envelope"></i> ${fullEmail}`;
+                element.setAttribute('href', `mailto:${fullEmail}`);
+                element.onclick = null; // Usuń akcję kliknięcia, by działało jak zwykły mailto link
+                element.style.cursor = 'default';
             }
         }
 
-        // --- OBSŁUGA COOKIES ---
+        // --- BANER COOKIES ---
         function checkCookies() {
-            const consent = localStorage.getItem('yangwu_cookies');
-            if (!consent) {
+            if (!localStorage.getItem('cookie_consent')) {
                 setTimeout(() => {
                     document.getElementById('cookie-banner').classList.add('show');
                 }, 1000);
@@ -678,69 +333,74 @@
         }
 
         function acceptCookies() {
-            localStorage.setItem('yangwu_cookies', 'true');
+            localStorage.setItem('cookie_consent', 'accepted');
             document.getElementById('cookie-banner').classList.remove('show');
         }
 
-        // --- GLOBALNY LICZNIK ODWIEDZIN W CHMURZE ---
+        // --- GLOBALNY LICZNIK ODWIEDZIN Z PUBLICZNEGO API UMAMI ---
         async function updateVisitorCounter() {
             const counterEl = document.getElementById('views-count');
             if (!counterEl) return;
 
+            // Twoje parametry z Umami Cloud
+            const WEBSITE_ID = '49ac7549-751f-4323-b2a3-1336000b8496';
+            const SHARE_TOKEN = '7J5GfKBKRPhrZ1rm';
+
+            // Zakres czasu: "all the time" (od 2020 roku do dzisiaj w milisekundach)
+            const startAt = new Date('2020-01-01').getTime();
+            const endAt = Date.now();
+
             try {
-                // Wykorzystujemy darmowe, publiczne i stabilne API (przypisane unikalnie do Twojej domeny yangwu.pl)
-                // Każde odświeżenie strony wyśle zapytanie, które globalnie powiększy wspólny licznik o 1
-                const response = await fetch('https://api.counterapi.dev/v1/yangwu_pl/views/up');
-                
+                // Odpytujemy oficjalne publiczne API Umami Cloud dla linków współdzielonych (Share)
+                const url = `https://api.umami.is/v1/shares/${SHARE_TOKEN}/stats?startAt=${startAt}&endAt=${endAt}`;
+
+                const response = await fetch(url, {
+                    method: 'GET',
+                    headers: { 'Accept': 'application/json' }
+                });
+
                 if (response.ok) {
                     const data = await response.json();
-                    // Dodajemy bazową stałą (np. 154200), aby licznik nie startował od zera i ładnie wyglądał
-                    const totalViews = parseInt(data.value) + 154200;
+                    
+                    // Pobieramy wyłącznie parametr 'views' (wyświetlenia) bez żadnej bazy startowej
+                    const totalViews = (data && data.views && data.views.value) ? parseInt(data.views.value) : 0;
+                    
                     counterEl.innerText = Number(totalViews).toLocaleString('pl-PL');
                     return;
+                } else {
+                    console.error('Umami Share API zwróciło błąd:', response.status);
                 }
             } catch (error) {
-                console.error('Błąd synchronizacji licznika globalnego:', error);
+                console.error('Błąd połączenia z publicznym API Umami:', error);
             }
 
-            // BEZPIECZNY POWRÓT (FALLBACK): Jeśli serwer licznika nie odpowie, ładujemy losową bezpieczną wartość, by strona nie wyglądała na pustą
-            let currentViews = localStorage.getItem('yangwu_total_views');
-            if (!currentViews) {
-                currentViews = Math.floor(Math.random() * (4800 - 3200 + 1)) + 3200;
-            } else {
-                currentViews = parseInt(currentViews) + 1;
-            }
-            localStorage.setItem('yangwu_total_views', currentViews);
-            counterEl.innerText = Number(currentViews).toLocaleString('pl-PL');
+            // W razie błędu sieci, pokaże 0 zamiast bazy startowej
+            counterEl.innerText = "0";
         }
 
-        // --- AUTOMATYCZNE POBIERANIE OGŁOSZEŃ Z DISCORDA ---
+        // --- DYNAMICZNE ŁADOWANIE OGŁOSZEŃ Z DISCORDA ---
         async function loadDiscordAnnouncements() {
-            const container = document.querySelector('.announcements-grid');
+            const container = document.getElementById('discord-announcements');
             if (!container) return;
-            
+
             try {
-                const response = await fetch('announcements.json?' + new Date().getTime(), { cache: 'no-store' });
-                if(!response.ok) {
-                    container.innerHTML = '<p style="text-align:center; color:#555; margin-top:20px;">Brak aktualnych ogłoszeń z Discorda.</p>';
-                    return;
-                }
-
+                const response = await fetch('announcements.json');
+                if (!response.ok) throw new Error('Brak pliku ogłoszeń');
+                
                 const messages = await response.json();
+                container.innerHTML = ''; // Wyczyść loader
+
                 if (messages.length === 0) {
-                    container.innerHTML = '<p style="text-align:center; color:#555; margin-top:20px;">Brak aktualnych ogłoszeń z Discorda.</p>';
+                    container.innerHTML = '<p style="color:#555; font-size:14px; grid-column: 1/-1; text-align:center;">Brak nowych ogłoszeń na Discordzie.</p>';
                     return;
                 }
 
-                container.innerHTML = '';
                 messages.forEach(msg => {
-                    const isLejdi = msg.author.toLowerCase().includes('neska');
-                    const themeClass = isLejdi ? 'announce-lejdi' : 'announce-hukiro';
-                    const avatarImg = isLejdi ? 'avatarneska.png' : 'avatarhukirox.png';
-                    const authorName = isLejdi ? 'LejdiNeska' : 'Hukirox';
-
+                    const authorName = msg.author === 'neska' ? 'LejdiNeska' : (msg.author === 'hukiro' ? 'Hukirox' : 'System');
+                    const avatarImg = msg.author === 'neska' ? 'neska-avatar.png' : (msg.author === 'hukiro' ? 'hukiro-avatar.png' : 'logo.png');
+                    
                     const cardHTML = `
-                        <div class="announcement-card ${themeClass}">
+                        <div class="announcement-card">
                             <div class="announcement-header">
                                 <div class="announcement-author">
                                     <img src="${avatarImg}" class="announcement-avatar">
@@ -758,18 +418,17 @@
                 });
             } catch (error) {
                 console.error('Błąd podczas ładowania ogłoszeń:', error);
-                container.innerHTML = '<p style="text-align:center; color:#ff0055; margin-top:20px;">Nie udało się połączyć z bazą ogłoszeń.</p>';
+                container.innerHTML = '<p style="text-align:center; color:#ff0055; margin-top:20px; grid-column: 1/-1;">Nie udało się połączyć z bazą ogłoszeń.</p>';
             }
         }
 
-        // Inicjalizacja wszystkich skryptów po ładowaniu strony
-        window.onload = () => {
-            setupEmails();
+        // Inicjalizacja wszystkich skryptów po pełnym załadowaniu struktury DOM
+        document.addEventListener("DOMContentLoaded", () => {
             checkCookies();
-            updateVisitorCounter(); // Wywołanie zaktualizowanego licznika chmurowego
+            updateVisitorCounter(); // Wywołanie nowego licznika z Umami Cloud
             loadDiscordAnnouncements();
-            setInterval(loadDiscordAnnouncements, 15000);
-        };
+            setInterval(loadDiscordAnnouncements, 15000); // Odświeżanie ogłoszeń co 15s
+        });
     </script>
 </body>
 </html>
