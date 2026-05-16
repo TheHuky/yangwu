@@ -59,7 +59,7 @@
             cursor: pointer;
             padding: 5px;
             transition: 0.3s;
-            order: -1; /* Umieszcza hamburger przed menu na urządzeniach mobilnych */
+            order: -1; 
         }
         .hamburger-menu:hover { opacity: 0.7; }
 
@@ -167,7 +167,7 @@
         .contact-footer { text-align: center; margin-top: 60px; padding-top: 40px; border-top: 1px solid #1a1a1a; }
         .contact-footer p { opacity: 0.4; font-size: 13px; }
 
-        /* --- STOPKA --- */
+        /* --- STOPKA I DOPASOWANIE LICZNIKA --- */
         .sticky-footer {
             position: fixed; bottom: 0; left: 0; width: 100%; height: 60px;
             background: #050505; border-top: 1px solid #1a1a1a;
@@ -179,11 +179,26 @@
         .privacy-link:hover { color: white; }
         
         .visitor-counter {
-            display: flex; align-items: center; gap: 6px; color: #444; font-size: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #111; /* Ciemne tło pasujące do kafelków */
+            border: 1px solid #222; /* Ramka pasująca do reszty layoutu */
+            border-radius: 6px; /* Zaokrąglone krawędzie */
+            padding: 4px 10px;
+            transition: 0.3s ease;
+            filter: opacity(75%) brightness(0.9); /* Subtelne wtopienie w stopkę */
         }
-        .visitor-counter img {
-            display: block;
-            max-height: 25px; /* Dopasowanie wysokości grafiki do paska stopki */
+        .visitor-counter:hover {
+            border-color: #333;
+            filter: opacity(100%) brightness(1); /* Pełna widoczność po najechaniu myszką */
+        }
+        .visitor-counter div, .visitor-counter img, .visitor-counter a {
+            display: inline-block !important;
+            vertical-align: middle;
+            max-height: 20px; /* Blokada wysokości przed rozpychaniem stopki */
+            border: none !important;
+            text-decoration: none !important;
         }
 
         /* --- PODSTRONA WSPIERANIE --- */
@@ -306,11 +321,11 @@
             } 
             
             .hamburger-menu {
-                display: block; /* Pokazuje hamburger na urządzeniach mobilnych */
+                display: block; 
             }
 
             .nav-links {
-                display: none; /* Domyślnie ukryte menu mobilne */
+                display: none; 
                 position: absolute; top: 100%;
                 left: 0;
                 width: 100%;
@@ -320,7 +335,6 @@
                 z-index: 999;
             }
 
-            /* Klasa aktywująca rozwijane menu */
             .nav-links.open {
                 display: block;
             }
@@ -448,7 +462,7 @@
                 <div class="about-card">
                     <img src="avatarhukirox.png" class="border-hukiro">
                     <h3 class="color-hukiro">Hukirox</h3>
-                    <p style="color: #999; line-height: 1.6;">Lubisz gry fabularne i patrzenie, jak cały świat wybucha na Twoich oczach? A może wolisz śledzić ciągłe, nieudane próby parkouru, które kończą się lotem w dół i „pięknym” lądowaniem na twarz? A może po prostu chcesz się pośmiać i popisać z kimś o grach? W takim razie dobrze trafiłeś! Hukirox to nie tylko streamer, który gra w gry – Hukirox to styl lifestyle, a gdy raz tu zajrzysz, zawsze będziesz wracać. Czy jesteś gotów oddać całego siebie, by każdego dnia obserwować, jak na ekranie dzieje się więcej niż na polskiej scenie politycznej? Czy masz w sobie dość cierpliwości, by patrzeć raz po raz, jak Hukirox rozbija ten sam samolot dwudziesty raz, zanim zrozumie, że jednak wypadałoby odpalić silniki? Jeśli tak jak inni chcesz pośmiać się z efektownych lotów po nieudanych skokach, to na co jeszcze czekasz? Natychmiast ruszaj na live i oddaj się całkowicie temu szalonemu światowi, który tworzymy razem każdego dnia!</p>
+                    <p style="color: #999; line-height: 1.6;">Lubisz gry fabularne i patrzenie, jak cały świat wybucha na Twoich oczach? A może wolisz śledzić ciągłe, nieudane próby parkouru, które kończą się lotem w dół i „pięknym” lądowaniem na twarz? A może po prostu chcesz się pośmiać i popisać z kimś o grach? W takim razie dobrze trafiłeś! Hukirox to nie tylko streamer, który gra w gry – Hukirox to style lifestyle, a gdy raz tu zajrzysz, zawsze będziesz wracać. Czy jesteś gotów oddać całego siebie, by każdego dnia obserwować, jak na ekranie dzieje się więcej niż na polskiej scenie politycznej? Czy masz w sobie dość cierpliwości, by patrzeć raz po raz, jak Hukirox rozbija ten sam samolot dwudziesty raz, zanim zrozumie, że jednak wypadałoby odpalić silniki? Jeśli tak jak inni chcesz pośmiać się z efektownych lotów po nieudanych skokach, to na co jeszcze czekasz? Natychmiast ruszaj na live i oddaj się całkowicie temu szalonemu światowi, który tworzymy razem każdego dnia!</p>
                 </div>
             </div>
         </div>
@@ -594,9 +608,12 @@
         <a href="#" class="privacy-link" onclick="showPage(event, 'privacy')">POLITYKA PRYWATNOŚCI</a>
         
         <div class="visitor-counter">
-            <a href="https://www.freecounterstat.com" title="free hit counter">
-                <img src="https://counter1.optistats.ovh/private/freecounterstat.php?c=5q1rmbxcxnerxkagn8yw566fakpdtddu" border="0" title="free hit counter" alt="free hit counter">
-            </a>
+            <div id="sfc5q1rmbxcxnerxkagn8yw566fakpdtddu"></div>
+            <noscript>
+                <a href="https://www.freecounterstat.com" title="free hit counter">
+                    <img src="https://counter1.optistats.ovh/private/freecounterstat.php?c=5q1rmbxcxnerxkagn8yw566fakpdtddu" border="0" title="free hit counter" alt="free hit counter">
+                </a>
+            </noscript>
         </div>
     </footer>
 
@@ -632,7 +649,6 @@
             const target = document.getElementById(pageId + '-page');
             if (target) target.classList.add('active');
             window.scrollTo({ top: 0, behavior: 'instant' });
-            // Automatyczne zamknięcie hamburgera po kliknięciu podstrony
             const nav = document.getElementById('mobile-nav');
             if (nav) {
                 nav.classList.remove('open');
@@ -654,13 +670,12 @@
             document.getElementById('cookie-banner').classList.remove('show');
         }
 
-        // --- GLOBALNY LICZNIK ODWIEDZIN W CHMURZE ---
+        // --- GLOBALNY LICZNIK ODWIEDZIN W CHMURZE (ZNEUTRALIZOWANY) ---
         async function updateVisitorCounter() {
-            // Stary licznik wyłączony. 
-            // Nowy licznik freecounterstat działa automatycznie jako element HTML obrazka w stopce.
+            // Logika wyłączona - widget ładuje się asynchronicznie przez zewnętrzny JS
         }
 
-        // --- AUTOMATYCZNE POBIERANIE OGŁOSZEŃ Z DISCORDA ---
+        // --- AUTOMATYCZNE POBIERANIE OGŁOSZEN Z DISCORDA ---
         async function loadDiscordAnnouncements() {
             const container = document.querySelector('.announcements-grid');
             if (!container) return;
@@ -708,14 +723,15 @@
             }
         }
 
-        // Inicjalizacja wszystkich skryptów po ładowaniu strony
         window.onload = () => {
             setupEmails();
             checkCookies();
-            updateVisitorCounter(); // Wywołanie pustej metody dla zachowania spójności ładowania
+            updateVisitorCounter(); 
             loadDiscordAnnouncements();
             setInterval(loadDiscordAnnouncements, 15000);
         };
     </script>
+    
+    <script type="text/javascript" src="https://counter1.optistats.ovh/private/counter.js?c=5q1rmbxcxnerxkagn8yw566fakpdtddu&down=async" async></script>
 </body>
 </html>
