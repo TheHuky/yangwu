@@ -28,15 +28,14 @@
             max-width: 1400px;
             margin: 0 auto; display: flex;
             justify-content: space-between; align-items: center; padding: 0 40px; height: 60px;
+            position: relative;
         }
         
         .logo-img { height: 45px;
             width: auto; display: block; cursor: pointer; }
 
-        .nav-wrapper { display: flex; align-items: center;
-            gap: 35px; }
-        .nav-links ul { list-style: none; display: flex; gap: 25px;
-            align-items: center; }
+        .nav-wrapper { display: flex; align-items: center; gap: 35px; }
+        .nav-links ul { list-style: none; display: flex; gap: 25px; align-items: center; }
         .nav-links a { 
             text-decoration: none;
             color: white; font-weight: 700; font-size: 13px; 
@@ -52,6 +51,20 @@
             gap: 8px;
         }
         .discord-btn:hover { background: #4752c4; transform: scale(1.05); }
+
+        /* --- HAMBURGER MENU BUTTON --- */
+        .hamburger-menu {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 5px;
+            transition: 0.3s;
+            order: -1; /* Umieszcza hamburger przed menu na urządzeniach mobilnych */
+        }
+        .hamburger-menu:hover { opacity: 0.7; }
 
         /* --- PODSTRONY --- */
         .page-section { display: none;
@@ -264,7 +277,8 @@
 
         /* --- POLITYKA PRYWATNOŚCI --- */
         .policy-container { max-width: 900px;
-            margin: 80px auto; padding: 0 40px; line-height: 1.8; color: #ccc; }
+            margin: 80px auto; padding: 0 40px; line-height: 1.8; color: #ccc;
+        }
         .policy-container h2 { color: white; margin-bottom: 30px; font-size: 32px; font-weight: 900; }
         .policy-container h3 { color: white; margin: 30px 0 10px 0; font-size: 20px;
             border-left: 4px solid #5865F2; padding-left: 15px; }
@@ -308,15 +322,54 @@
         .btn-settings { background: #222; color: white; border: 1px solid #333; }
         .btn-settings:hover { background: #333; }
 
+        /* --- MEDIA QUERIES --- */
         @media (max-width: 1100px) { 
-            .split-layout, .about-grid, .contact-grid { display: flex;
-                flex-direction: column; } 
-            .container { flex-direction: column;
-                height: auto; padding: 20px; } 
-            .nav-wrapper { flex-direction: column;
-                gap: 15px; margin-top: 20px; } 
-            .creator-column { border-right: none;
-                border-bottom: 1px solid #1a1a1a; }
+            .split-layout, .about-grid, .contact-grid { display: flex; flex-direction: column; } 
+            .container { flex-direction: column; height: auto; padding: 20px; } 
+            
+            .nav-wrapper { 
+                width: 100%;
+                flex-direction: row !important;
+                justify-content: space-between;
+                align-items: center;
+                margin-top: 20px;
+            } 
+            
+            .hamburger-menu {
+                display: block; /* Pokazuje hamburger na urządzeniach mobilnych */
+            }
+
+            .nav-links {
+                display: none; /* Domyślnie ukryte menu mobilne */
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: #050505;
+                border-bottom: 1px solid #1a1a1a;
+                padding: 20px 0;
+                z-index: 999;
+            }
+
+            /* Klasa aktywująca rozwijane menu */
+            .nav-links.open {
+                display: block;
+            }
+
+            .nav-links ul {
+                flex-direction: column;
+                gap: 20px;
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 10px 0;
+                font-size: 15px;
+            }
+
+            .creator-column { border-right: none; border-bottom: 1px solid #1a1a1a; }
         }
 
         @media (max-width: 600px) {
@@ -324,8 +377,7 @@
             .cookie-btns { flex-direction: column; }
             .announcement-header { flex-direction: column; align-items: flex-start; gap: 10px; }
             .announcement-discord-badge { align-self: flex-start; }
-            .sticky-footer { flex-direction: column; gap: 5px; height: auto;
-                padding: 10px 0; }
+            .sticky-footer { flex-direction: column; gap: 5px; height: auto; padding: 10px 0; }
         }
     </style>
 </head>
@@ -344,6 +396,7 @@
 
     <header class="main-header">
         <div class="container">
+            
             <div class="logo">
                 <a onclick="showPage(event, 'home')">
                     <img src="LOGO.png" alt="YANGWU" class="logo-img">
@@ -351,7 +404,11 @@
             </div>
 
             <div class="nav-wrapper">
-                <nav class="nav-links">
+                <button class="hamburger-menu" onclick="toggleMobileMenu()" aria-label="Otwórz menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+
+                <nav class="nav-links" id="mobile-nav">
                     <ul>
                         <li><a onclick="showPage(event, 'home')">Home</a></li>
                         <li><a onclick="showPage(event, 'about')">O nas</a></li>
@@ -360,6 +417,7 @@
                         <li><a onclick="showPage(event, 'contact')">Kontakt</a></li>
                     </ul>
                 </nav>
+             
                 <a href="https://discord.gg/qWC28YmRj2" class="discord-btn"><i class="fa-brands fa-discord"></i> DOŁĄCZ DO NAS</a>
             </div>
         </div>
@@ -370,6 +428,7 @@
             <section class="creator-column" id="col-lejdi">
                 <img src="avatarneska.png" class="streamer-avatar">
                 <h1>LejdiNeska</h1>
+  
                 <div class="social-section">
                     <a href="http://www.youtube.com/@LejdiNeska?sub_confirmation=1" class="social-card"><i class="fa-brands fa-youtube icon-lejdi"></i><div class="social-info"><h4>YOUTUBE</h4><p>Wpadnij pogadać!</p></div></a>
                     <a href="https://www.instagram.com/lejdineska/" class="social-card"><i class="fa-brands fa-instagram icon-lejdi"></i><div class="social-info"><h4>INSTAGRAM</h4><p>Sprawdź nowe zdjęcie!</p></div></a>
@@ -377,7 +436,7 @@
                     <a href="https://discord.gg/qWC28YmRj2" class="social-card"><i class="fa-brands fa-discord icon-lejdi"></i><div class="social-info"><h4>DISCORD</h4><p>Warto tu być!</p></div></a>
                     <a href="https://www.twitch.tv/lejdineska" class="social-card"><i class="fa-brands fa-twitch icon-lejdi"></i><div class="social-info"><h4>TWITCH</h4><p>Może strumyk?</p></div></a>
                     <a href="https://www.youtube.com/@NeskaAndHukiroxFishing" class="social-card"><i class="fa-solid fa-fish icon-lejdi"></i><div class="social-info"><h4>KANAŁ WĘDKARSKI</h4><p>Połowione!</p></div></a>
-                    
+                   
                     <div class="stats-grid">
                         <div class="stat-box"><i class="fa-brands fa-youtube icon-lejdi"></i><div class="stat-data"><h5>10k+</h5><p>subów</p></div></div>
                         <div class="stat-box"><i class="fa-brands fa-twitch icon-lejdi"></i><div class="stat-data"><h5>2.5k+</h5><p>obserwacji</p></div></div>
@@ -416,7 +475,7 @@
                 <div class="about-card">
                     <img src="avatarneska.png" class="border-lejdi">
                     <h3 class="color-lejdi">LejdiNeska</h3>
-                    <p style="color: #999; line-height: 1.6;">Czy czujesz się dziś tak, jakby wszystko było przeciwko Tobie? Czy czujesz niepowstrzymaną potrzebę obejrzenia czegoś na poprawę humoru? A może po prostu chcesz spędzić czas, gadając o głupotach i śmiejąc się z czego popadnie bez powodu? Jeśli tak, to gratulacje – właśnie znalazłeś to, czego szukałeś! Ta oto pani prowadzi transmisje na żywo, które doprowadziłyby do śmiechu nawet trupa! Luźna atmosfera jak na piwku ze znajomymi, żarty tak niskiego lotu, że przy nich Twój ojciec to komediant roku i, oczywiście, całkowita rozwałka systemu, gdy tylko ktoś da nam powód. O tak, dobrze myślisz… to nie będzie łatwa podróż, ale warta każdej sekundy! Nie czekaj i wbijaj już teraz! PS: Nie odpowiadamy za ewentualne ubytki w IQ lub zdrowiu psychicznym spowodowane naszym koślawym humorem.</p>
+                    <p style="color: #999; line-height: 1.6;">Czy czujesz się dziś tak, jakby wszystko było przeciwko Tobie? Czy czujesz niepowstrzymaną potrzebę obejrzenia czegoś na poprawę humoru? A może po prostu chcesz spędzić czas, gadając o głupotach i śmiejąc się z czego popadnie bez powodu? Jeśli tak, to gratulacje – właśnie znalazłeś to, czego szukałeś! Ta oto pani prowadzi transmisje na żywo, które doprowadziby do śmiechu nawet trupa! Luźna atmosfera jak na piwku ze znajomymi, żarty tak niskiego lotu, że przy nich Twój ojciec to komediant roku i, oczywiście, całkowita rozwałka systemu, gdy tylko ktoś da nam powód. O tak, dobrze myślisz… to nie będzie łatwa podróż, ale warta każdej sekundy! Nie czekaj i wbijaj już teraz! PS: Nie odpowiadamy za ewentualne ubytki w IQ lub zdrowiu psychicznym spowodowane naszym koślawym humorem.</p>
                 </div>
                 <div class="about-card">
                     <img src="avatarhukirox.png" class="border-hukiro">
@@ -437,7 +496,7 @@
             
             <div class="announcements-grid"></div>
         </div>
-    </main>
+   </main>
 
     <main id="support-page" class="page-section">
         <div class="support-page">
@@ -461,7 +520,7 @@
                         <a href="https://tipply.pl/@hukirox" class="support-btn tipply"><i class="fa-solid fa-bolt color-hukiro"></i> TIPPLY (DONATE)</a>
                         <a href="https://www.youtube.com/channel/UCa_ZZMIKboMlgNn7lMcWwNQ/join" class="support-btn yt-join"><i class="fa-brands fa-youtube"></i> WSPIERAJ NA YOUTUBE</a>
                     </div>
-                </div>
+              </div>
             </div>
         </div>
     </main>
@@ -503,7 +562,7 @@
                         <a href="https://www.youtube.com/@NeskaAndHukiroxFishing"><i class="fa-solid fa-fish"></i></a>
                     </div>
                 </div>
-            </div>
+           </div>
 
             <div class="contact-footer">
                 <p>Staramy się odpowiadać na wszystkie propozycje biznesowe w ciągu 48 godzin.<br>Dla fanów i spraw społecznościowych najlepszym miejscem jest nasz Discord.</p>
@@ -585,6 +644,14 @@
             });
         }
 
+        // --- OBSŁUGA MENU MOBILNEGO ---
+        function toggleMobileMenu() {
+            const nav = document.getElementById('mobile-nav');
+            if (nav) {
+                nav.classList.toggle('open');
+            }
+        }
+
         // --- NAWIGACJA ---
         function showPage(event, pageId) {
             if (event) event.preventDefault();
@@ -592,6 +659,12 @@
             const target = document.getElementById(pageId + '-page');
             if (target) target.classList.add('active');
             window.scrollTo({ top: 0, behavior: 'instant' });
+            
+            // Automatyczne zamknięcie hamburgera po kliknięciu podstrony
+            const nav = document.getElementById('mobile-nav');
+            if (nav) {
+                nav.classList.remove('open');
+            }
         }
 
         // --- OBSŁUGA COOKIES ---
@@ -631,9 +704,7 @@
             if (!container) return;
             
             try {
-                // Wymuszamy ignorowanie pamięci podręcznej (cache: 'no-store')
-                const response = await fetch('announcements.json?' + new Date().getTime(), { cache: 'no-store' }); 
-                
+                const response = await fetch('announcements.json?' + new Date().getTime(), { cache: 'no-store' });
                 if(!response.ok) {
                     container.innerHTML = '<p style="text-align:center; color:#555; margin-top:20px;">Brak aktualnych ogłoszeń z Discorda.</p>';
                     return;
@@ -646,7 +717,6 @@
                 }
 
                 container.innerHTML = '';
-
                 messages.forEach(msg => {
                     const isLejdi = msg.author.toLowerCase().includes('neska');
                     const themeClass = isLejdi ? 'announce-lejdi' : 'announce-hukiro';
@@ -681,11 +751,7 @@
             setupEmails();
             checkCookies();
             updateVisitorCounter();
-            
-            // Pierwsze wczytanie ogłoszeń
             loadDiscordAnnouncements();
-            
-            // ZMIANA: Automatyczne sprawdzanie i synchronizowanie ogłoszeń co 15 sekund w tle
             setInterval(loadDiscordAnnouncements, 15000);
         };
     </script>
