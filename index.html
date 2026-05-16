@@ -1047,9 +1047,9 @@ const sheetCsvUrl = 'https://docs.google.com/spreadsheets/d/15lYtzB9YioGyN_ti386
                 row.push(currentEntry.trim().replace(/^"|"$/g, ''));
 
                 // Mapowanie kolumn zgodnie z Twoim arkuszem:
-                // row[1] = B (PLANUJĘ)
-                // row[2] = C (ZASTANAWIAM SIĘ)
-                // row[3] = D (NIE PLANUJĘ)
+                // row[1] = B (UKOŃCZONE)
+                // row[2] = C (PLANUJĘ)
+                // row[3] = D (ZASTANAWIAM SIĘ)
                 // row[4] = E (UKOŃCZONE)
                 // row[5] = F (PLANY NA SERIE - Tytuł gry)
                 // row[6] = G (Link do YouTube)
@@ -1061,17 +1061,17 @@ const sheetCsvUrl = 'https://docs.google.com/spreadsheets/d/15lYtzB9YioGyN_ti386
                 let statusLabel = '';
 
                 if (row[1] && row[1].toUpperCase() === 'TRUE') {
-                    statusKey = 'planuje';
-                    statusLabel = 'PLANUJĘ';
-                } else if (row[2] && row[2].toUpperCase() === 'TRUE') {
-                    statusKey = 'zastanawiam';
-                    statusLabel = 'ZASTANAWIAM SIĘ';
-                } else if (row[3] && row[3].toUpperCase() === 'TRUE') {
-                    statusKey = 'nieplanuje';
-                    statusLabel = 'NIE PLANUJĘ';
-                } else if (row[4] && row[4].toUpperCase() === 'TRUE') {
                     statusKey = 'ukonczone';
                     statusLabel = 'UKOŃCZONE';
+                } else if (row[2] && row[2].toUpperCase() === 'TRUE') {
+                    statusKey = 'planuje';
+                    statusLabel = 'PLANUJĘ';
+                } else if (row[3] && row[3].toUpperCase() === 'TRUE') {
+                    statusKey = 'zastanawiamsie';
+                    statusLabel = 'ZASTANAWIAM SIĘ';
+                } else if (row[4] && row[4].toUpperCase() === 'TRUE') {
+                    statusKey = 'nieplanuje';
+                    statusLabel = 'NIE PLANUJĘ';
                 } else {
                     continue; 
                 }
