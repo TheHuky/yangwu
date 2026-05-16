@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="49ac7549-751f-4323-b2a3-1336000b8496"></script>
+    
     <style>
         /* FIX: Stabilizacja paska przewijania */
         html { scrollbar-gutter: stable; }
@@ -31,10 +33,13 @@
             position: relative;
         }
         
-        .logo-img { height: 45px; width: auto; display: block; cursor: pointer; }
+        .logo-img { height: 45px;
+            width: auto; display: block; cursor: pointer; }
 
-        .nav-wrapper { display: flex; align-items: center; gap: 35px; }
-        .nav-links ul { list-style: none; display: flex; gap: 25px; align-items: center; }
+        .nav-wrapper { display: flex; align-items: center;
+            gap: 35px; }
+        .nav-links ul { list-style: none; display: flex; gap: 25px;
+            align-items: center; }
         .nav-links a { 
             text-decoration: none;
             color: white; font-weight: 700; font-size: 13px; 
@@ -46,7 +51,8 @@
             background: #5865F2;
             color: white !important; text-decoration: none;
             padding: 10px 22px; border-radius: 8px; font-size: 12px; font-weight: 700; 
-            transition: 0.3s; display: flex; align-items: center; gap: 8px;
+            transition: 0.3s; display: flex; align-items: center;
+            gap: 8px;
         }
         .discord-btn:hover { background: #4752c4; transform: scale(1.05); }
 
@@ -60,17 +66,20 @@
             cursor: pointer;
             padding: 5px;
             transition: 0.3s;
-            order: -1; /* Umieszcza hamburger przed menu na urządzeniach mobilnych */
+            order: -1;
+            /* Umieszcza hamburger przed menu na urządzeniach mobilnych */
         }
         .hamburger-menu:hover { opacity: 0.7; }
 
         /* --- PODSTRONY --- */
-        .page-section { display: none; animation: fadeIn 0.4s ease-in-out; }
+        .page-section { display: none;
+            animation: fadeIn 0.4s ease-in-out; }
         .page-section.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         /* --- STRONA GŁÓWNA (HOME) --- */
-        .split-layout { display: flex; width: 100%; min-height: 100vh; }
+        .split-layout { display: flex;
+            width: 100%; min-height: 100vh; }
         .creator-column {
             flex: 1;
             padding: 70px 30px; border-right: 1px solid #1a1a1a;
@@ -84,7 +93,8 @@
             display: flex;
             align-items: center; background: #111; border-radius: 12px;
             padding: 15px; margin-bottom: 12px; text-decoration: none; color: white;
-            border: 1px solid #222; transition: 0.3s ease;
+            border: 1px solid #222;
+            transition: 0.3s ease;
         }
         .social-card:hover { transform: translateX(10px); background: #1a1a1a; }
         .social-card i { font-size: 26px; margin-right: 18px; width: 35px; text-align: center; }
@@ -131,18 +141,26 @@
         #col-hukiro .stat-box { border-color: rgba(0, 255, 0, 0.15); }
 
         /* --- O NAS --- */
-        .about-page { max-width: 1100px; margin: 80px auto; padding: 0 20px; }
-        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 50px; }
-        .about-card { background: #111; border-radius: 20px; padding: 50px 30px; border: 1px solid #222; text-align: center; }
-        .about-card img { width: 160px; height: 160px; border-radius: 50%; border: 4px solid; margin-bottom: 25px; object-fit: cover; }
+        .about-page { max-width: 1100px;
+            margin: 80px auto; padding: 0 20px; }
+        .about-grid { display: grid;
+            grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 50px; }
+        .about-card { background: #111;
+            border-radius: 20px; padding: 50px 30px; border: 1px solid #222; text-align: center;
+        }
+        .about-card img { width: 160px; height: 160px; border-radius: 50%; border: 4px solid;
+            margin-bottom: 25px; object-fit: cover; }
 
         /* --- KONTAKT --- */
-        .contact-page { max-width: 1200px; margin: 80px auto; padding: 0 20px; }
+        .contact-page { max-width: 1200px;
+            margin: 80px auto; padding: 0 20px; }
         .contact-header { text-align: center; margin-bottom: 60px; }
         .contact-header h2 { font-size: 50px; font-weight: 900; margin-bottom: 20px; }
-        .contact-header p { font-size: 18px; opacity: 0.6; max-width: 700px; margin: 0 auto; line-height: 1.6; }
+        .contact-header p { font-size: 18px; opacity: 0.6; max-width: 700px; margin: 0 auto;
+            line-height: 1.6; }
         
-        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        .contact-grid { display: grid;
+            grid-template-columns: 1fr 1fr; gap: 40px; }
         .contact-box { 
             background: #111;
             border-radius: 24px; padding: 40px; border: 1px solid #222; 
@@ -173,7 +191,8 @@
             position: fixed;
             bottom: 0; left: 0; width: 100%; height: 60px;
             background: #050505; border-top: 1px solid #1a1a1a;
-            display: flex; align-items: center; justify-content: center; gap: 30px;
+            display: flex; align-items: center; justify-content: center;
+            gap: 30px;
             z-index: 1001; font-size: 12px; font-weight: 700; color: #555;
             letter-spacing: 1px; text-transform: uppercase;
         }
@@ -187,13 +206,16 @@
         .visitor-counter i { font-size: 12px; }
 
         /* --- PODSTRONA WSPIERANIE --- */
-        .support-page { max-width: 1200px; margin: 80px auto; padding: 0 20px; }
-        .support-links { display: flex; flex-direction: column; gap: 15px; width: 100%; margin-top: 25px; }
+        .support-page { max-width: 1200px;
+            margin: 80px auto; padding: 0 20px; }
+        .support-links { display: flex; flex-direction: column;
+            gap: 15px; width: 100%; margin-top: 25px; }
         .support-btn {
             display: flex;
             align-items: center; justify-content: center; gap: 10px;
             padding: 18px; border-radius: 12px; text-decoration: none; color: white;
-            font-weight: 900; font-size: 14px; transition: 0.3s; border: 1px solid transparent;
+            font-weight: 900; font-size: 14px; transition: 0.3s;
+            border: 1px solid transparent;
         }
         .support-btn.tipply { background: #222; border-color: #333; }
         .support-btn.tipply:hover { background: #2a2a2a; transform: scale(1.02); }
@@ -201,8 +223,10 @@
         .support-btn.yt-join:hover { background: #cc0000; transform: scale(1.02); }
 
         /* --- PODSTRONA OGŁOSZENIA --- */
-        .announcements-page { max-width: 1000px; margin: 80px auto; padding: 0 20px; }
-        .announcements-grid { display: flex; flex-direction: column; gap: 25px; margin-top: 40px; }
+        .announcements-page { max-width: 1000px;
+            margin: 80px auto; padding: 0 20px; }
+        .announcements-grid { display: flex; flex-direction: column;
+            gap: 25px; margin-top: 40px; }
         
         .announcement-card {
             background: #111;
@@ -223,7 +247,8 @@
             padding-bottom: 15px;
         }
         .announcement-author { display: flex; align-items: center; gap: 12px; }
-        .announcement-avatar { width: 40px; height: 40px; border-radius: 50%; border: 2px solid; object-fit: cover; }
+        .announcement-avatar { width: 40px; height: 40px; border-radius: 50%; border: 2px solid;
+            object-fit: cover; }
         .announcement-meta h4 { font-size: 16px; font-weight: 900; }
         .announcement-meta span { font-size: 11px; opacity: 0.4; text-transform: uppercase; letter-spacing: 0.5px; }
         
@@ -256,9 +281,12 @@
         .announce-hukiro .announcement-meta h4 { color: #00ff00; }
 
         /* --- POLITYKA PRYWATNOŚCI --- */
-        .policy-container { max-width: 900px; margin: 80px auto; padding: 0 40px; line-height: 1.8; color: #ccc; }
+        .policy-container { max-width: 900px;
+            margin: 80px auto; padding: 0 40px; line-height: 1.8; color: #ccc;
+        }
         .policy-container h2 { color: white; margin-bottom: 30px; font-size: 32px; font-weight: 900; }
-        .policy-container h3 { color: white; margin: 30px 0 10px 0; font-size: 20px; border-left: 4px solid #5865F2; padding-left: 15px; }
+        .policy-container h3 { color: white; margin: 30px 0 10px 0; font-size: 20px;
+            border-left: 4px solid #5865F2; padding-left: 15px; }
         .policy-container p { margin-bottom: 15px; }
         .policy-container ul { margin: 0 0 20px 25px; }
         .policy-container li { margin-bottom: 8px; }
@@ -279,7 +307,8 @@
             position: fixed;
             bottom: -100%; left: 50%; transform: translateX(-50%);
             width: 90%; max-width: 600px; background: #141414; border: 1px solid #222;
-            border-radius: 16px; padding: 25px; z-index: 2000; display: flex;
+            border-radius: 16px; padding: 25px;
+            z-index: 2000; display: flex;
             flex-direction: column; gap: 15px; box-shadow: 0 20px 50px rgba(0,0,0,0.9);
             transition: bottom 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
@@ -300,8 +329,10 @@
 
         /* --- MEDIA QUERIES --- */
         @media (max-width: 1100px) { 
-            .split-layout, .about-grid, .contact-grid { display: flex; flex-direction: column; } 
-            .container { flex-direction: column; height: auto; padding: 20px; } 
+            .split-layout, .about-grid, .contact-grid { display: flex;
+                flex-direction: column; } 
+            .container { flex-direction: column;
+                height: auto; padding: 20px; } 
             
             .nav-wrapper { 
                 width: 100%;
@@ -312,11 +343,13 @@
             } 
             
             .hamburger-menu {
-                display: block; /* Pokazuje hamburger na urządzeniach mobilnych */
+                display: block;
+                /* Pokazuje hamburger na urządzeniach mobilnych */
             }
 
             .nav-links {
-                display: none; /* Domyślnie ukryte menu mobilne */
+                display: none;
+                /* Domyślnie ukryte menu mobilne */
                 position: absolute;
                 top: 100%;
                 left: 0;
@@ -333,17 +366,20 @@
             }
 
             .nav-links ul {
-                flex-direction: column; gap: 20px;
+                flex-direction: column;
+                gap: 20px;
                 width: 100%;
                 text-align: center;
             }
 
             .nav-links a {
-                display: block; padding: 10px 0;
+                display: block;
+                padding: 10px 0;
                 font-size: 15px;
             }
 
-            .creator-column { border-right: none; border-bottom: 1px solid #1a1a1a; }
+            .creator-column { border-right: none;
+                border-bottom: 1px solid #1a1a1a; }
         }
 
         @media (max-width: 600px) {
@@ -351,7 +387,8 @@
             .cookie-btns { flex-direction: column; }
             .announcement-header { flex-direction: column; align-items: flex-start; gap: 10px; }
             .announcement-discord-badge { align-self: flex-start; }
-            .sticky-footer { flex-direction: column; gap: 5px; height: auto; padding: 10px 0; }
+            .sticky-footer { flex-direction: column; gap: 5px; height: auto;
+                padding: 10px 0; }
         }
     </style>
 </head>
@@ -379,7 +416,7 @@
 
             <div class="nav-wrapper">
      
-                <button class="hamburger-menu" onclick="toggleMobileMenu()" aria-label="Otwórz menu">
+            <button class="hamburger-menu" onclick="toggleMobileMenu()" aria-label="Otwórz menu">
                     <i class="fa-solid fa-bars"></i>
                 </button>
 
@@ -397,7 +434,7 @@
              
                 <a href="https://discord.gg/qWC28YmRj2" class="discord-btn"><i class="fa-brands fa-discord"></i> DOŁĄCZ DO NAS</a>
       
-            </div>
+       </div>
         </div>
     </header>
 
@@ -408,35 +445,35 @@
                 <h1>LejdiNeska</h1>
   
                 
-                <div class="social-section">
+ <div class="social-section">
                     <a href="http://www.youtube.com/@LejdiNeska?sub_confirmation=1" class="social-card"><i class="fa-brands fa-youtube icon-lejdi"></i><div class="social-info"><h4>YOUTUBE</h4><p>Wpadnij pogadać!</p></div></a>
                     <a href="https://www.instagram.com/lejdineska/" class="social-card"><i class="fa-brands fa-instagram icon-lejdi"></i><div class="social-info"><h4>INSTAGRAM</h4><p>Sprawdź nowe zdjęcie!</p></div></a>
                     <a href="https://www.tiktok.com/@lejdineska" class="social-card"><i class="fa-brands fa-tiktok icon-lejdi"></i><div class="social-info"><h4>TIKTOK</h4><p>Sprawdź co tam robię!</p></div></a>
                
-                    <a href="https://discord.gg/qWC28YmRj2" class="social-card"><i class="fa-brands fa-discord icon-lejdi"></i><div class="social-info"><h4>DISCORD</h4><p>Warto tu być!</p></div></a>
+      <a href="https://discord.gg/qWC28YmRj2" class="social-card"><i class="fa-brands fa-discord icon-lejdi"></i><div class="social-info"><h4>DISCORD</h4><p>Warto tu być!</p></div></a>
                     <a href="https://www.twitch.tv/lejdineska" class="social-card"><i class="fa-brands fa-twitch icon-lejdi"></i><div class="social-info"><h4>TWITCH</h4><p>Może strumyk?</p></div></a>
                     <a href="https://www.youtube.com/@NeskaAndHukiroxFishing" class="social-card"><i class="fa-solid fa-fish icon-lejdi"></i><div class="social-info"><h4>KANAŁ WĘDKARSKI</h4><p>Połowione!</p></div></a>
                    
               
-                    <div class="stats-grid">
+       <div class="stats-grid">
                         <div class="stat-box"><i class="fa-brands fa-youtube icon-lejdi"></i><div class="stat-data"><h5>10k+</h5><p>subów</p></div></div>
                         <div class="stat-box"><i class="fa-brands fa-twitch icon-lejdi"></i><div class="stat-data"><h5>2.5k+</h5><p>obserwacji</p></div></div>
                         <div class="stat-box"><i class="fa-brands fa-tiktok icon-lejdi"></i><div class="stat-data"><h5>25k+</h5><p>obserwacji</p></div></div>
       
-                        <div class="stat-box"><i class="fa-brands fa-instagram icon-lejdi"></i><div class="stat-data"><h5>1.5k+</h5><p>obserwacji</p></div></div>
+                    <div class="stat-box"><i class="fa-brands fa-instagram icon-lejdi"></i><div class="stat-data"><h5>1.5k+</h5><p>obserwacji</p></div></div>
                     </div>
                 </div>
             </section>
 
             <section class="creator-column" id="col-hukiro">
                
-                <img src="avatarhukirox.png" class="streamer-avatar">
+  <img src="avatarhukirox.png" class="streamer-avatar">
                 <h1>Hukirox</h1>
                 <div class="social-section">
                     <a href="https://www.youtube.com/@Hukirox?sub_confirmation=1" class="social-card"><i class="fa-brands fa-youtube icon-hukiro"></i><div class="social-info"><h4>YOUTUBE</h4><p>Zobacz, jak gram!</p></div></a>
                     <a href="https://www.instagram.com/hukirox/" class="social-card"><i class="fa-brands fa-instagram icon-hukiro"></i><div class="social-info"><h4>INSTAGRAM</h4><p>Zobacz nową fotę!</p></div></a>
         
-                    <a href="https://www.tiktok.com/@hukirox" class="social-card"><i class="fa-brands fa-tiktok icon-hukiro"></i><div class="social-info"><h4>TIKTOK</h4><p>Najlepsze shoty!</p></div></a>
+                     <a href="https://www.tiktok.com/@hukirox" class="social-card"><i class="fa-brands fa-tiktok icon-hukiro"></i><div class="social-info"><h4>TIKTOK</h4><p>Najlepsze shoty!</p></div></a>
                     <a href="https://discord.gg/qWC28YmRj2" class="social-card"><i class="fa-brands fa-discord icon-hukiro"></i><div class="social-info"><h4>DISCORD</h4><p>Warto tu być!</p></div></a>
                     <a href="https://www.twitch.tv/hukirox" class="social-card"><i class="fa-brands fa-twitch icon-hukiro"></i><div class="social-info"><h4>TWITCH</h4><p>Zajrzyj na strumyk!</p></div></a>
                     <a href="https://www.youtube.com/@NeskaAndHukiroxFishing" class="social-card"><i class="fa-solid fa-fish icon-hukiro"></i><div class="social-info"><h4>KANAŁ WĘDKARSKI</h4><p>Połowione!</p></div></a>
@@ -449,7 +486,7 @@
                     </div>
                 </div>
      
-            </section>
+        </section>
         </div>
     </main>
 
@@ -465,7 +502,7 @@
                 <div class="about-card">
                     <img src="avatarhukirox.png" class="border-hukiro">
                    
-                    <h3 class="color-hukiro">Hukirox</h3>
+  <h3 class="color-hukiro">Hukirox</h3>
                     <p style="color: #999; line-height: 1.6;">Lubisz gry fabularne i patrzenie, jak cały świat wybucha na Twoich oczach? A może wolisz śledzić ciągłe, nieudane próby parkouru, które kończą się lotem w dół i „pięknym” lądowaniem na twarz? A może po prostu chcesz się pośmiać i popisać z kimś o grach? W takim razie dobrze trafiłeś! Hukirox to nie tylko streamer, który gra w gry – Hukirox to styl lifestyle, a gdy raz tu zajrzysz, zawsze będziesz wracać. Czy jesteś gotów oddać całego siebie, by każdego dnia obserwować, jak na ekranie dzieje się więcej niż na polskiej scenie politycznej? Czy masz w sobie dość cierpliwości, by patrzeć raz po raz, jak Hukirox rozbija ten sam samolot dwudziesty raz, zanim zrozumie, że jednak wypadałoby odpalić silniki? Jeśli tak jak inni chcesz pośmiać się z efektownych lotów po nieudanych skokach, to na co jeszcze czekasz? Natychmiast ruszaj na live i oddaj się całkowicie temu szalonemu światowi, który tworzymy razem każdego dnia!</p>
                 </div>
             </div>
@@ -484,7 +521,7 @@
             <div class="announcements-grid"></div>
         </div>
   
-    </main>
+  </main>
 
     <main id="support-page" class="page-section">
         <div class="support-page">
@@ -497,7 +534,7 @@
                     <img src="avatarneska.png" class="streamer-avatar border-lejdi" style="width: 100px; height: 100px;">
                     <h3 class="color-lejdi">LejdiNeska</h3>
       
-                    <div class="support-links">
+               <div class="support-links">
                         <a href="https://tipply.pl/@neska" class="support-btn tipply"><i class="fa-solid fa-heart color-lejdi"></i> TIPPLY (DONATE)</a>
                         <a href="https://www.youtube.com/channel/UCKNy-BlvPESwtPje3bdBI6g/join" class="support-btn yt-join"><i class="fa-brands fa-youtube"></i> WSPIERAJ NA YOUTUBE</a>
                     </div>
@@ -507,7 +544,7 @@
                     <img src="avatarhukirox.png" class="streamer-avatar border-hukiro" style="width: 100px; height: 100px;">
                     <h3 class="color-hukiro">Hukirox</h3>
                     
-                    <div class="support-links">
+ <div class="support-links">
                         <a href="https://tipply.pl/@hukirox" class="support-btn tipply"><i class="fa-solid fa-bolt color-hukiro"></i> TIPPLY (DONATE)</a>
                         <a href="https://www.youtube.com/channel/UCa_ZZMIKboMlgNn7lMcWwNQ/join" class="support-btn yt-join"><i class="fa-brands fa-youtube"></i> WSPIERAJ NA YOUTUBE</a>
                     </div>
@@ -529,17 +566,17 @@
                     <i class="fa-solid fa-envelope-open-text main-icon color-lejdi"></i>
                     <h3 class="color-lejdi">LejdiNeska</h3>
            
-                    <p class="description">Pogadanki, dobra zabawa i masa dystansu do siebie.</p>
+          <p class="description">Pogadanki, dobra zabawa i masa dystansu do siebie.</p>
                     <a href="#" class="email-link border-lejdi js-email-neska">Ładowanie adresu...</a>
                     <div class="contact-socials">
                         <a href="https://www.youtube.com/@LejdiNeska"><i class="fa-brands fa-youtube"></i></a>
           
-                        <a href="https://www.instagram.com/lejdineska/"><i class="fa-brands fa-instagram"></i></a>
+               <a href="https://www.instagram.com/lejdineska/"><i class="fa-brands fa-instagram"></i></a>
                         <a href="https://discord.gg/qWC28YmRj2"><i class="fa-brands fa-discord"></i></a>
                         <a href="https://www.tiktok.com/@lejdineska"><i class="fa-brands fa-tiktok"></i></a>
                         <a href="https://www.twitch.tv/lejdineska"><i class="fa-brands fa-twitch"></i></a>
   
-                        <a href="https://www.youtube.com/@NeskaAndHukiroxFishing"><i class="fa-solid fa-fish"></i></a>
+                       <a href="https://www.youtube.com/@NeskaAndHukiroxFishing"><i class="fa-solid fa-fish"></i></a>
                     </div>
                 </div>
 
@@ -550,17 +587,17 @@
                     <a href="#" class="email-link border-hukiro js-email-hukiro">Ładowanie adresu...</a>
                     <div class="contact-socials">
     
-                        <a href="https://www.youtube.com/@Hukirox"><i class="fa-brands fa-youtube"></i></a>
+                     <a href="https://www.youtube.com/@Hukirox"><i class="fa-brands fa-youtube"></i></a>
                         <a href="https://www.instagram.com/hukirox/"><i class="fa-brands fa-instagram"></i></a>
                         <a href="https://discord.gg/qWC28YmRj2"><i class="fa-brands fa-discord"></i></a>
                        
-                        <a href="https://www.tiktok.com/@hukirox"><i class="fa-brands fa-tiktok"></i></a>
+  <a href="https://www.tiktok.com/@hukirox"><i class="fa-brands fa-tiktok"></i></a>
                         <a href="https://www.twitch.tv/hukirox"><i class="fa-brands fa-twitch"></i></a>
                         <a href="https://www.youtube.com/@NeskaAndHukiroxFishing"><i class="fa-solid fa-fish"></i></a>
                     </div>
                 </div>
       
-            </div>
+      </div>
 
             <div class="contact-footer">
                 <p>Staramy się odpowiadać na wszystkie propozycje biznesowe w ciągu 48 godzin.<br>Dla fanów i spraw społecznościowych najlepszym miejscem jest nasz Discord.</p>
@@ -571,7 +608,7 @@
     <main id="privacy-page" class="page-section">
         <div class="policy-container">
         
-            <h2>POLITYKA PRYWATNOŚCI</h2>
+     <h2>POLITYKA PRYWATNOŚCI</h2>
             <p>Data aktualizacji: 16 maja 2026 r.</p>
             
             <p>Niniejsza Polityka Prywatności określa zasady przetwarzania danych osobowych użytkowników serwisu <strong>yangwu.pl</strong>. Dbanie o Twoją prywatność jest dla nam kluczowe, dlatego stosujemy wysokie standardy ochrony danych zgodne z RODO (Ogólnym Rozporządzeniem o Ochronie Danych).</p>
@@ -683,35 +720,48 @@
             document.getElementById('cookie-banner').classList.remove('show');
         }
 
-        // --- GLOBALNY LICZNIK ODWIEDZIN W CHMURZE ---
+        // --- GLOBALNY LICZNIK ODWIEDZIN W CHMURZE (UMAMI API) ---
         async function updateVisitorCounter() {
             const counterEl = document.getElementById('views-count');
             if (!counterEl) return;
 
+            // Dane konfiguracyjne z Twojego konta Umami
+            const WEBSITE_ID = '49ac7549-751f-4323-b2a3-1336000b8496'; 
+            const SHARE_TOKEN = '7J5GfKBKRPhrZ1rm'; // <-- Zastąp to ciągiem znaków z Share URL w Umami
+
             try {
-                // Wykorzystujemy darmowe, publiczne i stabilne API
-                // Zmieniono nazwę na 'yangwu_pl_v2', aby zresetować licznik do zera
-                const response = await fetch('https://api.counterapi.dev/v1/yangwu_pl_v2/views/up');
+                // Odpytujemy API Umami o statystyki od początku istnienia strony do chwili obecnej
+                const url = `https://api.umami.is/v1/websites/${WEBSITE_ID}/stats?startAt=0&endAt=${new Date().getTime()}`;
+                
+                const response = await fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        'Target-Public-Token': SHARE_TOKEN
+                    }
+                });
+
                 if (response.ok) {
                     const data = await response.json();
-                    // Usunięto sztuczne dodawanie + 154200, licznik pokazuje teraz czysty wynik
-                    const totalViews = parseInt(data.value);
+                    
+                    // Pobieramy wartość realnych odsłon zebranych przez Umami i dodajemy Twój stan początkowy (154 200)
+                    const totalViews = parseInt(data.pageviews.value) + 154200;
+                    
+                    // Formatujemy i ładujemy do elementu w stopce
                     counterEl.innerText = Number(totalViews).toLocaleString('pl-PL');
                     return;
                 }
             } catch (error) {
-                console.error('Błąd synchronizacji licznika globalnego:', error);
+                console.error('Błąd synchronizacji licznika Umami Cloud:', error);
             }
 
-            // BEZPIECZNY POWRÓT (FALLBACK): Jeśli serwer licznika nie odpowie
-            let currentViews = localStorage.getItem('yangwu_total_views_v2');
+            // BEZPIECZNY POWRÓT (FALLBACK): Na wypadek włączonego AdBlocka (zostaje Twój oryginalny system lokalny)
+            let currentViews = localStorage.getItem('yangwu_total_views');
             if (!currentViews) {
-                // Zamiast losować, w przypadku błędu API pierwsze wejście to 1
-                currentViews = 1;
+                currentViews = Math.floor(Math.random() * (4800 - 3200 + 1)) + 3200;
             } else {
                 currentViews = parseInt(currentViews) + 1;
             }
-            localStorage.setItem('yangwu_total_views_v2', currentViews);
+            localStorage.setItem('yangwu_total_views', currentViews);
             counterEl.innerText = Number(currentViews).toLocaleString('pl-PL');
         }
 
