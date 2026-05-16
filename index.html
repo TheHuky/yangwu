@@ -299,11 +299,11 @@
         .game-card {
             background: #111;
             border-radius: 16px;
-            padding: 25px;
+            padding: 20px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            min-height: 160px;
+            min-height: 110px; /* POPRAWKA 1: Mniejsza, bardziej zwarta wysokość kafelka */
             transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             text-decoration: none;
             color: white;
@@ -994,19 +994,18 @@
             }
         }
 
-        // --- DYNAMICZNY BACKLOG GIER Z GOOGLE SHEETS (METODA CSV) ---
+        // --- DYNAMICZNY BACKLOG GIER Z GOOGLE SHEETS ---
         let allGamesData = []; 
 
         async function loadGoogleSheetsBacklog() {
             const grid = document.getElementById('games-grid');
             if (!grid) return;
 
-// Specjalny link Google Vizualization API (omija błędy CORS)
-const sheetCsvUrl = 'https://docs.google.com/spreadsheets/d/15lYtzB9YioGyN_ti386lu9FeaPc6uOF-M5ZFMp7_Sb0/gviz/tq?tqx=out:csv&gid=0';
+            // Oficjalny link gviz zapobiegający błędom sieciowym CORS na GitHub Pages
+            const sheetCsvUrl = 'https://docs.google.com/spreadsheets/d/15lYtzB9YioGyN_ti386lu9FeaPc6uOF-M5ZFMp7_Sb0/gviz/tq?tqx=out:csv&gid=0';
 
             try {
-                // Doklejamy timestamp na końcu, żeby omijać cache na GitHubie i przeglądarkach!
-                const response = await fetch(sheetCsvUrl + '&t=' + new Date().getTime());
+                const response = await fetch(sheetCsvUrl + '&nocache=' + new Date().getTime());
                 if (!response.ok) throw new Error('Problem z pobraniem pliku z Google Sheets');
                 
                 const csvText = await response.text();
@@ -1015,20 +1014,19 @@ const sheetCsvUrl = 'https://docs.google.com/spreadsheets/d/15lYtzB9YioGyN_ti386
                 renderBacklog(allGamesData);
             } catch (error) {
                 console.error('Błąd ładowania listy gier:', error);
-                grid.innerHTML = '<p style="text-align:center; color:#ff0055; grid-column:1/-1; padding:40px 0;">Nie udało się załadować listy gier. Upewnij się, że arkusz jest udostępniony publicznie jako przeglądający.</p>';
+                grid.innerHTML = '<p style="text-align:center; color:#ff0055; grid-column:1/-1; padding:40px 0;">Nie udało się załadować listy gier. Odśwież stronę za chwilę (Ctrl + F5).</p>';
             }
         }
 
-        // Parser dla struktury pliku CSV (zabezpieczony przed przecinkami wewnątrz cudzysłowów)
+        // Parser danych CSV z Google Sheets
         function parseCsvBacklog(text) {
             const lines = text.split(/\r?\n/);
             const games = [];
 
-            // Zaczynamy od i = 1, aby pominąć wiersz nagłówkowy
+            // i = 1 omija pierwszy wiersz nagłówka w arkuszu
             for (let i = 1; i < lines.length; i++) {
                 if (!lines[i].trim()) continue;
 
-                // Bezpieczne rozbicie linii CSV z uwzględnieniem cudzysłowów
                 const row = [];
                 let insideQuote = false;
                 let currentEntry = '';
@@ -1046,37 +1044,35 @@ const sheetCsvUrl = 'https://docs.google.com/spreadsheets/d/15lYtzB9YioGyN_ti386
                 }
                 row.push(currentEntry.trim().replace(/^"|"$/g, ''));
 
-                // Mapowanie kolumn zgodnie z Twoim arkuszem:
-                // row[1] = B (PLANUJĘ)
-                // row[2] = C (ZASTANAWIAM SIĘ)
-                // row[3] = D (NIE PLANUJĘ)
-                // row[4] = E (UKOŃCZONE)
-                // row[5] = F (PLANY NA SERIE - Tytuł gry)
-                // row[6] = G (Link do YouTube)
-
+                // Tytuł gry znajduje się w kolumnie F (indeks 5)
                 const title = row[5];
                 if (!title) continue; 
 
                 let statusKey = '';
                 let statusLabel = '';
 
-                if (row[1] && row[1].toUpperCase() === 'TRUE') {
+                // POPRAWKA 2: Dokładne, zsynchronizowane mapowanie kolumn z Twojego arkusza
+                // Kolumna B (indeks 1) -> PLANUJĘ
+                // Kolumna C (indeks 2) -> UKOŃCZONE
+                // Kolumna D (indeks 3) -> ZASTANAWIAM SIĘ
+                // Kolumna E (indeks 4) -> NIE PLANUJĘ
+                if (row[1] && (row[1].toUpperCase() === 'TRUE' || row[1].length > 0)) {
                     statusKey = 'planuje';
                     statusLabel = 'PLANUJĘ';
-                } else if (row[2] && row[2].toUpperCase() === 'TRUE') {
-                    statusKey = 'zastanawiam';
-                    statusLabel = 'ZASTANAWIAM SIĘ';
-                } else if (row[3] && row[3].toUpperCase() === 'TRUE') {
-                    statusKey = 'nieplanuje';
-                    statusLabel = 'NIE PLANUJĘ';
-                } else if (row[4] && row[4].toUpperCase() === 'TRUE') {
+                } else if (row[2] && (row[2].toUpperCase() === 'TRUE' || row[2].length > 0)) {
                     statusKey = 'ukonczone';
                     statusLabel = 'UKOŃCZONE';
+                } else if (row[3] && (row[3].toUpperCase() === 'TRUE' || row[3].length > 0)) {
+                    statusKey = 'zastanawiam';
+                    statusLabel = 'ZASTANAWIAM SIĘ';
+                } else if (row[4] && (row[4].toUpperCase() === 'TRUE' || row[4].length > 0)) {
+                    statusKey = 'nieplanuje';
+                    statusLabel = 'NIE PLANUJĘ';
                 } else {
                     continue; 
                 }
 
-                // Sprawdzamy czy podano poprawny link
+                // Link do serii na YouTube znajduje się w kolumnie G (indeks 6)
                 const link = row[6] || '';
 
                 games.push({
@@ -1089,7 +1085,7 @@ const sheetCsvUrl = 'https://docs.google.com/spreadsheets/d/15lYtzB9YioGyN_ti386
             return games;
         }
 
-        // Renderowanie kafelków na stronie
+        // Renderowanie kafelków z grami na podstronie
         function renderBacklog(gamesList) {
             const grid = document.getElementById('games-grid');
             if (!grid) return;
@@ -1101,7 +1097,6 @@ const sheetCsvUrl = 'https://docs.google.com/spreadsheets/d/15lYtzB9YioGyN_ti386
 
             grid.innerHTML = '';
             gamesList.forEach(game => {
-                // Jeśli jest link, robimy z tego klikalny znacznik <a>. Jak nie to zwykły <div>
                 const hasLink = game.link && game.link.startsWith('http');
                 const tag = hasLink ? 'a' : 'div';
                 const hrefAttr = hasLink ? `href="${game.link}" target="_blank"` : '';
@@ -1123,7 +1118,7 @@ const sheetCsvUrl = 'https://docs.google.com/spreadsheets/d/15lYtzB9YioGyN_ti386
             });
         }
 
-        // Filtrowanie na żywo
+        // Filtrowanie listy gier w czasie rzeczywistym
         function filterGames() {
             const searchText = document.getElementById('game-search').value.toLowerCase();
             const filterValue = document.getElementById('status-filter').value;
@@ -1137,7 +1132,7 @@ const sheetCsvUrl = 'https://docs.google.com/spreadsheets/d/15lYtzB9YioGyN_ti386
             renderBacklog(filtered);
         }
 
-        // Podpięcie słuchaczy zdarzeń
+        // Rejestracja zdarzeń dla filtrów
         document.addEventListener('DOMContentLoaded', () => {
             const searchInput = document.getElementById('game-search');
             const statusSelect = document.getElementById('status-filter');
@@ -1146,12 +1141,12 @@ const sheetCsvUrl = 'https://docs.google.com/spreadsheets/d/15lYtzB9YioGyN_ti386
             if (statusSelect) statusSelect.addEventListener('change', filterGames);
         });
 
-        // Inicjalizacja
+        // Ładowanie zasobów po załadowaniu okna
         window.onload = () => {
             setupEmails();
             checkCookies();
             loadDiscordAnnouncements();
-            loadGoogleSheetsBacklog(); // Pobieranie listy gier 
+            loadGoogleSheetsBacklog();
             setInterval(loadDiscordAnnouncements, 15000);
         };
     </script>
