@@ -91,7 +91,32 @@
            NOWE STYLIZACJE DLA MAŁYCH, KOMPAKTOWYCH FILMÓW (POZIOMYCH)
            ======================================================== */
         .videos-header { width: 100%; max-width: 450px; margin-top: 40px; margin-bottom: 15px; text-align: left; font-size: 18px; font-weight: 900; letter-spacing: 0.5px; }
-        .video-grid { display: flex; flex-direction: column; gap: 12px; width: 100%; max-width: 450px; }
+        /* Kontener na filmy z ograniczoną wysokością i możliwością przewijania */
+        .video-grid { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 12px; 
+            width: 100%; 
+            max-width: 450px; 
+            max-height: 265px; /* Wysokość mieszcząca idealnie około 3 filmy na raz */
+            overflow-y: auto;  /* Włączenie pionowego paska przewijania */
+            padding-right: 6px; /* Przestrzeń na pasek, aby kafelki nie były obcinane */
+        }
+
+        /* Estetyczna stylizacja paska przewijania dopasowana do ciemnego motywu strony */
+        .video-grid::-webkit-scrollbar {
+            width: 6px;
+        }
+        .video-grid::-webkit-scrollbar-track {
+            background: #0b0b0b;
+        }
+        .video-grid::-webkit-scrollbar-thumb {
+            background: #222;
+            border-radius: 10px;
+        }
+        .video-grid::-webkit-scrollbar-thumb:hover {
+            background: #333;
+        }
         
         .video-card { background: #111; border: 1px solid #222; border-radius: 10px; overflow: hidden; text-decoration: none; color: white; transition: 0.2s ease; text-align: left; display: flex; flex-direction: row; height: 80px; }
         
