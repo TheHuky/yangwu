@@ -39,8 +39,9 @@ async function zaladujArkuszWideo(sheetUrl, defaultCategory, containerId) {
         const data = await response.text();
         const rows = data.split('\n').slice(1); // Pomijamy nagłówek tabeli
         
-        for (const row of rows) {
-            if (!row.trim()) continue;
+        // Mapujemy wiersze na obietnice (Promises), aby przetwarzać wszystkie filmy w arkuszu RÓWNOLEGLE
+        const videoPromises = rows.map(async (row) => {
+            if (!row.trim()) return null;
             
             // Parsowanie CSV zabezpieczone przed przecinkami w tekście
             const columns = row.match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g) || row.split(',');
@@ -48,22 +49,19 @@ async function zaladujArkuszWideo(sheetUrl, defaultCategory, containerId) {
             if (columns.length >= 1) {
                 const rawLink = columns[0].replace(/^"|"$/g, '').trim();
                 
-                // Jeśli w arkuszu istnieje druga kolumna (kategoria), używamy jej. 
-                // W przeciwnym wypadku przypisujemy domyślną (lejdineska/hukirox).
                 const category = (columns.length >= 2 && columns[1]) 
                     ? columns[1].replace(/^"|"$/g, '').trim().toLowerCase() 
                     : defaultCategory;
         
                 const videoId = wyciagnijIdYouTube(rawLink);
-                if (!videoId) continue; // Pomija wiersz, jeśli link jest nieprawidłowy
+                if (!videoId) return null;
 
-                // Automatyczne pobranie prawdziwego tytułu z YouTube
+                // Pobieranie tytułu z YouTube startuje równolegle dla każdego filmu
                 const title = await pobierzTytulYouTube(videoId);
 
                 const videoLink = `https://www.youtube.com/watch?v=${videoId}`;
-                const thumbnailLink = `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`; // Zoptymalizowany, mniejszy rozmiar miniatury
+                const thumbnailLink = `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
 
-                // Automatyczny krótki podopis pod tytułem
                 let autoDescription = '';
                 if (category === 'lejdineska') {
                     autoDescription = `Kliknij, aby obejrzeć u Neski`;
@@ -71,8 +69,8 @@ async function zaladujArkuszWideo(sheetUrl, defaultCategory, containerId) {
                     autoDescription = `Kliknij, aby obejrzeć u Hukiroxa`;
                 }
 
-                // Kompaktowy szablon poziomego kafelka
-                const videoHtml = `
+                // Zwracamy gotowy kod HTML kafelka
+                return `
                     <a href="${videoLink}" target="_blank" class="video-card">
                         <div class="video-thumbnail-wrapper">
                             <img src="${thumbnailLink}" alt="${title}" class="video-thumbnail" loading="lazy">
@@ -84,10 +82,18 @@ async function zaladujArkuszWideo(sheetUrl, defaultCategory, containerId) {
                         </div>
                     </a>
                 `;
-
-                container.insertAdjacentHTML('beforeend', videoHtml);
             }
-        }
+            return null;
+        });
+
+        // Czekamy, aż wszystkie filmy z danego arkusza zbiorą swoje dane
+        const videoHtmlArray = await Promise.all(videoPromises);
+        
+        // Wstrzykujemy wszystkie wygenerowane kafelki na raz (płynny efekt bez skakania strony)
+        videoHtmlArray.forEach(html => {
+            if (html) container.insertAdjacentHTML('beforeend', html);
+        });
+
     } catch (error) {
         console.error('Błąd podczas ładowania modułu wideo dla ' + defaultCategory + ':', error);
     }
@@ -95,9 +101,11 @@ async function zaladujArkuszWideo(sheetUrl, defaultCategory, containerId) {
 
 // Główna funkcja wywoływana przy ładowaniu strony
 async function loadVideosFromSheets() {
-    // Pobieramy dane równolegle z obu osobnych arkuszy
-    await zaladujArkuszWideo(NESKA_SHEET_URL, 'lejdineska', 'videos-container-neska');
-    await zaladujArkuszWideo(HUKIROX_SHEET_URL, 'hukirox', 'videos-container-hukirox');
+    // Używamy Promise.all, aby OBA arkusze (Neska i Hukirox) zaczęły pobierać się dokładnie w tej samej milisekundzie
+    await Promise.all([
+        zaladujArkuszWideo(NESKA_SHEET_URL, 'lejdineska', 'videos-container-neska'),
+        zaladujArkuszWideo(HUKIROX_SHEET_URL, 'hukirox', 'videos-container-hukirox')
+    ]);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
