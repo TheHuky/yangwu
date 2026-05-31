@@ -1,34 +1,36 @@
-// Wklej tutaj wygenerowany link CSV z Google Sheets
-const FILMY_SHEET_URL = 'TWÓJ_LINK_DO_PLIKU_CSV_TUTAJ';
+// Konfiguracja: Wklej tutaj swój link CSV wygenerowany z Google Sheets
+const FILMY_SHEET_URL = 'TUTAJ_WKLEJ_SWÓJ_LINK_DO_CSV_Z_GOOGLE_SHEETS';
 
-// Funkcja wyciągająca ID filmu z linku
+// Funkcja wyciągająca ID filmu z dowolnego linku YouTube
 function wyciagnijIdYouTube(url) {
     if (url.length === 11 && !url.includes('/')) return url;
     const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/);
     return match ? match[1] : null;
 }
 
-// Funkcja pobierająca tytuł bezpośrednio z serwerów YouTube (oEmbed)
+// Bezpieczne pobieranie tytułu bezpośrednio z YouTube bez problemów z CORS
 async function pobierzTytulYouTube(videoId) {
     try {
-        const response = await fetch(`https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${videoId}&format=json`);
+        const url = `https://noembed.com/embed?url=https://www.youtube.com/watch?v=${videoId}`;
+        const response = await fetch(url);
         if (response.ok) {
             const data = await response.json();
-            return data.title; // Zwraca oryginalny tytuł filmu z YT
+            return data.title || "Nowy materiał wideo!";
         }
     } catch (error) {
-        console.error("Błąd pobierania tytułu dla ID " + videoId, error);
+        console.error("Nie udało się pobrać tytułu dla filmu: " + videoId, error);
     }
-    return "Nowy materiał wideo!"; // Tytuł awaryjny, gdyby YT nie odpowiedział
+    return "Nowy film na kanale!"; // Tytuł rezerwowy
 }
 
 async function loadVideosFromSheets() {
     try {
+        // Cache-buster (&t=...), aby strona zawsze pobierała najnowsze wpisy z tabeli
         const response = await fetch(FILMY_SHEET_URL + '&t=' + new Date().getTime());
         if (!response.ok) throw new Error('Brak odpowiedzi z Google Sheets');
         
         const data = await response.text();
-        const rows = data.split('\n').slice(1); // Pomijamy nagłówki
+        const rows = data.split('\n').slice(1); // Pomijamy nagłówek tabeli
         
         const containerNeska = document.getElementById('videos-container-neska');
         const containerHukirox = document.getElementById('videos-container-hukirox');
@@ -36,10 +38,11 @@ async function loadVideosFromSheets() {
         if (containerNeska) containerNeska.innerHTML = '';
         if (containerHukirox) containerHukirox.innerHTML = '';
 
-        // Używamy pętli for...of, aby móc użyć 'await' przy pobieraniu tytułów
+        // Używamy pętli for...of dla prawidłowego oczekiwania na tytuły (await)
         for (const row of rows) {
             if (!row.trim()) continue;
 
+            // Parsowanie CSV zabezpieczone przed przecinkami w tekście
             const columns = row.match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g) || row.split(',');
             
             if (columns.length >= 2) {
@@ -47,22 +50,23 @@ async function loadVideosFromSheets() {
                 const category = columns[1].replace(/^"|"$/g, '').trim().toLowerCase();
 
                 const videoId = wyciagnijIdYouTube(rawLink);
-                if (!videoId) continue;
+                if (!videoId) continue; // Pomija wiersz, jeśli link jest nieprawidłowy
 
-                // AUTOMATYCZNE POBIERANIE TYTUŁU Z YT
+                // Automatyczne pobranie prawdziwego tytułu z YouTube
                 const title = await pobierzTytulYouTube(videoId);
 
                 const videoLink = `https://www.youtube.com/watch?v=${videoId}`;
-                const thumbnailLink = `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`; // 'mqdefault' daje mniejszy, zoptymalizowany plik
+                const thumbnailLink = `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`; // Zoptymalizowany, mniejszy rozmiar miniatury
 
-                // Automatyczny opis
+                // Automatyczny krótki podopis pod tytułem
                 let autoDescription = '';
                 if (category === 'lejdineska') {
-                    autoDescription = `Kliknij, aby obejrzeć u LejdiNeski!`;
+                    autoDescription = `Kliknij, aby obejrzeć u Neski`;
                 } else if (category === 'hukirox') {
-                    autoDescription = `Kliknij, aby obejrzeć u Hukiroxa!`;
+                    autoDescription = `Kliknij, aby obejrzeć u Hukiroxa`;
                 }
 
+                // Kompaktowy szablon poziomego kafelka
                 const videoHtml = `
                     <a href="${videoLink}" target="_blank" class="video-card">
                         <div class="video-thumbnail-wrapper">
@@ -84,7 +88,7 @@ async function loadVideosFromSheets() {
             }
         }
     } catch (error) {
-        console.error('Błąd podczas ładowania filmów:', error);
+        console.error('Błąd podczas ładowania modułu wideo:', error);
     }
 }
 
