@@ -1,5 +1,5 @@
 // Konfiguracja: Wklej tutaj swój link CSV wygenerowany z Google Sheets
-const FILMY_SHEET_URL = 'TUTAJ_WKLEJ_SWÓJ_LINK_DO_CSV_Z_GOOGLE_SHEETS';
+const FILMY_SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSQ-tgBypzuLu3LKz2n9jeMbmqZOAJaT4jboMiyEMpmL3yNg0eJLqGnL2pNU-6FQratpJAkctYJV0Lm/pub?gid=0&single=true&output=csv';
 
 // Funkcja wyciągająca ID filmu z dowolnego linku YouTube
 function wyciagnijIdYouTube(url) {
