@@ -1,5 +1,6 @@
-// Konfiguracja: Wklej tutaj swój link CSV wygenerowany z Google Sheets
-const FILMY_SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSQ-tgBypzuLu3LKz2n9jeMbmqZOAJaT4jboMiyEMpmL3yNg0eJLqGnL2pNU-6FQratpJAkctYJV0Lm/pub?gid=0&single=true&output=csv';
+// Konfiguracja: Wklej tutaj swoje osobne linki CSV wygenerowane z Google Sheets
+const NESKA_SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQIN984aBz4cCp0zap9Qq2aytpXzImdBnuKT00jiZsphnWfHyjARCEsPcSY78ecofmBaBTP-rP0N9By/pub?gid=0&single=true&output=csv';
+const HUKIROX_SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSQ-tgBypzuLu3LKz2n9jeMbmqZOAJaT4jboMiyEMpmL3yNg0eJLqGnL2pNU-6FQratpJAkctYJV0Lm/pub?output=csv';
 
 // Funkcja wyciągająca ID filmu z dowolnego linku YouTube
 function wyciagnijIdYouTube(url) {
@@ -23,32 +24,36 @@ async function pobierzTytulYouTube(videoId) {
     return "Nowy film na kanale!"; // Tytuł rezerwowy
 }
 
-async function loadVideosFromSheets() {
+// Pomocnicza funkcja do pobierania i renderowania filmów z konkretnego arkusza
+async function zaladujArkuszWideo(sheetUrl, defaultCategory, containerId) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    
+    container.innerHTML = '';
+
     try {
         // Cache-buster (&t=...), aby strona zawsze pobierała najnowsze wpisy z tabeli
-        const response = await fetch(FILMY_SHEET_URL + '&t=' + new Date().getTime());
-        if (!response.ok) throw new Error('Brak odpowiedzi z Google Sheets');
+        const response = await fetch(sheetUrl + '&t=' + new Date().getTime());
+        if (!response.ok) throw new Error('Brak odpowiedzi z Google Sheets dla ' + defaultCategory);
         
         const data = await response.text();
         const rows = data.split('\n').slice(1); // Pomijamy nagłówek tabeli
         
-        const containerNeska = document.getElementById('videos-container-neska');
-        const containerHukirox = document.getElementById('videos-container-hukirox');
-        
-        if (containerNeska) containerNeska.innerHTML = '';
-        if (containerHukirox) containerHukirox.innerHTML = '';
-
-        // Używamy pętli for...of dla prawidłowego oczekiwania na tytuły (await)
         for (const row of rows) {
             if (!row.trim()) continue;
-
+            
             // Parsowanie CSV zabezpieczone przed przecinkami w tekście
             const columns = row.match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g) || row.split(',');
             
-            if (columns.length >= 2) {
+            if (columns.length >= 1) {
                 const rawLink = columns[0].replace(/^"|"$/g, '').trim();
-                const category = columns[1].replace(/^"|"$/g, '').trim().toLowerCase();
-
+                
+                // Jeśli w arkuszu istnieje druga kolumna (kategoria), używamy jej. 
+                // W przeciwnym wypadku przypisujemy domyślną (lejdineska/hukirox).
+                const category = (columns.length >= 2 && columns[1]) 
+                    ? columns[1].replace(/^"|"$/g, '').trim().toLowerCase() 
+                    : defaultCategory;
+        
                 const videoId = wyciagnijIdYouTube(rawLink);
                 if (!videoId) continue; // Pomija wiersz, jeśli link jest nieprawidłowy
 
@@ -80,21 +85,25 @@ async function loadVideosFromSheets() {
                     </a>
                 `;
 
-                if (category === 'lejdineska' && containerNeska) {
-                    containerNeska.insertAdjacentHTML('beforeend', videoHtml);
-                } else if (category === 'hukirox' && containerHukirox) {
-                    containerHukirox.insertAdjacentHTML('beforeend', videoHtml);
-                }
+                container.insertAdjacentHTML('beforeend', videoHtml);
             }
         }
     } catch (error) {
-        console.error('Błąd podczas ładowania modułu wideo:', error);
+        console.error('Błąd podczas ładowania modułu wideo dla ' + defaultCategory + ':', error);
     }
+}
+
+// Główna funkcja wywoływana przy ładowaniu strony
+async function loadVideosFromSheets() {
+    // Pobieramy dane równolegle z obu osobnych arkuszy
+    await zaladujArkuszWideo(NESKA_SHEET_URL, 'lejdineska', 'videos-container-neska');
+    await zaladujArkuszWideo(HUKIROX_SHEET_URL, 'hukirox', 'videos-container-hukirox');
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     loadVideosFromSheets();
 });
+
 // Dynamiczne filtrowanie filmów na żywo w pasku wyszukiwania
 document.addEventListener('input', (e) => {
     if (e.target.classList.contains('video-search-input')) {
