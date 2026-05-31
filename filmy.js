@@ -95,3 +95,22 @@ async function loadVideosFromSheets() {
 document.addEventListener('DOMContentLoaded', () => {
     loadVideosFromSheets();
 });
+// Dynamiczne filtrowanie filmów na żywo w pasku wyszukiwania
+document.addEventListener('input', (e) => {
+    if (e.target.classList.contains('video-search-input')) {
+        const query = e.target.value.toLowerCase().trim();
+        const tile = e.target.closest('.video-scroller-tile');
+        
+        if (tile) {
+            const cards = tile.querySelectorAll('.video-card');
+            cards.forEach(card => {
+                const titleText = card.querySelector('.video-title').textContent.toLowerCase();
+                if (titleText.includes(query)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    }
+});
