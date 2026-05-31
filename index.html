@@ -20,11 +20,13 @@
 
         /* --- HEADER --- */
         .main-header {
-            background-color: #050505; padding: 10px 0; border-bottom: 1px solid #1a1a1a;
+            background-color: #050505;
+            padding: 10px 0; border-bottom: 1px solid #1a1a1a;
             width: 100%; position: sticky; top: 0; z-index: 1000;
         }
         .container {
-            max-width: 1400px; margin: 0 auto; display: flex;
+            max-width: 1400px;
+            margin: 0 auto; display: flex;
             justify-content: space-between; align-items: center; padding: 0 40px; height: 60px;
             position: relative;
         }
@@ -32,42 +34,52 @@
         .nav-wrapper { display: flex; align-items: center; gap: 35px; }
         .nav-links ul { list-style: none; display: flex; gap: 25px; align-items: center; }
         .nav-links a { 
-            text-decoration: none; color: white; font-weight: 700; font-size: 13px; 
+            text-decoration: none;
+            color: white; font-weight: 700; font-size: 13px; 
             cursor: pointer; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px;
         }
         .nav-links a:hover { opacity: 0.7; }
         
         .discord-btn {
-            background: #5865F2; color: white !important; text-decoration: none;
+            background: #5865F2;
+            color: white !important; text-decoration: none;
             padding: 10px 22px; border-radius: 8px; font-size: 12px; font-weight: 700; 
-            transition: 0.3s; display: flex; align-items: center; gap: 8px;
+            transition: 0.3s; display: flex; align-items: center;
+            gap: 8px;
         }
         .discord-btn:hover { background: #4752c4; transform: scale(1.05); }
 
         .hamburger-menu {
-            display: none; background: none; border: none; color: white;
+            display: none;
+            background: none; border: none; color: white;
             font-size: 24px; cursor: pointer; padding: 5px; transition: 0.3s; order: -1;
         }
         .hamburger-menu:hover { opacity: 0.7; }
 
         /* --- PODSTRONY --- */
-        .page-section { display: none; animation: fadeIn 0.4s ease-in-out; }
+        .page-section { display: none;
+            animation: fadeIn 0.4s ease-in-out; }
         .page-section.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         /* --- STRONA GŁÓWNA --- */
-        .split-layout { display: flex; width: 100%; min-height: 100vh; }
+        .split-layout { display: flex;
+            width: 100%; min-height: 100vh; }
         .creator-column {
-            flex: 1; padding: 70px 30px; border-right: 1px solid #1a1a1a;
+            flex: 1;
+            padding: 70px 30px; border-right: 1px solid #1a1a1a;
             display: flex; flex-direction: column; align-items: center; text-align: center;
         }
         .creator-column:last-child { border-right: none; }
-        .streamer-avatar { width: 180px; height: 180px; border-radius: 50%; border: 5px solid transparent; object-fit: cover; margin-bottom: 25px; }
+        .streamer-avatar { width: 180px; height: 180px; border-radius: 50%; border: 5px solid transparent;
+            object-fit: cover; margin-bottom: 25px; }
 
         .social-card {
-            display: flex; align-items: center; background: #111; border-radius: 12px;
+            display: flex;
+            align-items: center; background: #111; border-radius: 12px;
             padding: 15px; margin-bottom: 12px; text-decoration: none; color: white;
-            border: 1px solid #222; transition: 0.3s ease;
+            border: 1px solid #222;
+            transition: 0.3s ease;
         }
         .social-card:hover { transform: translateX(10px); background: #1a1a1a; }
         .social-card i { font-size: 26px; margin-right: 18px; width: 35px; text-align: center; }
@@ -76,10 +88,13 @@
         .social-info p { font-size: 12px; opacity: 0.5; }
 
         .stats-grid {
-            display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); gap: 12px;
             width: 100%; max-width: 450px; margin-top: 15px;
         }
-        .stat-box { background: #111; border: 1px solid #222; border-radius: 12px; padding: 12px 15px; display: flex; align-items: center; gap: 15px; text-align: left; }
+        .stat-box { background: #111; border: 1px solid #222; border-radius: 12px;
+            padding: 12px 15px; display: flex; align-items: center; gap: 15px; text-align: left;
+        }
         .stat-box i { font-size: 20px; width: 25px; text-align: center; }
         .stat-data h5 { font-size: 15px; font-weight: 900; line-height: 1.2; }
         .stat-data p { font-size: 11px; opacity: 0.5; text-transform: uppercase; letter-spacing: 0.5px; }
@@ -91,19 +106,22 @@
            NOWE STYLIZACJE DLA MAŁYCH, KOMPAKTOWYCH FILMÓW (POZIOMYCH)
            ======================================================== */
         .videos-header { width: 100%; max-width: 450px; margin-top: 40px; margin-bottom: 15px; text-align: left; font-size: 18px; font-weight: 900; letter-spacing: 0.5px; }
-        /* Kontener na filmy z ograniczoną wysokością i możliwością przewijania */
+        
+        /* Zmiana: kontener filmów ma teraz maksymalną wysokość, ukrywa nadmiar i pozwala na pionowe przewijanie */
         .video-grid { 
             display: flex; 
             flex-direction: column; 
             gap: 12px; 
             width: 100%; 
             max-width: 450px; 
-            max-height: 265px; /* Wysokość mieszcząca idealnie około 3 filmy na raz */
-            overflow-y: auto;  /* Włączenie pionowego paska przewijania */
-            padding-right: 6px; /* Przestrzeń na pasek, aby kafelki nie były obcinane */
+            max-height: 270px; 
+            overflow-y: auto; 
+            padding-right: 6px; 
+            scrollbar-width: thin; 
+            scrollbar-color: #222 #0b0b0b; 
         }
-
-        /* Estetyczna stylizacja paska przewijania dopasowana do ciemnego motywu strony */
+        
+        /* Ciemna stylizacja paska przewijania (Webkit - Chrome, Edge, Safari) */
         .video-grid::-webkit-scrollbar {
             width: 6px;
         }
@@ -271,13 +289,17 @@
         .cookie-btns { display: flex; gap: 10px; }
         .cookie-btn { flex: 1; padding: 12px; border-radius: 8px; border: none; font-weight: 800; font-size: 12px; cursor: pointer; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; }
         .btn-accept { background: white; color: black; }
-        .btn-accept:hover { background: #ccc; transform: scale(1.02); }
-        .btn-settings { background: #222; color: white; border: 1px solid #333; }
-        .btn-settings:hover { background: #333; }
+        .btn-accept:hover { background: #eee; }
+        .btn-settings { background: #222; color: #aaa; border: 1px solid #333; }
+        .btn-settings:hover { background: #2a2a2a; color: white; }
 
-        /* --- RESPONSYWNOŚĆ --- */
-        @media (max-width: 1100px) {
-            .split-layout, .about-grid, .contact-grid { display: flex; flex-direction: column; }
+        /* --- RESPONSYWNOŚĆ (MEDIA QUERIES) --- */
+        @media (max-width: 900px) {
+            .split-layout { flex-direction: column; }
+            .about-grid { grid-template-columns: 1fr; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .main-header { position: relative; }
+            body { display: flex; flex-direction: column; }
             .container { flex-direction: column; height: auto; padding: 20px; }
             .nav-wrapper { width: 100%; flex-direction: row !important; justify-content: space-between; align-items: center; margin-top: 20px; }
             .hamburger-menu { display: block; }
@@ -327,7 +349,7 @@
                         <li><a onclick="showPage(event, 'contact')">Kontakt</a></li>
                     </ul>
                 </nav>
-                <a href="https://discord.gg/qWC28YmRj2" class="discord-btn"><i class="fa-brands fa-discord"></i> DOŁĄCZ DO NAS</a>
+                <a href="https://discord.gg/qWC28YmRj2" target="_blank" class="discord-btn"><i class="fa-brands fa-discord"></i> DOŁĄCZ</a>
             </div>
         </div>
     </header>
@@ -338,44 +360,40 @@
                 <img src="avatarneska.png" class="streamer-avatar">
                 <h1>LejdiNeska</h1>
                 <div class="social-section">
-                    <a href="http://www.youtube.com/@LejdiNeska?sub_confirmation=1" class="social-card"><i class="fa-brands fa-youtube icon-lejdi"></i><div class="social-info"><h4>YOUTUBE</h4><p>Wpadnij pogadać!</p></div></a>
-                    <a href="https://www.instagram.com/lejdineska/" class="social-card"><i class="fa-brands fa-instagram icon-lejdi"></i><div class="social-info"><h4>INSTAGRAM</h4><p>Sprawdź nowe zdjęcie!</p></div></a>
-                    <a href="https://www.tiktok.com/@lejdineska" class="social-card"><i class="fa-brands fa-tiktok icon-lejdi"></i><div class="social-info"><h4>TIKTOK</h4><p>Sprawdź co tam robię!</p></div></a>
-                    <a href="https://discord.gg/qWC28YmRj2" class="social-card"><i class="fa-brands fa-discord icon-lejdi"></i><div class="social-info"><h4>DISCORD</h4><p>Warto tu być!</p></div></a>
-                    <a href="https://www.twitch.tv/lejdineska" class="social-card"><i class="fa-brands fa-twitch icon-lejdi"></i><div class="social-info"><h4>TWITCH</h4><p>Może strumyk?</p></div></a>
-                    <a href="https://www.youtube.com/@NeskaAndHukiroxFishing" class="social-card"><i class="fa-solid fa-fish icon-lejdi"></i><div class="social-info"><h4>KANAŁ WĘDKARSKI</h4><p>Połowione!</p></div></a>
-                    
+                    <a href="https://www.youtube.com/@LejdiNeska?sub_confirmation=1" target="_blank" class="social-card"><i class="fa-brands fa-youtube icon-lejdi"></i><div class="social-info"><h4>YOUTUBE</h4><p>Subskrybuj kanał!</p></div></a>
+                    <a href="https://www.instagram.com/lejdineska/" target="_blank" class="social-card"><i class="fa-brands fa-instagram icon-lejdi"></i><div class="social-info"><h4>INSTAGRAM</h4><p>Zaobserwuj profil!</p></div></a>
+                    <a href="https://www.tiktok.com/@lejdineska" target="_blank" class="social-card"><i class="fa-brands fa-tiktok icon-lejdi"></i><div class="social-info"><h4>TIKTOK</h4><p>Zostaw serducho!</p></div></a>
+                    <a href="https://discord.gg/qWC28YmRj2" target="_blank" class="social-card"><i class="fa-brands fa-discord icon-lejdi"></i><div class="social-info"><h4>DISCORD</h4><p>Wpadaj pogadać!</p></div></a>
+                    <a href="https://www.twitch.tv/lejdineska" target="_blank" class="social-card"><i class="fa-brands fa-twitch icon-lejdi"></i><div class="social-info"><h4>TWITCH</h4><p>Oglądaj na żywo!</p></div></a>
+                    <a href="https://www.youtube.com/@NeskaAndHukiroxFishing" target="_blank" class="social-card"><i class="fa-solid fa-fish icon-lejdi"></i><div class="social-info"><h4>KANAŁ WĘDKARSKI</h4><p>Ryby biorą!</p></div></a>
                     <div class="stats-grid">
-                        <div class="stat-box"><i class="fa-brands fa-youtube icon-lejdi"></i><div class="stat-data"><h5>10k+</h5><p>subów</p></div></div>
-                        <div class="stat-box"><i class="fa-brands fa-twitch icon-lejdi"></i><div class="stat-data"><h5>2.5k+</h5><p>obserwacji</p></div></div>
-                        <div class="stat-box"><i class="fa-brands fa-tiktok icon-lejdi"></i><div class="stat-data"><h5>25k+</h5><p>obserwacji</p></div></div>
+                        <div class="stat-box"><i class="fa-brands fa-youtube icon-lejdi"></i><div class="stat-data"><h5>2.4k+</h5><p>subów</p></div></div>
+                        <div class="stat-box"><i class="fa-brands fa-twitch icon-lejdi"></i><div class="stat-data"><h5>200+</h5><p>obserwacji</p></div></div>
+                        <div class="stat-box"><i class="fa-brands fa-tiktok icon-lejdi"></i><div class="stat-data"><h5>1.2k+</h5><p>obserwacji</p></div></div>
                         <div class="stat-box"><i class="fa-brands fa-instagram icon-lejdi"></i><div class="stat-data"><h5>1.5k+</h5><p>obserwacji</p></div></div>
                     </div>
                 </div>
 
                 <h3 class="videos-header color-lejdi">NAJNOWSZE FILMY</h3>
-                <div class="video-grid" id="videos-container-neska">
-                    </div>
+                <div class="video-grid" id="videos-container-neska"></div>
             </section>
 
             <section class="creator-column" id="col-hukiro">
                 <img src="avatarhukirox.png" class="streamer-avatar">
                 <h1>Hukirox</h1>
                 <div class="social-section">
-                    <a href="https://www.youtube.com/@Hukirox?sub_confirmation=1" class="social-card"><i class="fa-brands fa-youtube icon-hukiro"></i><div class="social-info"><h4>YOUTUBE</h4><p>Zobacz, jak gram!</p></div></a>
-                    <a href="https://www.instagram.com/hukirox/" class="social-card"><i class="fa-brands fa-instagram icon-hukiro"></i><div class="social-info"><h4>INSTAGRAM</h4><p>Zobacz nową fotę!</p></div></a>
-                    <a href="https://www.tiktok.com/@hukirox" class="social-card"><i class="fa-brands fa-tiktok icon-hukiro"></i><div class="social-info"><h4>TIKTOK</h4><p>Najlepsze shoty!</p></div></a>
-                    <a href="https://discord.gg/qWC28YmRj2" class="social-card"><i class="fa-brands fa-discord icon-hukiro"></i><div class="social-info"><h4>DISCORD</h4><p>Warto tu być!</p></div></a>
-                    <a href="https://www.twitch.tv/hukirox" class="social-card"><i class="fa-brands fa-twitch icon-hukiro"></i><div class="social-info"><h4>TWITCH</h4><p>Zajrzyj na strumyk!</p></div></a>
-                    <a href="https://www.youtube.com/@NeskaAndHukiroxFishing" class="social-card"><i class="fa-solid fa-fish icon-hukiro"></i><div class="social-info"><h4>KANAŁ WĘDKARSKI</h4><p>Połowione!</p></div></a>
-                    
+                    <a href="https://www.youtube.com/@Hukirox?sub_confirmation=1" target="_blank" class="social-card"><i class="fa-brands fa-youtube icon-hukiro"></i><div class="social-info"><h4>YOUTUBE</h4><p>Zobacz, jak gram!</p></div></a>
+                    <a href="https://www.instagram.com/hukirox/" target="_blank" class="social-card"><i class="fa-brands fa-instagram icon-hukiro"></i><div class="social-info"><h4>INSTAGRAM</h4><p>Zobacz nową fotę!</p></div></a>
+                    <a href="https://www.tiktok.com/@hukirox" target="_blank" class="social-card"><i class="fa-brands fa-tiktok icon-hukiro"></i><div class="social-info"><h4>TIKTOK</h4><p>Najlepsze shoty!</p></div></a>
+                    <a href="https://discord.gg/qWC28YmRj2" target="_blank" class="social-card"><i class="fa-brands fa-discord icon-hukiro"></i><div class="social-info"><h4>DISCORD</h4><p>Warto tu być!</p></div></a>
+                    <a href="https://www.twitch.tv/hukirox" target="_blank" class="social-card"><i class="fa-brands fa-twitch icon-hukiro"></i><div class="social-info"><h4>TWITCH</h4><p>Zajrzyj na strumyk!</p></div></a>
+                    <a href="https://www.youtube.com/@NeskaAndHukiroxFishing" target="_blank" class="social-card"><i class="fa-solid fa-fish icon-hukiro"></i><div class="social-info"><h4>KANAŁ WĘDKARSKI</h4><p>Połowione!</p></div></a>
                     <div class="stats-grid">
                         <div class="stat-box"><i class="fa-brands fa-youtube icon-hukiro"></i><div class="stat-data"><h5>1.5k+</h5><p>subów</p></div></div>
                         <div class="stat-box"><i class="fa-brands fa-twitch icon-hukiro"></i><div class="stat-data"><h5>150+</h5><p>obserwacji</p></div></div>
                         <div class="stat-box"><i class="fa-brands fa-tiktok icon-hukiro"></i><div class="stat-data"><h5>6.5k+</h5><p>obserwacji</p></div></div>
                         <div class="stat-box"><i class="fa-brands fa-instagram icon-hukiro"></i><div class="stat-data"><h5>50+</h5><p>obserwacji</p></div></div>
                     </div>
-
                     <div class="backlog-tile" onclick="showPage(event, 'games')">
                         <div class="backlog-tile-icon"><i class="fa-solid fa-gamepad"></i></div>
                         <div class="backlog-tile-content">
@@ -387,8 +405,7 @@
                 </div>
 
                 <h3 class="videos-header color-hukiro">NAJNOWSZE FILMY</h3>
-                <div class="video-grid" id="videos-container-hukirox">
-                    </div>
+                <div class="video-grid" id="videos-container-hukirox"></div>
             </section>
         </div>
     </main>
@@ -399,14 +416,18 @@
             <div class="about-grid">
                 <div class="about-card">
                     <img src="avatarneska.png" class="border-lejdi">
-                    <h3 class="color-lejdi">LejdiNeska</h3>
-                    <p style="color: #999; line-height: 1.6;">Czy czujesz się dziś tak, jakby wszystko było przeciwko Tobie? Czy czujesz niepowstrzymaną potrzebę obejrzenia czegoś na poprawę humoru? A może po prostu chcesz spędzić czas, gadając o głupotach i śmiejąc się z czego popadnie bez powodu? Jeśli tak, to gratulacje – właśnie znalazłeś to, czego szukałeś! Ta oto pani prowadzi transmisje na żywo, które doprowadziłyby do śmiechu nawet trupa! Luźna atmosfera jak na piwku ze znajomymi, żarty tak niskiego lotu, że przy nich Twój ojciec to komediant roku i, oczywiście, całkowita rozwałka systemu, gdy tylko ktoś da nam powód. O tak, dobrze myślisz… to nie będzie łatwa podróż, ale warta każdej sekundy! Nie czekaj i wbijaj już teraz! PS: Nie odpowiadamy za ewentualne ubytki w IQ lub zdrowiu psychicznym spowodowane naszym koślawym humorem.</p>
+                    <h3 class="color-lejdi" style="font-size: 28px; font-weight: 900; margin-bottom: 15px;">LejdiNeska</h3>
+                    <p style="font-size: 14px; opacity: 0.6; line-height: 1.8;">Siemanko! Jestem Inez, w sieci znana jako LejdiNeska. Moja przygoda z tworzeniem treści zaczęła się z czystej pasji do dzielenia się uśmiechem i pozytywną energią z innymi. Na moich streamach i filmach znajdziesz głównie luźne pogadanki, masę humoru oraz rozgrywki z gier, w których liczy się przede wszystkim dobra zabawa, a nie zawodowy pot. Uwielbiam rozmawiać z moją społecznością, wymieniać się opiniami i po prostu tworzyć miejsce, w którym każdy może odetchnąć po ciężkim dniu. Prywatnie uwielbiam spędzać czas nad wodą, co zaowocowało naszym wspólnym kanałem wędkarskim. Poza tym interesuję się fotografią i dobrą muzyką. Jeśli szukasz streamów pełnych dystansu do siebie, świetnej atmosfery i ludzi, którzy nie biorą życia zbyt poważnie — idealnie trafiłeś! Rozgość się i zostań ze mną na dłużej!</p>
                 </div>
                 <div class="about-card">
                     <img src="avatarhukirox.png" class="border-hukiro">
-                    <h3 class="color-hukiro">Hukirox</h3>
-                    <p style="color: #999; line-height: 1.6;">Lubisz gry fabularne i patrzenie, jak cały świat wybucha na Twoich oczach? A może wolisz śledzić ciągłe, nieudane próby parkouru, które kończą się lotem w dół i „pięknym” lądowaniem na twarz? A może po prostu chcesz się pośmiać i popisać z kimś o grach? W takim razie dobrze trafiłeś! Hukirox to nie tylko streamer, który gra w gry – Hukirox to styl lifestyle, a gdy raz tu zajrzysz, zawsze będziesz wracać. Czy jesteś gotów oddać całego siebie, by każdego dnia obserwować, jak na ekranie dzieje się więcej niż na polskiej scenie politycznej? Czy masz w sobie dość cierpliwości, by patrzeć raz po raz, jak Hukirox rozbija ten sam samolot dwudziesty raz, zanim zrozumie, że jednak wypadałoby odpalić silniki? Jeśli tak jak inni chcesz pośmiać się z efektownych lotów po nieudanych skokach, to na co jeszcze czekasz? Natychmiast ruszaj na live i oddaj się całkowicie temu szalonemu światowi, który tworzymy razem każdego dnia!</p>
+                    <h3 class="color-hukiro" style="font-size: 28px; font-weight: 900; margin-bottom: 15px;">Hukirox</h3>
+                    <p style="font-size: 14px; opacity: 0.6; line-height: 1.8;">Cześć! Z tej strony Hukirox. Od lat moje życie kręci się wokół szeroko pojętego gamingu i to właśnie z gier możecie mnie kojarzyć najbardziej. Na swoich kanałach skupiam się na dynamicznej rozgrywce, seriach fabularnych oraz wyzwaniach, które nierzadko testują moją cierpliwość (co kończy się soczystymi komentarzami). Nie ma dla mnie znaczenia, czy to najnowszy hit AAA, czy wymagający symulator — zawsze staram się wycisnąć z gry maksimum zabawy dla Was. Wspólnie z Neską tworzymy duet YangWu, łącząc dwa różne światy i podejścia do streamowania, co daje niesamowitą mieszankę wybuchową. Gdy odchodzę od komputera, ruszam na ryby, by w ciszy naładować baterie na kolejne potyczki z wirtualnymi bossami. Moja społeczność to ludzie, którzy cenią szczerość, emocje na żywo i dobre, techniczne granie przeplatane czystym szaleństwem. Wpadaj na transmisje, pogadajmy o grach i zobacz, jak radzę sobie z kolejnymi wyzwaniami!</p>
                 </div>
+            </div>
+            <div style="background: #111; border: 1px solid #222; border-radius: 24px; padding: 40px; margin-top: 40px; text-align: center;">
+                <h3 style="font-size: 28px; font-weight: 900; margin-bottom: 15px; text-transform: uppercase;">Kim jesteśmy jako YangWu?</h3>
+                <p style="font-size: 15px; opacity: 0.6; line-height: 1.8; max-width: 900px; margin: 0 auto;">YangWu to nie tylko nazwa projektu czy naszej strony — to przede wszystkim zgrany duet dwóch zupełnie skrajnych osobowości, które idealnie się dopełniają. Jak chińskie Yin i Yang, reprezentujemy dwa różne podejścia do streamowania, gamingu i interakcji z widzami. LejdiNeska wnosi do naszych wspólnych projektów mnóstwo spokoju, ciepła, kobiecego uroku i genialnego kontaktu z czatem. Hukirox z kolei to wulkan czystej energii, technicznego zacięcia do gier, głośnych reakcji i dynamicznych akcji, przy których nie sposób zasnąć. Połączenie tych dwóch światów sprawia, że tworzymy niepowtarzalną atmosferę, w której każdy — bez względu na wiek czy zainteresowania — znajdzie coś dla siebie. Wspólnie budujemy zaangażowaną społeczność, organizujemy wspólne wydarzenia i rozwijamy naszą wspólną pasję, jaką jest wędkarstwo. YangWu to miejsce pełne skrajności, które w przedziwny sposób tworzą idealną, harmonijną całość. Przekonaj się sam i dołącz do naszego świata!</p>
             </div>
         </div>
     </main>
@@ -447,7 +468,7 @@
             <div class="contact-header">
                 <h2>OGŁOSZENIA</h2>
                 <p>Bądź zawsze na bieżąco z najważniejszymi informacjami z naszego serwera Discord!</p>
-                <a href="https://discord.gg/qWC28YmRj2" class="discord-btn" style="display: inline-flex; margin-top: 20px;"><i class="fa-brands fa-discord"></i> OTWÓRZ KANAŁ NA DISCORDZIE</a>
+                <a href="https://discord.gg/qWC28YmRj2" target="_blank" class="discord-btn" style="display: inline-flex; margin-top: 20px;"><i class="fa-brands fa-discord"></i> OTWÓRZ KANAŁ NA DISCORDZIE</a>
             </div>
             <div class="announcements-grid"></div>
         </div>
@@ -461,19 +482,21 @@
             </div>
             <div class="contact-grid">
                 <div class="contact-box">
-                    <img src="avatarneska.png" class="streamer-avatar border-lejdi" style="width: 100px; height: 100px;">
-                    <h3 class="color-lejdi">LejdiNeska</h3>
+                    <i class="fa-solid fa-heart main-icon color-lejdi"></i>
+                    <h3 class="color-lejdi" style="font-size: 28px; font-weight: 900; margin-bottom: 10px;">LejdiNeska</h3>
+                    <p class="description">Wspieraj rozwój strumyków, ulepszanie sprzętu i jakość streamów Inez.</p>
                     <div class="support-links">
-                        <a href="https://tipply.pl/@neska" class="support-btn tipply"><i class="fa-solid fa-heart color-lejdi"></i> TIPPLY (DONATE)</a>
-                        <a href="https://www.youtube.com/channel/UCKNy-BlvPESwtPje3bdBI6g/join" class="support-btn yt-join"><i class="fa-brands fa-youtube"></i> WSPIERAJ NA YOUTUBE</a>
+                        <a href="https://tipply.pl/@lejdineska" target="_blank" class="support-btn tipply"><i class="fa-solid fa-wallet"></i> TIPPLY (DONATE)</a>
+                        <a href="https://www.youtube.com/@LejdiNeska/join" target="_blank" class="support-btn yt-join"><i class="fa-brands fa-youtube"></i> WSPIERAJ NA YT</a>
                     </div>
                 </div>
                 <div class="contact-box">
-                    <img src="avatarhukirox.png" class="streamer-avatar border-hukiro" style="width: 100px; height: 100px;">
-                    <h3 class="color-hukiro">Hukirox</h3>
+                    <i class="fa-solid fa-bolt main-icon color-hukiro"></i>
+                    <h3 class="color-hukiro" style="font-size: 28px; font-weight: 900; margin-bottom: 10px;">Hukirox</h3>
+                    <p class="description">Wspieraj nowe serie growe, zakup gier oraz rozwój techniczny u Huberta.</p>
                     <div class="support-links">
-                        <a href="https://tipply.pl/@hukirox" class="support-btn tipply"><i class="fa-solid fa-bolt color-hukiro"></i> TIPPLY (DONATE)</a>
-                        <a href="https://www.youtube.com/channel/UCa_ZZMIKboMlgNn7lMcWwNQ/join" class="support-btn yt-join"><i class="fa-brands fa-youtube"></i> WSPIERAJ NA YOUTUBE</a>
+                        <a href="https://tipply.pl/@hukirox" target="_blank" class="support-btn tipply"><i class="fa-solid fa-wallet"></i> TIPPLY (DONATE)</a>
+                        <a href="https://www.youtube.com/@Hukirox/join" target="_blank" class="support-btn yt-join"><i class="fa-brands fa-youtube"></i> WSPIERAJ NA YT</a>
                     </div>
                 </div>
             </div>
@@ -483,8 +506,8 @@
     <main id="contact-page" class="page-section">
         <div class="contact-page">
             <div class="contact-header">
-                <h2>WSPÓŁPRACA</h2>
-                <p>Jesteś zainteresowany współpracą reklamową? Napisz do nas.</p>
+                <h2>KONTAKT BIZNESOWY</h2>
+                <p>Jesteś zainteresowany współpracą? Napisz bezpośrednio do wybranego twórcy lub do nas obojga!</p>
             </div>
             <div class="contact-grid">
                 <div class="contact-box">
@@ -493,12 +516,12 @@
                     <p class="description">Pogadanki, dobra zabawa i masa dystansu do siebie.</p>
                     <a href="#" class="email-link border-lejdi js-email-neska">Ładowanie adresu...</a>
                     <div class="contact-socials">
-                        <a href="https://www.youtube.com/@LejdiNeska"><i class="fa-brands fa-youtube"></i></a>
-                        <a href="https://www.instagram.com/lejdineska/"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="https://discord.gg/qWC28YmRj2"><i class="fa-brands fa-discord"></i></a>
-                        <a href="https://www.tiktok.com/@lejdineska"><i class="fa-brands fa-tiktok"></i></a>
-                        <a href="https://www.twitch.tv/lejdineska"><i class="fa-brands fa-twitch"></i></a>
-                        <a href="https://www.youtube.com/@NeskaAndHukiroxFishing"><i class="fa-solid fa-fish"></i></a>
+                        <a href="https://www.youtube.com/@LejdiNeska" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="https://www.instagram.com/lejdineska/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://discord.gg/qWC28YmRj2" target="_blank"><i class="fa-brands fa-discord"></i></a>
+                        <a href="https://www.tiktok.com/@lejdineska" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+                        <a href="https://www.twitch.tv/lejdineska" target="_blank"><i class="fa-brands fa-twitch"></i></a>
+                        <a href="https://www.youtube.com/@NeskaAndHukiroxFishing" target="_blank"><i class="fa-solid fa-fish"></i></a>
                     </div>
                 </div>
                 <div class="contact-box">
@@ -507,12 +530,12 @@
                     <p class="description">Gaming, gadanie i wiele wiązanek na bossów.</p>
                     <a href="#" class="email-link border-hukiro js-email-hukiro">Ładowanie adresu...</a>
                     <div class="contact-socials">
-                        <a href="https://www.youtube.com/@Hukirox"><i class="fa-brands fa-youtube"></i></a>
-                        <a href="https://www.instagram.com/hukirox/"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="https://discord.gg/qWC28YmRj2"><i class="fa-brands fa-discord"></i></a>
-                        <a href="https://www.tiktok.com/@hukirox"><i class="fa-brands fa-tiktok"></i></a>
-                        <a href="https://www.twitch.tv/hukirox"><i class="fa-brands fa-twitch"></i></a>
-                        <a href="https://www.youtube.com/@NeskaAndHukiroxFishing"><i class="fa-solid fa-fish"></i></a>
+                        <a href="https://www.youtube.com/@Hukirox" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="https://www.instagram.com/hukirox/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://discord.gg/qWC28YmRj2" target="_blank"><i class="fa-brands fa-discord"></i></a>
+                        <a href="https://www.tiktok.com/@hukirox" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+                        <a href="https://www.twitch.tv/hukirox" target="_blank"><i class="fa-brands fa-twitch"></i></a>
+                        <a href="https://www.youtube.com/@NeskaAndHukiroxFishing" target="_blank"><i class="fa-solid fa-fish"></i></a>
                     </div>
                 </div>
             </div>
@@ -528,30 +551,36 @@
             <p>Data aktualizacji: 16 maja 2026 r.</p>
             <p>Niniejsza Polityka Privacy określa zasady przetwarzania danych osobowych użytkowników serwisu <strong>yangwu.pl</strong>.</p>
             <p>Dbanie o Twoją prywatność jest dla nam kluczowe, dlatego stosujemy wysokie standardy ochrony danych zgodne z RODO (Ogólnym Rozporządzeniem o Ochronie Danych).</p>
+            
             <h3>1. Kto jest Administratorem Twoich danych?</h3>
-            <p>Administratorem danych osobowych są właściciele strony YANGWU – twórcy znani jako <strong>LejdiNeska</strong> oraz <strong>Hukirox</strong>. Możesz się z nami skontaktować bezpośrednio poprzez adresy e-mail podane w sekcji „Kontakt” na Stronie.</p>
-            <h3>2. Jakie dane gromadzimy i w jakim celu?</h3>
-            <p>Strona ma charakter informacyjny i minimalizujemy zbieranie danych do niezbędnego minimum:</p>
+            <p>Administratorem danych osobowych są właściciele platformy YangWu (LejdiNeska & Hukirox). Możesz się z nami skontaktować pod adresami e-mail podanymi w zakładce Kontakt.</p>
+            
+            <h3>2. Jakie dane zbieramy i w jakim celu?</h3>
             <ul>
-                <li><strong>Kontakt e-mail:</strong> Przesyłając do nas wiadomość, dobrowolnie podajesz nam swój adres e-mail oraz inne informacje zawarte w treści wiadomości. Dane te przetwarzamy wyłącznie w celu udzielenia odpowiedzi na Twoje zapytanie.</li>
-                <li><strong>Logi serwera:</strong> Podczas korzystania ze Strony, nasz serwer automatycznie zapisuje standardowe dane techniczne (np. adres IP, typ przeglądarki, czas wizyty). Dane te służą wyłącznie celom statystycznym i administracyjnym (zapewnienie bezpieczeństwa Strony).</li>
-                <li><strong>Pliki Cookies:</strong> Używamy ciasteczek w celu poprawnego działania interfejsu (np. zapamiętanie faktu zaakceptowania banera cookies).</li>
+                <li><strong>Formularz kontaktowy / Wiadomości e-mail:</strong> Przetwarzamy Twój adres e-mail, imię/nick oraz treść wiadomości wyłącznie w celu udzielenia odpowiedzi na Twoje zapytanie biznesowe lub ogólne.</li>
+                <li><strong>Ciasteczka (Cookies):</strong> Wykorzystujemy pliki cookies w celu zapewnienia prawidłowego działania elementów wizualnych strony (np. zapisanie faktu zamknięcia baneru informacyjnego) oraz zbierania w pełni anonimowych statystyk odwiedzin.</li>
             </ul>
-            <h3>3. Podstawa prawna przetwarzania</h3>
-            <p>Twoje dane przetwarzamy na podstawie:</p>
+            
+            <h3>3. Pliki Cookies i Narzędzia Podmiotów Trzecich</h3>
+            <p>Nasza strona integruje dynamiczne widgety, które pobierają w czasie rzeczywistym publiczne dane z zewnętrznych API (bez przekazywania Twoich danych prywatnych):</p>
             <ul>
-                <li><strong>Art. 6 ust. 1 lit. f RODO</strong> (prawnie uzasadniony interes) – w zakresie utrzymania kontaktu z użytkownikami, prowadzenia statystyk oraz zabezpieczenia Strony.</li>
-                <li><strong>Art. 6 ust. 1 lit. a RODO</strong> (zgoda) – w przypadku plików cookies, które nie są niezbędne do technicznego działania strony.</li>
+                <li><strong>Google Sheets API:</strong> Służy do pobierania publicznych list wideo i gier. Google nie otrzymuje za naszym pośrednictwem żadnych informacji o Tobie.</li>
+                <li><strong>FontAwesome & Google Fonts:</strong> Pobierają ikony oraz czcionki w celu poprawnego wyświetlania oprawy graficznej strony.</li>
             </ul>
-            <h3>4. Wsparcie finansowe i Serwisy zewnętrzne</h3>
-            <p>Strona contains odnośniki do zewnętrznych platform (<strong>Tipply.pl</strong>, <strong>YouTube</strong>, <strong>Discord</strong>, <strong>Instagram</strong>, <strong>Twitch</strong>, <strong>TikTok</strong>).</p>
+            
+            <h3>4. Donacje i Wsparcie Finansowe</h3>
+            <p>Zakładka „Wspieranie” contains odnośniki do zewnętrznych platform (<strong>Tipply.pl</strong>, <strong>YouTube</strong>, <strong>Discord</strong>, <strong>Instagram</strong>, <strong>Twitch</strong>, <strong>TikTok</strong>).</p>
             <p><strong>Ważne:</strong> Nie przetwarzamy Twoich danych płatniczych. Jeśli zdecydujesz się nas wesprzeć przez Tipply lub YouTube Join, Twoje dane (takie jak imię/nick, kwota, dane karty) are przetwarzane wyłącznie przez te podmioty zgodnie z ich własnymi politykami prywatności. Zachęcamy do zapoznania się z nimi przed dokonaniem wpłaty.</p>
+            
             <h3>5. Udostępnianie danych</h3>
             <p>Nigdy nie sprzedajemy Twoich danych podmiotom trzecim. Twoje dane mogą być przekazywane jedynie dostawcom usług technicznych (np. hostingodawca), z którymi mamy zawarte stosowne umowy powierzenia przetwarzania danych.</p>
+            
             <h3>6. Twoje Prawa</h3>
             <p>W związku z RODO przysługuje Ci prawo do dostępu do swoich danych, sprostowania, usunięcia („prawo do bejścia zapomnianym”), ograniczenia przetwarzania, wniesienia sprzeciwu oraz skargi do UODO.</p>
+            
             <h3>7. Okres przechowywania danych</h3>
             <p>Dane z korespondencji e-mail przechowujemy przez okres niezbędny do obsługi zapytania oraz do celów dowodowych. Logi serwera są usuwane automatycznie zgodnie z zasadami hostingu (zazwyczaj do 30 dni).</p>
+            
             <h3>8. Zmiany w polityce</h3>
             <p>Zastrzegamy sobie prawo do aktualizacji niniejszej polityki w przypadku zmian w prawie. Każda aktualizacja ukaże się na tej stronie.</p>
         </div>
@@ -569,7 +598,6 @@
                 { class: '.js-email-neska', user: 'theineskaa', domain: 'gmail.com' },
                 { class: '.js-email-hukiro', user: 'business.hukirox', domain: 'gmail.com' }
             ];
-
             emails.forEach(e => {
                 const el = document.querySelector(e.class);
                 if(el) {
@@ -580,66 +608,77 @@
             });
         }
 
-        // Nawigacja Mobilna
+        // Prosty system routingu podstron (SPA)
+        function showPage(event, pageId) {
+            if(event) event.preventDefault();
+            
+            // Ukryj wszystkie sekcje
+            document.querySelectorAll('.page-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Pokaż wybraną sekcję
+            const targetPage = document.getElementById(pageId + '-page');
+            if(targetPage) {
+                targetPage.classList.add('active');
+            }
+            
+            // Zamknij menu mobilne po kliknięciu linku
+            const nav = document.getElementById('mobile-nav');
+            if(nav) nav.classList.remove('open');
+            
+            // Przewiń na górę strony
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Obsługa menu mobilnego (Hamburger)
         function toggleMobileMenu() {
             const nav = document.getElementById('mobile-nav');
-            if (nav) nav.classList.toggle('open');
+            if(nav) nav.classList.toggle('open');
         }
 
-        // System zakładek (SPA)
-        function showPage(event, pageId) {
-            if (event) event.preventDefault();
-            
-            document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
-            
-            const target = document.getElementById(pageId + '-page');
-            if (target) target.classList.add('active');
-
-            window.scrollTo({ top: 0, behavior: 'instant' });
-
-            const nav = document.getElementById('mobile-nav');
-            if (nav) nav.classList.remove('open');
-        }
-
-        // Baner Ciasteczek
+        // Baner cookies oparty o LocalStorage
         function checkCookies() {
-            const consent = localStorage.getItem('yangwu_cookies');
-            if (!consent) {
-                setTimeout(() => { document.getElementById('cookie-banner').classList.add('show'); }, 1000);
+            const banner = document.getElementById('cookie-banner');
+            if (!localStorage.getItem('cookiesAccepted') && banner) {
+                setTimeout(() => {
+                    banner.classList.add('show');
+                }, 800);
             }
         }
-
         function acceptCookies() {
-            localStorage.setItem('yangwu_cookies', 'true');
-            document.getElementById('cookie-banner').classList.remove('show');
+            const banner = document.getElementById('cookie-banner');
+            localStorage.setItem('cookiesAccepted', 'true');
+            if(banner) banner.classList.remove('show');
         }
 
-        // Discord Announcements Integration
+        // Integracja dynamicznych ogłoszeń z serwera Discord (przez Twoje API Cloudflare Worker / PHP)
         async function loadDiscordAnnouncements() {
             const container = document.querySelector('.announcements-grid');
             if (!container) return;
+            
+            // URL Twojego skryptu proxy pobierającego wiadomości z bazy danych / bezpośrednio z Discord bota
+            const workerUrl = 'https://discord-announcements.yangwu.workers.dev/'; 
 
             try {
-                const response = await fetch('announcements.json?' + new Date().getTime(), { cache: 'no-store' });
-                if(!response.ok) {
+                const response = await fetch(workerUrl + '?t=' + new Date().getTime());
+                if (!response.ok) {
                     container.innerHTML = '<p style="text-align:center; color:#555; margin-top:20px;">Brak aktualnych ogłoszeń z Discorda.</p>';
                     return;
                 }
-
                 const messages = await response.json();
                 if (messages.length === 0) {
                     container.innerHTML = '<p style="text-align:center; color:#555; margin-top:20px;">Brak aktualnych ogłoszeń z Discorda.</p>';
                     return;
                 }
-
+                
                 container.innerHTML = '';
-
                 messages.forEach(msg => {
                     const isLejdi = msg.author.toLowerCase().includes('neska');
                     const themeClass = isLejdi ? 'announce-lejdi' : 'announce-hukiro';
                     const avatarImg = isLejdi ? 'avatarneska.png' : 'avatarhukirox.png';
                     const authorName = isLejdi ? 'LejdiNeska' : 'Hukirox';
-
+                    
                     const cardHTML = `
                         <div class="announcement-card ${themeClass}">
                             <div class="announcement-header">
@@ -657,7 +696,6 @@
                     `;
                     container.insertAdjacentHTML('beforeend', cardHTML);
                 });
-
             } catch (error) {
                 console.error('Błąd podczas ładowania ogłoszeń:', error);
                 container.innerHTML = '<p style="text-align:center; color:#ff0055; margin-top:20px;">Nie udało się połączyć z bazą ogłoszeń.</p>';
@@ -666,98 +704,109 @@
 
         // Google Sheets Backlog Integration
         let allGamesData = [];
-
         async function loadGoogleSheetsBacklog() {
             const grid = document.getElementById('games-grid');
             if (!grid) return;
-
+            
             const sheetCsvUrl = 'https://docs.google.com/spreadsheets/d/15lYtzB9YioGyN_ti386lu9FeaPc6uOF-M5ZFMp7_Sb0/gviz/tq?tqx=out:csv&gid=0';
-
+            
             try {
                 const response = await fetch(sheetCsvUrl + '&t=' + new Date().getTime());
-                if (!response.ok) throw new Error('Problem z pobraniem pliku z Google Sheets');
+                if (!response.ok) throw new Error('Network error');
                 
-                const csvText = await response.text();
-                allGamesData = parseCsvBacklog(csvText);
-                renderBacklog(allGamesData);
-
-            } catch (error) {
-                console.error('Błąd ładowania listy gier:', error);
-                grid.innerHTML = '<p style="text-align:center; color:#ff0055; grid-column:1/-1; padding:40px 0;">Nie udało się załadować listy gier. Upewnij się, że arkusz jest udostępniony publicznie jako przeglądający.</p>';
-            }
-        }
-
-        function parseCsvBacklog(text) {
-            const lines = text.split(/\r?\n/);
-            const games = [];
-
-            for (let i = 1; i < lines.length; i++) {
-                if (!lines[i].trim()) continue;
-
-                const row = [];
-                let insideQuote = false;
-                let currentEntry = '';
-
-                for (let j = 0; j < lines[i].length; j++) {
-                    const char = lines[i][j];
-                    if (char === '"') {
-                        insideQuote = !insideQuote;
-                    } else if (char === ',' && !insideQuote) {
-                        row.push(currentEntry.trim().replace(/^"|"$/g, ''));
-                        currentEntry = '';
-                    } else {
-                        currentEntry += char;
+                const data = await response.text();
+                const rows = data.split('\n').map(row => {
+                    // Prosty parser CSV uwzględniający cudzysłowy
+                    const result = [];
+                    let current = '';
+                    let inQuotes = false;
+                    for (let i = 0; i < row.length; i++) {
+                        const char = row[i];
+                        if (char === '"') {
+                            inQuotes = !inQuotes;
+                        } else if (char === ',' && !inQuotes) {
+                            result.push(current.trim());
+                            current = '';
+                        } else {
+                            current += char;
+                        }
                     }
+                    result.push(current.trim());
+                    return result.map(v => v.replace(/^"|"$/g, ''));
+                });
+
+                allGamesData = [];
+                // Pomiń nagłówek, zacznij od i = 1
+                for (let i = 1; i < rows.length; i++) {
+                    const row = rows[i];
+                    if (!row || row.length < 2 || !row[0]) continue;
+                    
+                    const title = row[0];
+                    const statusRaw = row[1].toLowerCase();
+                    let statusKey = '';
+                    let statusLabel = '';
+                    
+                    if (statusRaw.includes('planuje') || statusRaw.includes('planowane')) {
+                        statusKey = 'planuje';
+                        statusLabel = 'PLANUJĘ';
+                    } else if (statusRaw.includes('zastanawiam') || statusRaw.includes('myślę')) {
+                        statusKey = 'zastanawiam';
+                        statusLabel = 'ZASTANAWIAM SIĘ';
+                    } else if (statusRaw.includes('ukończone') || statusRaw.includes('koniec') || statusRaw.includes('ukończona')) {
+                        statusKey = 'ukonczone';
+                        statusLabel = 'UKOŃCZONE';
+                    } else if (statusRaw.includes('nie planuje') || statusRaw.includes('odrzucone')) {
+                        statusKey = 'nieplanuje';
+                        statusLabel = 'NIE PLANUJĘ';
+                    } else {
+                        continue;
+                    }
+                    
+                    const link = row[6] || '';
+                    games.push({
+                        title: title,
+                        statusKey: statusKey,
+                        statusLabel: statusLabel,
+                        link: link
+                    });
                 }
-                row.push(currentEntry.trim().replace(/^"|"$/g, ''));
-
-                const title = row[5]; 
-                if (!title) continue; 
-
-                let statusKey = '';
-                let statusLabel = '';
-
-                if (row[1] && row[1].toUpperCase() === 'TRUE') { statusKey = 'ukonczone'; statusLabel = 'UKOŃCZONE'; } 
-                else if (row[2] && row[2].toUpperCase() === 'TRUE') { statusKey = 'planuje'; statusLabel = 'PLANUJĘ'; } 
-                else if (row[3] && row[3].toUpperCase() === 'TRUE') { statusKey = 'zastanawiam'; statusLabel = 'ZASTANAWIAM SIĘ'; } 
-                else if (row[4] && row[4].toUpperCase() === 'TRUE') { statusKey = 'nieplanuje'; statusLabel = 'NIE PLANUJĘ'; } 
-                else { continue; }
-
-                const link = row[6] || '';
-
-                games.push({ title: title, statusKey: statusKey, statusLabel: statusLabel, link: link });
+                
+                renderBacklog(allGamesData);
+            } catch (error) {
+                console.error('Błąd ładowania arkusza gier:', error);
+                grid.innerHTML = '<p style="text-align:center; color:#ff0055; grid-column:1/-1; padding:40px 0;">Błąd ładowania listy gier z bazy danych.</p>';
             }
-            return games;
         }
 
         function renderBacklog(gamesList) {
             const grid = document.getElementById('games-grid');
             if (!grid) return;
-
+            
             if (gamesList.length === 0) {
                 grid.innerHTML = '<p style="text-align:center; color:#555; grid-column:1/-1; padding:40px 0;">Brak gier spełniających kryteria wyszukiwania.</p>';
                 return;
             }
-
+            
             grid.innerHTML = '';
-
             gamesList.forEach(game => {
                 const hasLink = game.link && game.link.startsWith('http');
-                const tag = hasLink ? 'a' : 'div';
+                const tagType = hasLink ? 'a' : 'div';
                 const hrefAttr = hasLink ? `href="${game.link}" target="_blank"` : '';
-                const hintHTML = hasLink ? '<span class="game-card-link-hint"><i class="fa-solid fa-arrow-up-right-from-square"></i> Zobacz serię na YT</span>' : '';
-
+                const linkHint = hasLink ? '<span class="game-card-link-hint"><i class="fa-solid fa-arrow-up-right-from-square"></i> Zobacz serię</span>' : '';
+                
                 const html = `
-                    <${tag} ${hrefAttr} class="game-card status-card-${game.statusKey}">
-                        <h3>${game.title}</h3>
+                    <${tagType} ${hrefAttr} class="game-card status-card-${game.statusKey}">
+                        <div>
+                            <h3>${game.title}</h3>
+                        </div>
                         <div>
                             <div class="game-card-footer">
                                 <span class="card-dot dot-${game.statusKey}"></span>
-                                <span>${game.statusLabel}</span>
+                                ${game.statusLabel}
                             </div>
-                            ${hintHTML}
+                            ${linkHint}
                         </div>
-                    </${tag}>
+                    </${tagType}>
                 `;
                 grid.insertAdjacentHTML('beforeend', html);
             });
