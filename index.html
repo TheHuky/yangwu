@@ -87,12 +87,6 @@
         #col-lejdi .stat-box { border-color: rgba(255, 0, 127, 0.15); }
         #col-hukiro .stat-box { border-color: rgba(0, 255, 0, 0.15); }
 
-        /* --- O NAS --- */
-        .about-page { max-width: 1100px; margin: 80px auto; padding: 0 20px; }
-        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 50px; }
-        .about-card { background: #111; border-radius: 20px; padding: 50px 30px; border: 1px solid #222; text-align: center; display: flex; flex-direction: column; align-items: center; }
-        .about-card img { width: 160px; height: 160px; border-radius: 50%; border: 4px solid; margin-bottom: 25px; object-fit: cover; }
-
         /* --- BACKLOG TILE (OGÓLNY & HUKIROX) --- */
         .backlog-tile { display: flex; align-items: center; background: #151515; border: 1px solid #00ff00; border-radius: 14px; padding: 20px; margin-top: 30px; width: 100%; text-align: left; cursor: pointer; transition: 0.3s ease; text-decoration: none; color: white; box-shadow: 0 0 15px rgba(0, 255, 0, 0.05); }
         .backlog-tile:hover { transform: translateY(-3px); background: #1c1c1c; box-shadow: 0 0 25px rgba(0, 255, 0, 0.15); }
@@ -723,14 +717,8 @@
             const grid = document.getElementById('archive-grid');
             if (!grid) return;
 
-            // Zastąp poniższy link swoim adresem po utworzeniu arkusza:
+            // Arkusz podpięty bezpośrednio z Twojego ID:
             const archiveCsvUrl = 'https://docs.google.com/spreadsheets/d/12J-Lo5lGLNMbvmpUu14-w-lljEASju1daxrKiniT13A/gviz/tq?tqx=out:csv&gid=0';
-
-            // Blokada błędu przed wklejeniem właściwego ID
-            if (archiveCsvUrl.includes('TUTAJ_ID_ARKUSZA_NESKI')) {
-                grid.innerHTML = '<p style="text-align:center; color:#FF007F; grid-column:1/-1; padding:40px 0;">Podłącz swój arkusz Google w kodzie, aby wyświetlić transmisje.</p>';
-                return;
-            }
 
             try {
                 const response = await fetch(archiveCsvUrl + '&t=' + new Date().getTime());
@@ -742,7 +730,7 @@
 
             } catch (error) {
                 console.error('Błąd archiwum:', error);
-                grid.innerHTML = '<p style="text-align:center; color:#FF007F; grid-column:1/-1; padding:40px 0;">Nie udało się załadować archiwum.</p>';
+                grid.innerHTML = '<p style="text-align:center; color:#FF007F; grid-column:1/-1; padding:40px 0;">Nie udało się pobrać archiwum. Upewnij się, że arkusz jest udostępniony jako „Każda osoba mająca link -> Przeglądający”.</p>';
             }
         }
 
@@ -810,7 +798,7 @@
                 const hasLink = item.link && item.link.startsWith('http');
                 const tag = hasLink ? 'a' : 'div';
                 const hrefAttr = hasLink ? `href="${item.link}" target="_blank"` : '';
-                const hintHTML = hasLink ? '<span class="game-card-link-hint"><i class="fa-solid fa-arrow-up-right-from-square"></i> Zobacz transmisję</span>' : '';
+                const hintHTML = hasLink ? '<span class="game-card-link-hint"><i class="fa-solid fa-arrow-up-right-from-square"></i> Zobacz</span>' : '';
                 const yearBadge = item.year ? ` • ${item.year}` : '';
 
                 const html = `
