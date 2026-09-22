@@ -87,6 +87,12 @@
         #col-lejdi .stat-box { border-color: rgba(255, 0, 127, 0.15); }
         #col-hukiro .stat-box { border-color: rgba(0, 255, 0, 0.15); }
 
+        /* --- O NAS --- */
+        .about-page { max-width: 1100px; margin: 80px auto; padding: 0 20px; }
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 50px; }
+        .about-card { background: #111; border-radius: 20px; padding: 50px 30px; border: 1px solid #222; text-align: center; display: flex; flex-direction: column; align-items: center; }
+        .about-card img { width: 160px; height: 160px; border-radius: 50%; border: 4px solid; margin-bottom: 25px; object-fit: cover; }
+
         /* --- BACKLOG TILE (OGÓLNY & HUKIROX) --- */
         .backlog-tile { display: flex; align-items: center; background: #151515; border: 1px solid #00ff00; border-radius: 14px; padding: 20px; margin-top: 30px; width: 100%; text-align: left; cursor: pointer; transition: 0.3s ease; text-decoration: none; color: white; box-shadow: 0 0 15px rgba(0, 255, 0, 0.05); }
         .backlog-tile:hover { transform: translateY(-3px); background: #1c1c1c; box-shadow: 0 0 25px rgba(0, 255, 0, 0.15); }
@@ -352,6 +358,25 @@
         </div>
     </main>
 
+    <!-- O NAS (BEZ ZMIAN - W ORYGINALNYM MIEJSCU) -->
+    <main id="about-page" class="page-section">
+        <div class="about-page">
+            <h2 style="text-align: center; font-size: 50px; font-weight: 900; margin-bottom: 30px;">POZNAJ TWÓRCÓW</h2>
+            <div class="about-grid">
+                <div class="about-card">
+                    <img src="avatarneska.png" class="border-lejdi">
+                    <h3 class="color-lejdi">LejdiNeska</h3>
+                    <p style="color: #999; line-height: 1.6;">Czy czujesz się dziś tak, jakby wszystko było przeciwko Tobie? Czy czujesz niepowstrzymaną potrzebę obejrzenia czegoś na poprawę humoru? A może po prostu chcesz spędzić czas, gadając o głupotach i śmiejąc się z czego popadnie bez powodu? Jeśli tak, to gratulacje – właśnie znalazłeś to, czego szukałeś! Ta oto pani prowadzi transmisje na żywo, które doprowadziłyby do śmiechu nawet trupa! Luźna atmosfera jak na piwku ze znajomymi, żarty tak niskiego lotu, że przy nich Twój ojciec to komediant roku i, oczywiście, całkowita rozwałka systemu, gdy tylko ktoś da nam powód. O tak, dobrze myślisz… to nie będzie łatwa podróż, ale warta każdej sekundy! Nie czekaj i wbijaj już teraz! PS: Nie odpowiadamy za ewentualne ubytki w IQ lub zdrowiu psychicznym spowodowane naszym koślawym humorem.</p>
+                </div>
+                <div class="about-card">
+                    <img src="avatarhukirox.png" class="border-hukiro">
+                    <h3 class="color-hukiro">Hukirox</h3>
+                    <p style="color: #999; line-height: 1.6;">Lubisz gry fabularne i patrzenie, jak cały świat wybucha na Twoich oczach? A może wolisz śledzić ciągłe, nieudane próby parkouru, które kończą się lotem w dół i „pięknym” lądowaniem na twarz? A może po prostu chcesz się pośmiać i popisać z kimś o grach? W takim razie dobrze trafiłeś! Hukirox to nie tylko streamer, który gra w gry – Hukirox to styl lifestyle, a gdy raz tu zajrzysz, zawsze będziesz wracać. Czy jesteś gotów oddać całego siebie, by każdego dnia obserwować, jak na ekranie dzieje się więcej niż na polskiej scenie politycznej? Czy masz w sobie dość cierpliwości, by patrzeć raz po raz, jak Hukirox rozbija ten sam samolot dwudziesty raz, zanim zrozumie, że jednak wypadałoby odpalić silniki? Jeśli tak jak inni chcesz pośmiać się z efektownych lotów po nieudanych skokach, to na co jeszcze czekasz? Natychmiast ruszaj na live i oddaj się całkowicie temu szalonemu światowi, który tworzymy razem każdego dnia!</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
     <!-- ARCHIWUM LEJDINESKI -->
     <main id="archive-page" class="page-section">
         <div class="games-page">
@@ -412,24 +437,6 @@
             </div>
             <div id="games-grid" class="games-grid">
                 <p style="text-align: center; color: #555; grid-column: 1/-1; padding: 40px 0;">Ładowanie listy gier prosto z arkusza...</p>
-            </div>
-        </div>
-    </main>
-
-    <main id="about-page" class="page-section">
-        <div class="about-page">
-            <h2 style="text-align: center; font-size: 50px; font-weight: 900; margin-bottom: 30px;">POZNAJ TWÓRCÓW</h2>
-            <div class="about-grid">
-                <div class="about-card">
-                    <img src="avatarneska.png" class="border-lejdi">
-                    <h3 class="color-lejdi">LejdiNeska</h3>
-                    <p style="color: #999; line-height: 1.6;">Czy czujesz się dziś tak, jakby wszystko było przeciwko Tobie? Czy czujesz niepowstrzymaną potrzebę obejrzenia czegoś na poprawę humoru? A może po prostu chcesz spędzić czas, gadając o głupotach i śmiejąc się z czego popadnie bez powodu? Jeśli tak, to gratulacje – właśnie znalazłeś to, czego szukałeś! Ta oto pani prowadzi transmisje na żywo, które doprowadziłyby do śmiechu nawet trupa! Luźna atmosfera jak na piwku ze znajomymi, żarty tak niskiego lotu, że przy nich Twój ojciec to komediant roku i, oczywiście, całkowita rozwałka systemu, gdy tylko ktoś da nam powód. O tak, dobrze myślisz… to nie będzie łatwa podróż, ale warta każdej sekundy! Nie czekaj i wbijaj już teraz! PS: Nie odpowiadamy za ewentualne ubytki w IQ lub zdrowiu psychicznym spowodowane naszym koślawym humorem.</p>
-                </div>
-                <div class="about-card">
-                    <img src="avatarhukirox.png" class="border-hukiro">
-                    <h3 class="color-hukiro">Hukirox</h3>
-                    <p style="color: #999; line-height: 1.6;">Lubisz gry fabularne i patrzenie, jak cały świat wybucha na Twoich oczach? A może wolisz śledzić ciągłe, nieudane próby parkouru, które kończą się lotem w dół i „pięknym” lądowaniem na twarz? A może po prostu chcesz się pośmiać i popisać z kimś o grach? W takim razie dobrze trafiłeś! Hukirox to nie tylko streamer, który gra w gry – Hukirox to styl lifestyle, a gdy raz tu zajrzysz, zawsze będziesz wracać. Czy jesteś gotów oddać całego siebie, by każdego dnia obserwować, jak na ekranie dzieje się więcej niż na polskiej scenie politycznej? Czy masz w sobie dość cierpliwości, by patrzeć raz po raz, jak Hukirox rozbija ten sam samolot dwudziesty raz, zanim zrozumie, że jednak wypadałoby odpalić silniki? Jeśli tak jak inni chcesz pośmiać się z efektownych lotów po nieudanych skokach, to na co jeszcze czekasz? Natychmiast ruszaj na live i oddaj się całkowicie temu szalonemu światowi, który tworzymy razem każdego dnia!</p>
-                </div>
             </div>
         </div>
     </main>
@@ -717,7 +724,6 @@
             const grid = document.getElementById('archive-grid');
             if (!grid) return;
 
-            // Arkusz podpięty bezpośrednio z Twojego ID:
             const archiveCsvUrl = 'https://docs.google.com/spreadsheets/d/12J-Lo5lGLNMbvmpUu14-w-lljEASju1daxrKiniT13A/gviz/tq?tqx=out:csv&gid=0';
 
             try {
